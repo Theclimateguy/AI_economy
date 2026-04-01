@@ -1,0 +1,63 @@
+{
+  "baseline_year": 2024,
+  "projection_start_year": 2025,
+  "projection_end_year": 2035,
+  "initial_adaptation": 0.0,
+  "potential_shock_column": "delta_sL_core",
+  "historical_klems_end_year": 2017,
+  "historical_kl_anchor_start_year": 1995,
+  "class_map": {
+    "K": "software",
+    "J": "software",
+    "M": "software",
+    "B": "hardware",
+    "F": "hardware",
+    "H": "hardware",
+    "C": "hybrid",
+    "DE": "hybrid"
+  },
+  "class_parameters": {
+    "software": {
+      "p": 0.03,
+      "q": 0.4,
+      "gamma_margin_multiplier": 0.25,
+      "capital_barrier": 0.15
+    },
+    "hardware": {
+      "p": 0.005,
+      "q": 0.15,
+      "gamma_margin_multiplier": 0.08,
+      "capital_barrier": 0.6
+    },
+    "hybrid": {
+      "p": 0.01,
+      "q": 0.25,
+      "gamma_margin_multiplier": 0.15,
+      "capital_barrier": 0.35
+    }
+  },
+  "scenario_parameters": {
+    "Base": {
+      "p_multiplier": 1.0,
+      "q_multiplier": 1.0,
+      "capital_barrier_multiplier": 1.0,
+      "class_overrides": {}
+    },
+    "Fast": {
+      "p_multiplier": 1.5,
+      "q_multiplier": 1.2,
+      "capital_barrier_multiplier": 0.75,
+      "class_overrides": {}
+    },
+    "Friction": {
+      "p_multiplier": 0.5,
+      "q_multiplier": 1.0,
+      "capital_barrier_multiplier": 1.0,
+      "class_overrides": {
+        "hardware": {
+          "capital_barrier_multiplier": 2.0
+        }
+      }
+    }
+  }
+}

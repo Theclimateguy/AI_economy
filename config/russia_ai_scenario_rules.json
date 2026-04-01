@@ -1,0 +1,39 @@
+{
+  "task_content_benchmarks_path": "data/processed/task_content_sector_benchmarks_1995_2005.csv",
+  "rti_matrix_path": "data/processed/rti_matrix_proxy.csv",
+  "screen_terms_path": "data/processed/historical_benchmark_screen_terms.csv",
+  "benchmark_targets_path": "config/benchmark_targets.json",
+  "rti_bucket_method": "sector_median_terciles",
+  "rti_bucket_labels": [
+    "low",
+    "medium",
+    "high"
+  ],
+  "ai_sigma_multipliers": {
+    "high": {
+      "core": 1.0,
+      "stress": 2.0
+    },
+    "medium": {
+      "core": 0.75,
+      "stress": 1.5
+    },
+    "low_medium": {
+      "core": 0.5,
+      "stress": 1.0
+    },
+    "low": {
+      "core": 0.25,
+      "stress": 0.5
+    }
+  },
+  "rti_sigma_weights": {
+    "high": 1.0,
+    "medium": 0.75,
+    "low": 0.5
+  },
+  "lambda_source": {
+    "test_id": "I6",
+    "term": "lag_margin"
+  }
+}

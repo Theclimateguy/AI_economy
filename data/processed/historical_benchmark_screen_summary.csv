@@ -1,0 +1,5 @@
+test_id,label,n_terms,n_terms_surviving,n_terms_baseline_sign,min_q_value,max_baseline_pvalue,min_placebo_pvalue,min_sign_stability_share,min_loo_sign_share,min_n_countries,min_nobs,description,survives_screen,decision
+I6,Temporary rent and competitive erosion,2,1,1,0.003634974761216005,0.09876427950230811,0.011240628204708655,0.0,0.0,21,1161,"Technology should raise margins temporarily, while high margins should mean-revert.",False,reject
+I8,Rising organic composition of capital,1,0,0,0.05734929043301057,0.022939716173204228,0.006846587019329047,0.0,0.0,21,1364,Technology should raise the organic composition of capital.,False,reject
+I2,Labour share decline via task-displacing capital,1,0,0,0.4315110383525103,0.34520883068200825,0.9368462647812494,0.0,0.0,17,1093,Technology should reduce the labour share more strongly in routine-intensive sectors.,False,reject
+I3,Employment polarization and compression,1,0,1,0.898109699051869,0.8981096990518691,0.5813406222512665,0.8,0.8666666666666667,17,1093,Technology should reduce labour demand per unit of value added in routine-intensive sectors.,False,reject

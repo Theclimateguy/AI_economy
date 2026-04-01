@@ -1,0 +1,38 @@
+{
+  "rti_bucket_method": "sector_median_terciles",
+  "rti_bucket_cutoffs": {
+    "low_cutoff": 0.057147677458241834,
+    "high_cutoff": 0.42074133912647527
+  },
+  "ai_sigma_multipliers": {
+    "high": {
+      "core": 1.0,
+      "stress": 2.0
+    },
+    "medium": {
+      "core": 0.75,
+      "stress": 1.5
+    },
+    "low_medium": {
+      "core": 0.5,
+      "stress": 1.0
+    },
+    "low": {
+      "core": 0.25,
+      "stress": 0.5
+    }
+  },
+  "rti_sigma_weights": {
+    "high": 1.0,
+    "medium": 0.75,
+    "low": 0.5
+  },
+  "margin_lambda": {
+    "margin_erosion_coef": -0.0419537861926466,
+    "margin_erosion_speed": 0.0419537861926466,
+    "margin_erosion_pvalue": 0.0007269949522432,
+    "margin_erosion_qvalue": 0.003634974761216,
+    "margin_erosion_survives": true
+  },
+  "n_sectors": 8
+}

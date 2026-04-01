@@ -1,0 +1,561 @@
+{
+  "latest_complete_year": 2024,
+  "n_panel_rows": 120,
+  "n_baseline_rows": 8,
+  "year_min": 2011,
+  "year_max": 2025,
+  "complete_labor_share_years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "complete_real_va_years": [
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "source_urls": {
+    "va_workbook": "https://rosstat.gov.ru/storage/mediabank/VDS_god_OKVED2_s_2011-2025.xlsx",
+    "employment_workbook": "https://rosstat.gov.ru/storage/mediabank/05-05_2017-2024.xls",
+    "wage_workbook": "https://rosstat.gov.ru/storage/mediabank/tab3-zpl_2025.xlsx"
+  },
+  "matches": {
+    "va_current": {
+      "B": [
+        {
+          "requested_label": "Добыча полезных ископаемых",
+          "row_index": 11,
+          "component_idx": 0
+        }
+      ],
+      "C": [
+        {
+          "requested_label": "Обрабатывающие производства",
+          "row_index": 12,
+          "component_idx": 0
+        }
+      ],
+      "DE": [
+        {
+          "requested_label": "Обеспечение электрической энергией, газом и паром; кондиционирование воздуха",
+          "row_index": 32,
+          "component_idx": 0
+        },
+        {
+          "requested_label": "Водоснабжение; водоотведение, организация сбора и утилизации отходов, деятельность по ликвидации загрязнений",
+          "row_index": 33,
+          "component_idx": 1
+        }
+      ],
+      "F": [
+        {
+          "requested_label": "Строительство",
+          "row_index": 36,
+          "component_idx": 0
+        }
+      ],
+      "H": [
+        {
+          "requested_label": "Транспортировка и хранение",
+          "row_index": 41,
+          "component_idx": 0
+        }
+      ],
+      "J": [
+        {
+          "requested_label": "Деятельность в области информации и связи",
+          "row_index": 48,
+          "component_idx": 0
+        }
+      ],
+      "K": [
+        {
+          "requested_label": "Деятельность финансовая и страховая",
+          "row_index": 53,
+          "component_idx": 0
+        }
+      ],
+      "M": [
+        {
+          "requested_label": "Деятельность профессиональная, научная и техническая",
+          "row_index": 57,
+          "component_idx": 0
+        }
+      ]
+    },
+    "va_constant_2016": {
+      "B": [
+        {
+          "requested_label": "Добыча полезных ископаемых",
+          "row_index": 11,
+          "component_idx": 0
+        }
+      ],
+      "C": [
+        {
+          "requested_label": "Обрабатывающие производства",
+          "row_index": 12,
+          "component_idx": 0
+        }
+      ],
+      "DE": [
+        {
+          "requested_label": "Обеспечение электрической энергией, газом и паром; кондиционирование воздуха",
+          "row_index": 32,
+          "component_idx": 0
+        },
+        {
+          "requested_label": "Водоснабжение; водоотведение, организация сбора и утилизации отходов, деятельность по ликвидации загрязнений",
+          "row_index": 33,
+          "component_idx": 1
+        }
+      ],
+      "F": [
+        {
+          "requested_label": "Строительство",
+          "row_index": 36,
+          "component_idx": 0
+        }
+      ],
+      "H": [
+        {
+          "requested_label": "Транспортировка и хранение",
+          "row_index": 41,
+          "component_idx": 0
+        }
+      ],
+      "J": [
+        {
+          "requested_label": "Деятельность в области информации и связи",
+          "row_index": 48,
+          "component_idx": 0
+        }
+      ],
+      "K": [
+        {
+          "requested_label": "Деятельность финансовая и страховая",
+          "row_index": 53,
+          "component_idx": 0
+        }
+      ],
+      "M": [
+        {
+          "requested_label": "Деятельность профессиональная, научная и техническая",
+          "row_index": 55,
+          "component_idx": 0
+        }
+      ]
+    },
+    "va_constant_2021": {
+      "B": [
+        {
+          "requested_label": "Добыча полезных ископаемых",
+          "row_index": 11,
+          "component_idx": 0
+        }
+      ],
+      "C": [
+        {
+          "requested_label": "Обрабатывающие производства",
+          "row_index": 12,
+          "component_idx": 0
+        }
+      ],
+      "DE": [
+        {
+          "requested_label": "Обеспечение электрической энергией, газом и паром; кондиционирование воздуха",
+          "row_index": 32,
+          "component_idx": 0
+        },
+        {
+          "requested_label": "Водоснабжение; водоотведение, организация сбора и утилизации отходов, деятельность по ликвидации загрязнений",
+          "row_index": 33,
+          "component_idx": 1
+        }
+      ],
+      "F": [
+        {
+          "requested_label": "Строительство",
+          "row_index": 36,
+          "component_idx": 0
+        }
+      ],
+      "H": [
+        {
+          "requested_label": "Транспортировка и хранение",
+          "row_index": 41,
+          "component_idx": 0
+        }
+      ],
+      "J": [
+        {
+          "requested_label": "Деятельность в области информации и связи",
+          "row_index": 48,
+          "component_idx": 0
+        }
+      ],
+      "K": [
+        {
+          "requested_label": "Деятельность финансовая и страховая",
+          "row_index": 53,
+          "component_idx": 0
+        }
+      ],
+      "M": [
+        {
+          "requested_label": "Деятельность профессиональная, научная и техническая",
+          "row_index": 57,
+          "component_idx": 0
+        }
+      ]
+    },
+    "va_volume_index_official": {
+      "B": [
+        {
+          "requested_label": "Добыча полезных ископаемых",
+          "row_index": 11,
+          "component_idx": 0
+        }
+      ],
+      "C": [
+        {
+          "requested_label": "Обрабатывающие производства",
+          "row_index": 12,
+          "component_idx": 0
+        }
+      ],
+      "DE": [
+        {
+          "requested_label": "Обеспечение электрической энергией, газом и паром; кондиционирование воздуха",
+          "row_index": 32,
+          "component_idx": 0
+        },
+        {
+          "requested_label": "Водоснабжение; водоотведение, организация сбора и утилизации отходов, деятельность по ликвидации загрязнений",
+          "row_index": 33,
+          "component_idx": 1
+        }
+      ],
+      "F": [
+        {
+          "requested_label": "Строительство",
+          "row_index": 36,
+          "component_idx": 0
+        }
+      ],
+      "H": [
+        {
+          "requested_label": "Транспортировка и хранение",
+          "row_index": 41,
+          "component_idx": 0
+        }
+      ],
+      "J": [
+        {
+          "requested_label": "Деятельность в области информации и связи",
+          "row_index": 48,
+          "component_idx": 0
+        }
+      ],
+      "K": [
+        {
+          "requested_label": "Деятельность финансовая и страховая",
+          "row_index": 53,
+          "component_idx": 0
+        }
+      ],
+      "M": [
+        {
+          "requested_label": "Деятельность профессиональная, научная и техническая",
+          "row_index": 57,
+          "component_idx": 0
+        }
+      ]
+    },
+    "va_deflator_index_official": {
+      "B": [
+        {
+          "requested_label": "Добыча полезных ископаемых",
+          "row_index": 11,
+          "component_idx": 0
+        }
+      ],
+      "C": [
+        {
+          "requested_label": "Обрабатывающие производства",
+          "row_index": 12,
+          "component_idx": 0
+        }
+      ],
+      "DE": [
+        {
+          "requested_label": "Обеспечение электрической энергией, газом и паром; кондиционирование воздуха",
+          "row_index": 32,
+          "component_idx": 0
+        },
+        {
+          "requested_label": "Водоснабжение; водоотведение, организация сбора и утилизации отходов, деятельность по ликвидации загрязнений",
+          "row_index": 33,
+          "component_idx": 1
+        }
+      ],
+      "F": [
+        {
+          "requested_label": "Строительство",
+          "row_index": 36,
+          "component_idx": 0
+        }
+      ],
+      "H": [
+        {
+          "requested_label": "Транспортировка и хранение",
+          "row_index": 41,
+          "component_idx": 0
+        }
+      ],
+      "J": [
+        {
+          "requested_label": "Деятельность в области информации и связи",
+          "row_index": 48,
+          "component_idx": 0
+        }
+      ],
+      "K": [
+        {
+          "requested_label": "Деятельность финансовая и страховая",
+          "row_index": 53,
+          "component_idx": 0
+        }
+      ],
+      "M": [
+        {
+          "requested_label": "Деятельность профессиональная, научная и техническая",
+          "row_index": 57,
+          "component_idx": 0
+        }
+      ]
+    },
+    "employment": {
+      "B": [
+        {
+          "requested_label": "Добыча полезных ископаемых",
+          "row_index": 9,
+          "component_idx": 0
+        }
+      ],
+      "C": [
+        {
+          "requested_label": "Обрабатывающие производства",
+          "row_index": 10,
+          "component_idx": 0
+        }
+      ],
+      "DE": [
+        {
+          "requested_label": "Обеспечение электрической энергией, газом и паром; кондиционирование воздуха",
+          "row_index": 11,
+          "component_idx": 0
+        },
+        {
+          "requested_label": "Водоснабжение; водоотведение, организация сбора и утилизации отходов, деятельность по ликвидации загрязнений",
+          "row_index": 12,
+          "component_idx": 1
+        }
+      ],
+      "F": [
+        {
+          "requested_label": "Строительство",
+          "row_index": 13,
+          "component_idx": 0
+        }
+      ],
+      "H": [
+        {
+          "requested_label": "Транспортировка и хранение",
+          "row_index": 15,
+          "component_idx": 0
+        }
+      ],
+      "J": [
+        {
+          "requested_label": "Деятельность в области информации и связи",
+          "row_index": 17,
+          "component_idx": 0
+        }
+      ],
+      "K": [
+        {
+          "requested_label": "Деятельность финансовая и страховая",
+          "row_index": 18,
+          "component_idx": 0
+        }
+      ],
+      "M": [
+        {
+          "requested_label": "Деятельность профессиональная, научная и техническая",
+          "row_index": 20,
+          "component_idx": 0
+        }
+      ]
+    },
+    "weighted_wage": {
+      "wage_rows": {
+        "B": [
+          {
+            "requested_label": "добыча полезных ископаемых",
+            "row_index": 11,
+            "component_idx": 0
+          }
+        ],
+        "C": [
+          {
+            "requested_label": "обрабатывающие производства",
+            "row_index": 16,
+            "component_idx": 0
+          }
+        ],
+        "DE": [
+          {
+            "requested_label": "обеспечение электрической энергией, газом и паром; кондиционирование воздуха",
+            "row_index": 42,
+            "component_idx": 0
+          },
+          {
+            "requested_label": "водоснабжение; водоотведение, организация сбора и утилизации отходов, деятельность по ликвидации загрязнений",
+            "row_index": 43,
+            "component_idx": 1
+          }
+        ],
+        "F": [
+          {
+            "requested_label": "строительство",
+            "row_index": 44,
+            "component_idx": 0
+          }
+        ],
+        "H": [
+          {
+            "requested_label": "транспортировка и хранение",
+            "row_index": 46,
+            "component_idx": 0
+          }
+        ],
+        "J": [
+          {
+            "requested_label": "деятельность в области информации и связи",
+            "row_index": 48,
+            "component_idx": 0
+          }
+        ],
+        "K": [
+          {
+            "requested_label": "деятельность финансовая и страховая",
+            "row_index": 49,
+            "component_idx": 0
+          }
+        ],
+        "M": [
+          {
+            "requested_label": "деятельность профессиональная,научная и техническая",
+            "row_index": 51,
+            "component_idx": 0
+          }
+        ]
+      },
+      "employment_rows": {
+        "B": [
+          {
+            "requested_label": "Добыча полезных ископаемых",
+            "row_index": 9,
+            "component_idx": 0
+          }
+        ],
+        "C": [
+          {
+            "requested_label": "Обрабатывающие производства",
+            "row_index": 10,
+            "component_idx": 0
+          }
+        ],
+        "DE": [
+          {
+            "requested_label": "Обеспечение электрической энергией, газом и паром; кондиционирование воздуха",
+            "row_index": 11,
+            "component_idx": 0
+          },
+          {
+            "requested_label": "Водоснабжение; водоотведение, организация сбора и утилизации отходов, деятельность по ликвидации загрязнений",
+            "row_index": 12,
+            "component_idx": 1
+          }
+        ],
+        "F": [
+          {
+            "requested_label": "Строительство",
+            "row_index": 13,
+            "component_idx": 0
+          }
+        ],
+        "H": [
+          {
+            "requested_label": "Транспортировка и хранение",
+            "row_index": 15,
+            "component_idx": 0
+          }
+        ],
+        "J": [
+          {
+            "requested_label": "Деятельность в области информации и связи",
+            "row_index": 17,
+            "component_idx": 0
+          }
+        ],
+        "K": [
+          {
+            "requested_label": "Деятельность финансовая и страховая",
+            "row_index": 18,
+            "component_idx": 0
+          }
+        ],
+        "M": [
+          {
+            "requested_label": "Деятельность профессиональная, научная и техническая",
+            "row_index": 20,
+            "component_idx": 0
+          }
+        ]
+      }
+    }
+  },
+  "formulas": {
+    "fot_proxy_bn_rub": "employment_thousand_persons * avg_monthly_wage_rub * 12 / 1_000_000",
+    "labour_share_proxy": "fot_proxy_bn_rub / va_current_bn_rub",
+    "va_nominal_index_prev_year_pct": "(va_current_bn_rub_t / va_current_bn_rub_t-1) * 100",
+    "va_volume_index_prev_year_pct": "(va_constant_2021_bn_rub_t / va_constant_2021_bn_rub_t-1) * 100",
+    "va_real_growth_pct": "va_volume_index_prev_year_pct - 100",
+    "va_deflator_index_prev_year_pct": "(va_nominal_index_prev_year_pct / va_volume_index_prev_year_pct) * 100",
+    "va_deflator_growth_pct": "va_deflator_index_prev_year_pct - 100"
+  },
+  "limitations": [
+    "Direct EMISS/Fedstat indicator API returned 403 in this environment, so the pipeline uses official Rosstat XLS/XLSX direct files.",
+    "Direct payroll series 57821 is not yet wired from Fedstat; FOT is proxied as employment multiplied by average monthly wage and 12 months.",
+    "Employment workbook currently covers 2017-2024, so labour-share complete overlap is 2017-2024.",
+    "For aggregated sector D+E, volume and deflator indices are computed from aggregated current and constant-price VA levels; official sheet indices are retained only for audit."
+  ]
+}

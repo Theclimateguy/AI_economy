@@ -1,0 +1,234 @@
+{
+  "requested_window": {
+    "start_year": 1985,
+    "end_year": 2005
+  },
+  "eu_klems_first_year": 1995,
+  "comparator_countries": [
+    "AT",
+    "BE",
+    "BG",
+    "CY",
+    "CZ",
+    "DE",
+    "DK",
+    "EE",
+    "EL",
+    "ES",
+    "FI",
+    "FR",
+    "HR",
+    "HU",
+    "IE",
+    "IT",
+    "LT",
+    "LU",
+    "LV",
+    "MT",
+    "NL",
+    "PL",
+    "PT",
+    "RO",
+    "SE",
+    "SI",
+    "SK",
+    "UK",
+    "JP",
+    "US"
+  ],
+  "country_code_map": {
+    "AT": "AUT",
+    "BE": "BEL",
+    "BG": "BGR",
+    "CY": "CYP",
+    "CZ": "CZE",
+    "DE": "DEU",
+    "DK": "DNK",
+    "EE": "EST",
+    "EL": "GRC",
+    "ES": "ESP",
+    "FI": "FIN",
+    "FR": "FRA",
+    "HR": "HRV",
+    "HU": "HUN",
+    "IE": "IRL",
+    "IT": "ITA",
+    "LT": "LTU",
+    "LU": "LUX",
+    "LV": "LVA",
+    "MT": "MLT",
+    "NL": "NLD",
+    "PL": "POL",
+    "PT": "PRT",
+    "RO": "ROU",
+    "SE": "SWE",
+    "SI": "SVN",
+    "SK": "SVK",
+    "UK": "GBR",
+    "JP": "JPN",
+    "US": "USA"
+  },
+  "sector_map": [
+    {
+      "sector_id": "B",
+      "sector_name_ru": "Добыча полезных ископаемых",
+      "okved": "B",
+      "klems_code": "B",
+      "share_code": "B",
+      "stan_code": "B",
+      "staffing_codes": [
+        "ECO_ISIC3_C"
+      ],
+      "staffing_proxy_exact": true,
+      "ai_intensity": "low",
+      "is_proxy_mn": false
+    },
+    {
+      "sector_id": "C",
+      "sector_name_ru": "Обрабатывающая промышленность",
+      "okved": "C",
+      "klems_code": "C",
+      "share_code": "C",
+      "stan_code": "C",
+      "staffing_codes": [
+        "ECO_ISIC3_D"
+      ],
+      "staffing_proxy_exact": true,
+      "ai_intensity": "low_medium",
+      "is_proxy_mn": false
+    },
+    {
+      "sector_id": "DE",
+      "sector_name_ru": "Энергетика и ЖКХ",
+      "okved": "D+E",
+      "klems_code": "D_E",
+      "share_code": "D_E",
+      "stan_code": "D_E",
+      "staffing_codes": [
+        "ECO_ISIC3_E"
+      ],
+      "staffing_proxy_exact": true,
+      "ai_intensity": "low",
+      "is_proxy_mn": false
+    },
+    {
+      "sector_id": "F",
+      "sector_name_ru": "Строительство",
+      "okved": "F",
+      "klems_code": "F",
+      "share_code": "F",
+      "stan_code": "F",
+      "staffing_codes": [
+        "ECO_ISIC3_F"
+      ],
+      "staffing_proxy_exact": true,
+      "ai_intensity": "low",
+      "is_proxy_mn": false
+    },
+    {
+      "sector_id": "H",
+      "sector_name_ru": "Транспорт и логистика",
+      "okved": "H",
+      "klems_code": "H",
+      "share_code": "H",
+      "stan_code": "H",
+      "staffing_codes": [
+        "ECO_ISIC3_I"
+      ],
+      "staffing_proxy_exact": false,
+      "ai_intensity": "medium",
+      "is_proxy_mn": false
+    },
+    {
+      "sector_id": "K",
+      "sector_name_ru": "Финансы и страхование",
+      "okved": "K",
+      "klems_code": "K",
+      "share_code": "K",
+      "stan_code": "K",
+      "staffing_codes": [
+        "ECO_ISIC3_J"
+      ],
+      "staffing_proxy_exact": true,
+      "ai_intensity": "high",
+      "is_proxy_mn": false
+    },
+    {
+      "sector_id": "J",
+      "sector_name_ru": "ИТ и связь",
+      "okved": "J",
+      "klems_code": "J",
+      "share_code": "J",
+      "stan_code": "J",
+      "staffing_codes": [
+        "ECO_ISIC3_K"
+      ],
+      "staffing_proxy_exact": false,
+      "ai_intensity": "high",
+      "is_proxy_mn": false
+    },
+    {
+      "sector_id": "M",
+      "sector_name_ru": "Профессиональные и научные услуги",
+      "okved": "M",
+      "klems_code": "M_N",
+      "share_code": "M",
+      "stan_code": "M_N",
+      "staffing_codes": [
+        "ECO_ISIC3_K"
+      ],
+      "staffing_proxy_exact": false,
+      "ai_intensity": "high",
+      "is_proxy_mn": true
+    }
+  ],
+  "eu_klems": {
+    "national_accounts_url": "https://euklems.eu/bulk/Statistical_National-Accounts.csv",
+    "capital_url": "https://euklems.eu/bulk/Statistical_Capital.csv",
+    "labour_share_url": "https://euklems.eu/bulk/Shares_LabourIncome.csv",
+    "ict_share_url": "https://euklems.eu/bulk/Shares_ICT-NonICT.csv",
+    "variable_description_url": "https://euklems.eu/wp-content/uploads/2019/10/Variable-Description.csv"
+  },
+  "oecd_stan": {
+    "agency": "OECD.STI.PIE",
+    "dataset": "DSD_STAN@DF_STAN_2025",
+    "version": "1.0",
+    "measures": [
+      "B1G",
+      "B1GFC",
+      "B2A3G",
+      "D1",
+      "D11",
+      "D29X39",
+      "EMP",
+      "P1",
+      "P2",
+      "P51G",
+      "P51G_ICT",
+      "N11GA",
+      "N11GA_ICT",
+      "N11NA",
+      "N11NA_ICT",
+      "SAL",
+      "SELF"
+    ]
+  },
+  "rti_source": {
+    "url": "https://piotr-lewandowski.pl/wp-content/uploads/2023/08/Country-specific-routine-task-intensity-of-occupations-for-102-countries.zip",
+    "zip_member_csv": "Country-specific routine task intensity of occupations for 102 countries/rti_country_specific_survey_predicted.csv",
+    "variant_prefix": "rti_isco1d"
+  },
+  "staffing_matrix_source": {
+    "url": "https://rplumber.ilo.org/data/indicator/?id=EMP_TEMP_ECO_OCU_NB_A&lang=en&type=code&format=.csv.gz&channel=ilostat",
+    "indicator_id": "EMP_TEMP_ECO_OCU_NB_A",
+    "base_year_target": 1995,
+    "fallback_years": [
+      1994,
+      1996,
+      1993,
+      1997
+    ],
+    "occupation_prefix": "OCU_ISCO88_",
+    "total_occupation_code": "OCU_ISCO88_TOTAL"
+  }
+}

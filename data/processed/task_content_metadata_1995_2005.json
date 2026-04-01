@@ -1,0 +1,19 @@
+{
+  "window": {
+    "start_year": 1995,
+    "end_year": 2005
+  },
+  "task_content_definition": "Delta TC = Delta(labour_share_structural) = Delta(wL/VA)",
+  "variant": "naive_sigma_1",
+  "price_clean_variant_available": false,
+  "price_clean_variant_note": "Relative-price-cleaned task-content decomposition is not computed in this pipeline because no sector-consistent price decomposition for wL/VA is attached to the merged historical panel.",
+  "n_panel_rows_in_window": 2591,
+  "n_annual_changes": 2354,
+  "n_longdiff_country_sector_pairs": 229,
+  "n_sectors": 8,
+  "n_countries_longdiff": 29,
+  "dominant_task_shift_counts": {
+    "task_displacing": 6,
+    "task_creating": 2
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "base_year_target": 1995,
+  "fallback_years": [
+    1994,
+    1996,
+    1993,
+    1997
+  ],
+  "min_weight_coverage": 0.95,
+  "n_candidate_country_sector_year_source": 566,
+  "n_selected_country_sector_pairs": 152,
+  "n_countries": 20,
+  "n_sectors": 8,
+  "n_exact_base_year_pairs": 98,
+  "selected_year_distribution": [
+    {
+      "year": 1994,
+      "n_country_sector_pairs": 1
+    },
+    {
+      "year": 1995,
+      "n_country_sector_pairs": 98
+    },
+    {
+      "year": 1996,
+      "n_country_sector_pairs": 10
+    },
+    {
+      "year": 1997,
+      "n_country_sector_pairs": 43
+    }
+  ],
+  "coverage_by_sector": [
+    {
+      "sector_id": "B",
+      "n_country_pairs": 14,
+      "mean_weight_coverage": 0.9803757913178286,
+      "min_weight_coverage": 0.9554439226821012
+    },
+    {
+      "sector_id": "C",
+      "n_country_pairs": 20,
+      "mean_weight_coverage": 0.9929773157742503,
+      "min_weight_coverage": 0.9501811661182386
+    },
+    {
+      "sector_id": "DE",
+      "n_country_pairs": 19,
+      "mean_weight_coverage": 0.9858502192263415,
+      "min_weight_coverage": 0.9561152746658426
+    },
+    {
+      "sector_id": "F",
+      "n_country_pairs": 20,
+      "mean_weight_coverage": 0.9955230827928894,
+      "min_weight_coverage": 0.9741439870422369
+    },
+    {
+      "sector_id": "H",
+      "n_country_pairs": 20,
+      "mean_weight_coverage": 0.9955563042219999,
+      "min_weight_coverage": 0.9614944395851557
+    },
+    {
+      "sector_id": "J",
+      "n_country_pairs": 20,
+      "mean_weight_coverage": 0.9929986169034383,
+      "min_weight_coverage": 0.960947009439855
+    },
+    {
+      "sector_id": "K",
+      "n_country_pairs": 19,
+      "mean_weight_coverage": 0.9849351124972893,
+      "min_weight_coverage": 0.952370123829409
+    },
+    {
+      "sector_id": "M",
+      "n_country_pairs": 20,
+      "mean_weight_coverage": 0.9929986169034383,
+      "min_weight_coverage": 0.960947009439855
+    }
+  ]
+}

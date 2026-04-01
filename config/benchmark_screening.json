@@ -1,0 +1,79 @@
+{
+  "analysis_window": {
+    "start_year": 1995,
+    "end_year": 2005
+  },
+  "thresholds": {
+    "p_value": 0.05,
+    "q_value": 0.1,
+    "placebo_p_value": 0.1,
+    "min_sign_stability_share": 0.8,
+    "min_loo_sign_share": 0.8,
+    "min_country_count": 12,
+    "min_observations": 100
+  },
+  "robustness": {
+    "exclude_countries": [
+      "USA",
+      "JPN"
+    ]
+  },
+  "tests": [
+    {
+      "test_id": "I2",
+      "label": "Labour share decline via task-displacing capital",
+      "formula": "d_labour_share ~ lag_d_techint + rti + lag_d_techint:rti + C(country_iso3) + C(year)",
+      "description": "Technology should reduce the labour share more strongly in routine-intensive sectors.",
+      "focal_terms": [
+        {
+          "term": "lag_d_techint:rti",
+          "expected_sign": -1,
+          "placebo_term": "lead_d_techint:rti"
+        }
+      ]
+    },
+    {
+      "test_id": "I3",
+      "label": "Employment polarization and compression",
+      "formula": "d_emp_per_va ~ lag_d_techint + rti + lag_d_techint:rti + C(country_iso3) + C(year)",
+      "description": "Technology should reduce labour demand per unit of value added in routine-intensive sectors.",
+      "focal_terms": [
+        {
+          "term": "lag_d_techint:rti",
+          "expected_sign": -1,
+          "placebo_term": "lead_d_techint:rti"
+        }
+      ]
+    },
+    {
+      "test_id": "I6",
+      "label": "Temporary rent and competitive erosion",
+      "formula": "d_margin ~ lag_d_techint + lag_margin + C(country_iso3) + C(year)",
+      "description": "Technology should raise margins temporarily, while high margins should mean-revert.",
+      "focal_terms": [
+        {
+          "term": "lag_d_techint",
+          "expected_sign": 1,
+          "placebo_term": "lead_d_techint"
+        },
+        {
+          "term": "lag_margin",
+          "expected_sign": -1
+        }
+      ]
+    },
+    {
+      "test_id": "I8",
+      "label": "Rising organic composition of capital",
+      "formula": "d_occ ~ lag_d_techint + C(country_iso3) + C(year)",
+      "description": "Technology should raise the organic composition of capital.",
+      "focal_terms": [
+        {
+          "term": "lag_d_techint",
+          "expected_sign": 1,
+          "placebo_term": "lead_d_techint"
+        }
+      ]
+    }
+  ]
+}
