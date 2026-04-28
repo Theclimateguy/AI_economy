@@ -7,7 +7,8 @@
 - исторических аналогий технологических революций;
 - строгого screening гипотез инвариантов;
 - перехода от невыживших линейных бет к сценарным task-content shocks;
-- динамической модели диффузии, маржи и капитальных затрат.
+- динамической модели диффузии, маржи и капитальных затрат;
+- политэкономического слоя managed obsolescence, где frontier capability может развертываться не полностью из-за replacement cycles, compatibility lock-in, repair/access restrictions, regulation и риска трудового backlash.
 
 ## Объект анализа
 
@@ -66,10 +67,17 @@
 \pi_{s,t} = \pi_{s,0} + \gamma_s A_s(t) - \lambda \pi_{s,t-1}
 \]
 
+\[
+a_{s,t} = q_t A_s(t)(1-\tau_{s,t})
+\]
+
 где:
 
 - \(A_s(t)\) — накопленная адаптация;
 - \(p_s, q_s\) — параметры диффузии;
 - \(\Delta s^{L,potential}_s\) — потенциальный шок доли труда;
 - \(\gamma_s\) — adoption premium;
-- \(\lambda\) — исторически выжившая скорость эрозии маржи.
+- \(\lambda\) — исторически выжившая скорость эрозии маржи;
+- \(q_t\) — frontier capability ИИ;
+- \(a_{s,t}\) — deployed capability в секторе;
+- \(\tau_{s,t}\) — managed-obsolescence / throttling wedge.

@@ -10,12 +10,15 @@
 | `OECD STAN` | `data/raw/oecd/` | output, `VA`, compensation, taxes, operating surplus, capital stocks |
 | `ILOSTAT` | `data/raw/ilostat/` | historical staffing matrix for `industry × occupation` |
 | `Lewandowski RTI` | `data/raw/rti/` | occupation-level routine task intensity |
+| `Russia KLEMS` | `data/raw/russia_klems/` | Russia 1995-2016 `VA`, labour, capital, productivity and TFP by NACE 1.0 industry |
+| `OWID technology diffusion` | `data/raw/world_tech/` | long-run technology adoption benchmark series |
 
 ### Russia data
 
 | Source | Folder | What it provides |
 |---|---|---|
 | `Rosstat official XLS/XLSX` | `data/raw/russia/` | `VA`, real indices, employment, wages |
+| `Russia KLEMS / HSE CPS` | `data/raw/russia_klems/` | historical bridge for Russian productivity, labour services and capital services |
 
 ## Processed outputs by experiment
 
@@ -52,6 +55,16 @@
   - `data/processed/ai_capital_return_paths_2025_2035.csv`
   - `data/processed/ai_capital_return_sector_summary.csv`
   - `data/processed/ai_capital_return_class_summary.csv`
+
+## Stage 3
+
+- Russia KLEMS layer:
+  - `data/processed/russia_klems_sector_panel_1995_2016.csv`
+  - `data/processed/managed_obsolescence_sector_proxy.csv`
+  - `data/processed/russia_klems_metadata.json`
+- World diffusion figures:
+  - `data/processed/world_technology_diffusion_benchmarks.csv`
+  - `output/figures/managed_obsolescence/*.png`
 
 ## Смысл разделения raw / processed
 

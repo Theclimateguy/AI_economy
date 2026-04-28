@@ -5,7 +5,8 @@
 Этот репозиторий оформлен как воспроизводимый research pack по анализу влияния ИИ на отрасли экономики РФ. Логика работы разбита на два этапа:
 
 1. строгая историческая проверка гипотез об инвариантах технологических революций;
-2. структурная модель диффузии, адаптации и капитальной отдачи для РФ после отказа от неустойчивых универсальных бет.
+2. структурная модель диффузии, адаптации и капитальной отдачи для РФ после отказа от неустойчивых универсальных бет;
+3. политэкономический слой managed obsolescence, который переводит исторические механизмы controlled replacement / compatibility / repair restrictions в секторный throttling proxy для РФ.
 
 ## Постановка задачи
 
@@ -49,6 +50,7 @@
 ### Russia block
 
 - official `Rosstat` files по `VA`, индексу физического объема, занятости, зарплатам
+- `Russia KLEMS` ВШЭ по выпуску, труду, капиталу, производительности и TFP за 1995-2016
 
 ### Где лежат данные
 
@@ -165,6 +167,39 @@
 - capital returns: [../data/processed/ai_capital_return_sector_summary.csv](../data/processed/ai_capital_return_sector_summary.csv)
 
 Детально: [stage2_diffusion_and_returns.md](stage2_diffusion_and_returns.md).
+
+## Этап 3. Managed obsolescence and throttling
+
+### Что добавлено
+
+Новый слой формализует риск, что frontier AI capability будет внедряться не полностью:
+
+\[
+a_{s,t} = q_t A_{s,t}(1-\tau_{s,t})
+\]
+
+где \(\tau_{s,t}\) отражает не только regulation, но и экономику replacement cycles, compatibility lock-in, repair/access restrictions и controlled release.
+
+### Новый источник данных
+
+Добавлен `Russia KLEMS` ВШЭ:
+
+- raw: [../data/raw/russia_klems/RUS_december_2019_0.xlsx](../data/raw/russia_klems/RUS_december_2019_0.xlsx)
+- panel: [../data/processed/russia_klems_sector_panel_1995_2016.csv](../data/processed/russia_klems_sector_panel_1995_2016.csv)
+- proxy: [../data/processed/managed_obsolescence_sector_proxy.csv](../data/processed/managed_obsolescence_sector_proxy.csv)
+
+### Первый результат
+
+Рейтинг sector pressure score:
+
+- `J`: 0.888, но weak proxy из-за старой NACE 1.0 telecom/post mapping;
+- `C`: 0.543, чистый маппинг и центральный сектор для РФ;
+- `M`: 0.431, высокий AI exposure, но broad proxy;
+- `B`: 0.375, чистый маппинг, но нефтегазовая статистика требует caution.
+
+Детально: [managed_obsolescence_layer.md](managed_obsolescence_layer.md).
+
+Графический набор: [managed_obsolescence_figures.md](managed_obsolescence_figures.md).
 
 ## Воспроизводимость
 

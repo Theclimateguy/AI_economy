@@ -1,0 +1,90 @@
+{
+  "source_page": "https://cps.hse.ru/en/data/",
+  "source_url": "https://www.hse.ru/mirror/pubs/share/322620037",
+  "raw_path": "data/raw/russia_klems/RUS_december_2019_0.xlsx",
+  "sector_panel_output_path": "data/processed/russia_klems_sector_panel_1995_2016.csv",
+  "obsolescence_proxy_output_path": "data/processed/managed_obsolescence_sector_proxy.csv",
+  "metadata_output_path": "data/processed/russia_klems_metadata.json",
+  "year_start": 1995,
+  "year_end": 2016,
+  "selected_variables": [
+    "GO",
+    "II",
+    "VA",
+    "LAB",
+    "CAP",
+    "EMP",
+    "H_EMP",
+    "VA_QI",
+    "GO_QI",
+    "LP_I",
+    "LAB_QI",
+    "CAP_QI",
+    "CAPIT_QI",
+    "CAPNIT_QI",
+    "VA_Q",
+    "VAConH",
+    "VAConK",
+    "VAConTFP",
+    "TFPva_I",
+    "LAB_AVG"
+  ],
+  "sector_map": [
+    {
+      "sector_id": "B",
+      "sector_name_ru": "Добыча полезных ископаемых",
+      "russia_klems_codes": ["C"],
+      "fit_quality": "exact_old_nace",
+      "fit_note": "Russia KLEMS NACE 1.0 C is mining and quarrying; maps to OKVED2 B."
+    },
+    {
+      "sector_id": "C",
+      "sector_name_ru": "Обрабатывающая промышленность",
+      "russia_klems_codes": ["D"],
+      "fit_quality": "exact_old_nace",
+      "fit_note": "Russia KLEMS NACE 1.0 D is manufacturing; maps to OKVED2 C."
+    },
+    {
+      "sector_id": "DE",
+      "sector_name_ru": "Энергетика и ЖКХ",
+      "russia_klems_codes": ["E"],
+      "fit_quality": "partial_old_nace",
+      "fit_note": "Russia KLEMS NACE 1.0 E combines electricity, gas and water supply; close but not identical to OKVED2 D+E."
+    },
+    {
+      "sector_id": "F",
+      "sector_name_ru": "Строительство",
+      "russia_klems_codes": ["F"],
+      "fit_quality": "exact_old_nace",
+      "fit_note": "Russia KLEMS NACE 1.0 F is construction; maps to OKVED2 F."
+    },
+    {
+      "sector_id": "H",
+      "sector_name_ru": "Транспорт и логистика",
+      "russia_klems_codes": ["60t63"],
+      "fit_quality": "partial_old_nace",
+      "fit_note": "Russia KLEMS 60t63 covers transport and storage; it excludes post and telecommunications."
+    },
+    {
+      "sector_id": "J",
+      "sector_name_ru": "ИТ и связь",
+      "russia_klems_codes": ["64"],
+      "fit_quality": "weak_proxy",
+      "fit_note": "Russia KLEMS 64 covers post and telecommunications. It is only a legacy proxy for OKVED2 information and communication."
+    },
+    {
+      "sector_id": "K",
+      "sector_name_ru": "Финансы и страхование",
+      "russia_klems_codes": ["J"],
+      "fit_quality": "exact_old_nace",
+      "fit_note": "Russia KLEMS NACE 1.0 J is financial intermediation; maps to OKVED2 K."
+    },
+    {
+      "sector_id": "M",
+      "sector_name_ru": "Профессиональные и научные услуги",
+      "russia_klems_codes": ["71t74"],
+      "fit_quality": "weak_proxy",
+      "fit_note": "Russia KLEMS 71t74 mixes renting, computer-related, R&D and other business activities; it is a broad proxy for OKVED2 M and part of J."
+    }
+  ]
+}

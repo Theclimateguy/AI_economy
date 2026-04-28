@@ -26,6 +26,11 @@
 - [Russia AI Diffusion Report](russia_ai_diffusion_report.md)
 - [Russia AI Capital Return Report](russia_ai_capital_return_report.md)
 
-## 5. Воспроизводимость
+## 5. Этап 3. Управляемое устаревание
+
+- [Managed Obsolescence Layer](managed_obsolescence_layer.md)
+- [Managed Obsolescence Figures](managed_obsolescence_figures.md)
+
+## 6. Воспроизводимость
 
 - [Reproducibility Guide](reproducibility.md)

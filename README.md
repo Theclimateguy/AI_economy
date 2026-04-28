@@ -4,7 +4,7 @@
 
 ## Что внутри
 
-Репозиторий собран как воспроизводимый пакет из двух этапов.
+Репозиторий собран как воспроизводимый пакет из трех этапов.
 
 ### Этап 1. Проверка гипотез инвариантов
 
@@ -20,6 +20,12 @@
 - Bass-type diffusion by adoption class
 - margin dynamics
 - capital need и capital-return functions
+
+### Этап 3. Managed obsolescence / throttling
+
+- Russia KLEMS ВШЭ как исторический мост для РФ, 1995-2016
+- proxy давления на staged deployment: productivity-hours gap, capital-labour gap, ICT vs non-ICT capital services, employment contraction
+- формализация разрыва между frontier AI capability и deployed capability
 
 ## Структура
 
@@ -46,6 +52,7 @@ python3 scripts/run_pipeline.py --stage all
 ```bash
 python3 scripts/run_pipeline.py --stage stage1
 python3 scripts/run_pipeline.py --stage stage2
+python3 scripts/run_pipeline.py --stage managed_obsolescence
 ```
 
 ## Ключевые документы
@@ -55,6 +62,8 @@ python3 scripts/run_pipeline.py --stage stage2
 - [Data Catalog](docs/data_catalog.md)
 - [Stage 1: Invariants Screening](docs/stage1_invariants.md)
 - [Stage 2: Diffusion, Adaptation, Capital Returns](docs/stage2_diffusion_and_returns.md)
+- [Managed Obsolescence Layer](docs/managed_obsolescence_layer.md)
+- [Managed Obsolescence Figures](docs/managed_obsolescence_figures.md)
 - [Reproducibility Guide](docs/reproducibility.md)
 
 ## Ключевые результаты
@@ -71,6 +80,12 @@ python3 scripts/run_pipeline.py --stage stage2
 - `hardware`-класс показывает режим `low adoption / high capex / late or absent payback`;
 - `hybrid`-класс занимает промежуточное положение.
 
+### Stage 3
+
+- `Russia KLEMS` добавлен как слой исторической калибровки для РФ;
+- самый высокий proxy-score у `J`, но это weak proxy из-за NACE 1.0;
+- среди чисто сопоставимых отраслей главный managed-obsolescence pressure показывает `C`.
+
 ## Основные артефакты
 
 - Historical panel:
@@ -81,6 +96,8 @@ python3 scripts/run_pipeline.py --stage stage2
   - `data/processed/ai_diffusion_paths_2025_2035.csv`
 - Capital returns:
   - `data/processed/ai_capital_return_sector_summary.csv`
+- Managed obsolescence:
+  - `data/processed/managed_obsolescence_sector_proxy.csv`
 
 ## Notes
 

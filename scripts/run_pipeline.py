@@ -22,13 +22,17 @@ STAGE_MAP = {
         "build_ai_diffusion_model.py",
         "build_ai_capital_returns.py",
     ],
+    "managed_obsolescence": [
+        "build_managed_obsolescence_layer.py",
+        "generate_managed_obsolescence_figures.py",
+    ],
 }
-STAGE_MAP["all"] = STAGE_MAP["stage1"] + STAGE_MAP["stage2"]
+STAGE_MAP["all"] = STAGE_MAP["stage1"] + STAGE_MAP["stage2"] + STAGE_MAP["managed_obsolescence"]
 
 
 def run_script(script_name: str) -> None:
     script_path = ROOT / "scripts" / script_name
-    print(f"[run_pipeline] running {script_name}")
+    print(f"[run_pipeline] running {script_name}", flush=True)
     subprocess.run([sys.executable, str(script_path)], check=True, cwd=ROOT)
 
 

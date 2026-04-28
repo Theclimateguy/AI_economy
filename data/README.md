@@ -20,6 +20,8 @@
 - `data/raw/ilostat/`
 - `data/raw/rti/`
 - `data/raw/russia/`
+- `data/raw/russia_klems/`
+- `data/raw/world_tech/`
 
 ## Processed
 
@@ -43,6 +45,11 @@
   - `ai_diffusion_sector_summary.csv`
   - `ai_capital_return_paths_2025_2035.csv`
   - `ai_capital_return_sector_summary.csv`
+- Managed obsolescence:
+  - `russia_klems_sector_panel_1995_2016.csv`
+  - `managed_obsolescence_sector_proxy.csv`
+  - `russia_klems_metadata.json`
+  - `world_technology_diffusion_benchmarks.csv`
 
 ## Принцип воспроизводимости
 
