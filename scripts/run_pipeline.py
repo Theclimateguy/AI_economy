@@ -31,6 +31,7 @@ STAGE_MAP = {
         "import_friction_layer.py",
         "build_russia_economy_structure.py",
         "sensitivity_montecarlo.py",
+        "io_leontief_propagation.py",
     ],
 }
 STAGE_MAP["all"] = (

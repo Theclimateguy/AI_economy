@@ -29,6 +29,7 @@
 ## 5. Этап 3. Управляемое устаревание
 
 - [Managed Obsolescence Layer](managed_obsolescence_layer.md)
+- [IO Macro Closure](io_macro_closure.md)
 - [Managed Obsolescence Figures](managed_obsolescence_figures.md)
 
 ## 6. Этап 4. Структура экономики

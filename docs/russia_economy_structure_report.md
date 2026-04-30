@@ -92,10 +92,13 @@ L^{AI}_{s,t} = \frac{VA^{AI}_{s,t}}{LP^{AI}_{s,t}},
 
 ## 8. Ограничения
 
-- Это accounting layer, а не general equilibrium: цены, межотраслевые связи и спрос не замыкаются.
+- Базовые headline-цифры выше остаются direct accounting layer; partial IO-closure вынесен в `docs/io_macro_closure.md`.
+- По `2019` Rosstat `TRI` тот же `Base / BaseThrottle` shock vector даёт `IO-adjusted VA gain = 7.347%` против accounting `4.549%`, то есть ещё `+4232.693` млрд руб. через межотраслевые связи.
+- Direct employment effect в accounting layer равен `-726.342` тыс., но Leontief demand-support добавляет `874.704` тыс.; net partial-closure outcome становится `148.363` тыс. Это не GE-оценка и не учитывает wages/prices crowding-out.
 - `VA` строится в baseline-ruble units через real growth и AI boosts; номинальная инфляция не моделируется.
 - Параметры `η` заданы сценарно по adoption class и должны идти в sensitivity block.
 - `MOS_s` — pressure proxy, а не доказательство намеренного ограничения внедрения.
+
 
 ## 9. Sensitivity
 
