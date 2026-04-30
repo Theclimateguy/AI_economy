@@ -24,9 +24,11 @@ STAGE_MAP = {
     ],
     "managed_obsolescence": [
         "build_managed_obsolescence_layer.py",
+        "import_friction_layer.py",
         "generate_managed_obsolescence_figures.py",
     ],
     "structure": [
+        "import_friction_layer.py",
         "build_russia_economy_structure.py",
         "sensitivity_montecarlo.py",
     ],

@@ -15,6 +15,7 @@ BASELINE_PATH = ROOT / "data" / "processed" / "russia_sector_baseline_2024.csv"
 OFFICIAL_PANEL_PATH = ROOT / "data" / "processed" / "russia_sector_panel_official_2011_2025.csv"
 RETURN_PATHS_PATH = ROOT / "data" / "processed" / "ai_capital_return_paths_2025_2035.csv"
 OBSOLESCENCE_PATH = ROOT / "data" / "processed" / "managed_obsolescence_sector_proxy.csv"
+IMPORT_FRICTION_PATH = ROOT / "data" / "processed" / "import_dependency_sector.csv"
 
 OUTPUT_PATHS = ROOT / "data" / "processed" / "russia_economy_structure_paths_2025_2035.csv"
 OUTPUT_SECTOR = ROOT / "data" / "processed" / "russia_economy_structure_sector_summary.csv"
@@ -42,7 +43,8 @@ def load_inputs(
     official_override: pd.DataFrame | None = None,
     returns_override: pd.DataFrame | None = None,
     obsolescence_override: pd.DataFrame | None = None,
-) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    import_friction_override: pd.DataFrame | None = None,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     baseline = baseline_override.copy() if baseline_override is not None else pd.read_csv(BASELINE_PATH)
     official = official_override.copy() if official_override is not None else pd.read_csv(OFFICIAL_PANEL_PATH)
     returns = returns_override.copy() if returns_override is not None else pd.read_csv(RETURN_PATHS_PATH)
@@ -50,7 +52,13 @@ def load_inputs(
     obsolescence = obsolescence_source[
         ["sector_id", "managed_obsolescence_pressure_score", "managed_obsolescence_pressure_rank", "fit_quality"]
     ]
-    return baseline, official, returns, obsolescence
+    if import_friction_override is not None:
+        import_friction = import_friction_override.copy()
+    elif IMPORT_FRICTION_PATH.exists():
+        import_friction = pd.read_csv(IMPORT_FRICTION_PATH)
+    else:
+        import_friction = pd.DataFrame({"sector_id": baseline["sector_id"].unique()})
+    return baseline, official, returns, obsolescence, import_friction
 
 
 def build_counterfactual_growth(official: pd.DataFrame, config: dict) -> pd.DataFrame:
@@ -104,12 +112,14 @@ def prepare_base(
     official_override: pd.DataFrame | None = None,
     returns_override: pd.DataFrame | None = None,
     obsolescence_override: pd.DataFrame | None = None,
+    import_friction_override: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
-    baseline, official, returns, obsolescence = load_inputs(
+    baseline, official, returns, obsolescence, import_friction = load_inputs(
         baseline_override=baseline_override,
         official_override=official_override,
         returns_override=returns_override,
         obsolescence_override=obsolescence_override,
+        import_friction_override=import_friction_override,
     )
     growth = build_counterfactual_growth(official, config)
     employment = build_employment_trend(official, config)
@@ -126,6 +136,32 @@ def prepare_base(
     base = baseline[base_columns].merge(growth, on="sector_id", how="left")
     base = base.merge(employment, on="sector_id", how="left")
     base = base.merge(obsolescence, on="sector_id", how="left")
+    if not import_friction.empty:
+        merge_cols = [
+            column
+            for column in [
+                "sector_id",
+                "employment_share_2024",
+                "strategic_sector_flag",
+                "import_dependency_score",
+                "market_concentration_score",
+                "sanction_wedge_base",
+                "sanction_wedge_relief",
+            ]
+            if column in import_friction.columns
+        ]
+        base = base.merge(import_friction[merge_cols], on="sector_id", how="left")
+    for column in [
+        "employment_share_2024",
+        "strategic_sector_flag",
+        "import_dependency_score",
+        "market_concentration_score",
+        "sanction_wedge_base",
+        "sanction_wedge_relief",
+    ]:
+        if column not in base.columns:
+            base[column] = 0.0
+        base[column] = base[column].fillna(0.0)
 
     if base[["va_cf_growth_rate_annual", "employment_cf_growth_rate_annual"]].isna().any().any():
         missing = base.loc[
@@ -158,6 +194,7 @@ def build_structure_paths(
     official_override: pd.DataFrame | None = None,
     returns_override: pd.DataFrame | None = None,
     obsolescence_override: pd.DataFrame | None = None,
+    import_friction_override: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     df = prepare_base(
         config,
@@ -165,6 +202,7 @@ def build_structure_paths(
         official_override=official_override,
         returns_override=returns_override,
         obsolescence_override=obsolescence_override,
+        import_friction_override=import_friction_override,
     )
     years_from_base = df["year"] - int(config["baseline_year"])
     df["va_cf_bn_rub"] = df["va_current_bn_rub"] * np.power(1.0 + df["va_cf_growth_rate_annual"], years_from_base)
@@ -182,12 +220,33 @@ def build_structure_paths(
     class_params = config["class_productivity_parameters"]
 
     group_cols = ["scenario", "sector_id"]
-    for throttle_scenario, rho in config["managed_obsolescence_scenarios"].items():
+    throttle_specs: list[dict[str, object]] = [
+        {"name": throttle_scenario, "rho": rho, "sanction_column": None}
+        for throttle_scenario, rho in config["managed_obsolescence_scenarios"].items()
+    ]
+    for throttle_scenario, scenario_cfg in config.get("import_friction", {}).get("sanction_scenarios", {}).items():
+        throttle_specs.append(
+            {
+                "name": throttle_scenario,
+                "rho": float(scenario_cfg["rho"]),
+                "sanction_column": scenario_cfg["wedge_column"],
+            }
+        )
+
+    for spec in throttle_specs:
+        throttle_scenario = str(spec["name"])
+        rho = float(spec["rho"])
         throttled = df.copy()
         throttled["throttle_scenario"] = throttle_scenario
         throttled["throttle_rho"] = float(rho)
+        sanction_column = spec["sanction_column"]
+        throttled["sanction_wedge"] = (
+            throttled[str(sanction_column)].fillna(0.0) if sanction_column is not None else 0.0
+        )
         throttled["managed_adoption_factor"] = (
-            1.0 - float(rho) * throttled["managed_obsolescence_pressure_score"].fillna(0.0)
+            1.0
+            - float(rho) * throttled["managed_obsolescence_pressure_score"].fillna(0.0)
+            - throttled["sanction_wedge"]
         ).clip(lower=0.0, upper=1.0)
         throttled["adaptation_managed"] = throttled["adaptation"] * throttled["managed_adoption_factor"]
         throttled["diffusion_speed_managed"] = throttled["diffusion_speed"] * throttled["managed_adoption_factor"]
@@ -276,6 +335,9 @@ def build_structure_paths(
         "managed_obsolescence_pressure_rank",
         "fit_quality",
         "throttle_rho",
+        "sanction_wedge",
+        "import_dependency_score",
+        "market_concentration_score",
         "managed_adoption_factor",
         "adaptation",
         "adaptation_managed",

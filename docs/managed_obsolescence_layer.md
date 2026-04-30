@@ -165,12 +165,16 @@ A^{managed}_{s,t} = A_{s,t}(1-\rho MOS_s)
 
 \[
 \tau_{s,t} =
-\alpha_1 MOS_s
-+ \alpha_2 \text{employment\_share}_{s,t}
-+ \alpha_3 \text{strategic\_sector}_s
-+ \alpha_4 \text{import\_dependency}_{s,t}
-+ \alpha_5 \text{market\_concentration}_{s,t}
+\rho MOS_s
++ \alpha_4 \text{import\_dependency}_{s}
++ \alpha_5 \text{market\_concentration}_{s}
 \]
+
+где в текущей first-pass реализации
+
+- `import_dependency_s` собирается как proxy из `equipment-import prior`, `software/cloud prior`, `GPU dependence`, `ICT digital share` и `fixed-asset renewal`;
+- `market_concentration_s` собирается как proxy из sector concentration prior, strategic flag и `employment_share_2024`;
+- сценарии `SanctionBase` и `SanctionRelief` отличаются по силе import wedge при одном и том же `BaseThrottle` уровне для `MOS`.
 
 Тогда managed obsolescence становится не отдельной исторической аналогией, а слоем policy friction поверх Bass diffusion.
 

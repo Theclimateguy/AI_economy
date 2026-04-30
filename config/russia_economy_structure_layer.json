@@ -25,6 +25,21 @@
     "BaseThrottle": 0.3,
     "StressThrottle": 0.5
   },
+  "import_friction": {
+    "input_path": "data/processed/import_dependency_sector.csv",
+    "alpha_4": 0.18,
+    "alpha_5": 0.10,
+    "sanction_scenarios": {
+      "SanctionBase": {
+        "rho": 0.3,
+        "wedge_column": "sanction_wedge_base"
+      },
+      "SanctionRelief": {
+        "rho": 0.3,
+        "wedge_column": "sanction_wedge_relief"
+      }
+    }
+  },
   "class_productivity_parameters": {
     "software": {
       "va_log_boost_per_adoption": 0.14,
