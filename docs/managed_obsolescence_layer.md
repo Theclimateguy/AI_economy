@@ -59,6 +59,12 @@ A^{managed}_{s,t} = A_{s,t}(1-\theta_s)
 
 Russia KLEMS Release 3 покрывает 1995-2016 и 34 отрасли в классификации NACE 1.0. Важные ограничения источника: 2015-2016 предварительные, labour shares зафиксированы на уровне 2014, для нефтегазовых отраслей есть проблема transfer pricing и распределения активности между mining, trade, fuel and transport.
 
+Для актуализации добавлен официальный recent-block Росстата:
+
+- `data/processed/russia_sector_panel_official_2011_2025.csv` для `VA`, занятости и wage-bill proxy;
+- `data/raw/russia/ikt_org.xlsx` для отраслевого использования цифровых технологий;
+- `data/raw/russia/koef_ved_2017_2021.xlsx` для коэффициента обновления основных фондов.
+
 ## Маппинг на отрасли проекта
 
 | Project sector | Russia KLEMS code | Качество | Комментарий |
@@ -74,7 +80,7 @@ Russia KLEMS Release 3 покрывает 1995-2016 и 34 отрасли в кл
 
 ## Proxy score
 
-Для каждого сектора построен score:
+Исторический KLEMS score сохраняется для backward comparability:
 
 \[
 MOS_s =
@@ -85,6 +91,35 @@ MOS_s =
 \]
 
 где \(g\) — CAGR за 1995-2016, \(N^+(\cdot)\) — min-max нормировка положительной части по восьми секторам.
+
+Обновленный long-base score строится в два шага.
+
+Сначала recent-block `2017–2024`:
+
+\[
+MOS^{recent}_s =
+0.35 N^+(g^{LP,off}_s)
++ 0.30 N^+\left(0.5(g^{VA,real}_s - g^{FOT}_s) + 0.5 g^{renewal}_s\right)
++ 0.20 N^+(g^{ICTshare}_s)
++ 0.15 N^+(-g^{EMP,off}_s)
+\]
+
+Затем long-base blend `2000–2024` по component scores:
+
+\[
+S^{long}_{s,j} =
+\frac{16}{23} S^{KLEMS(2000-2016)}_{s,j}
++ \frac{7}{23} S^{OFF(2017-2024)}_{s,j},
+\qquad
+MOS^{updated}_s = 0.35 S^{long}_{s,1} + 0.30 S^{long}_{s,2} + 0.20 S^{long}_{s,3} + 0.15 S^{long}_{s,4}
+\]
+
+Здесь:
+
+- \(g^{LP,off}\) — CAGR real `VA per worker` proxy, так как часов по секторам в текущем repo нет;
+- \(g^{FOT}\) — CAGR `employment * wage * 12`;
+- \(g^{renewal}\) — CAGR коэффициента обновления основных фондов за `2017–2020`;
+- \(g^{ICTshare}\) — CAGR proxy `0.5 * server_share + 0.5 * website_share` из `ikt_org.xlsx`.
 
 Интерпретация компонентов:
 
@@ -97,18 +132,20 @@ MOS_s =
 
 ## Первый результат для РФ
 
+Ниже уже не legacy KLEMS rank, а обновленный `mos_score_updated`:
+
 | Rank | Sector | Score | Read |
 |---:|---|---:|---|
-| 1 | `J` ИТ и связь | 0.888 | высокий сигнал, но слабый legacy proxy: telecom/post вместо полной OKVED2 J |
-| 2 | `C` обрабатывающая | 0.543 | чистый маппинг; центральный сектор для managed deployment |
-| 3 | `M` проф. и научные услуги | 0.431 | высокий AI exposure, но KLEMS proxy широк и смешивает виды деятельности |
-| 4 | `B` добыча | 0.375 | чистый маппинг, но нефтегазовая статистика требует осторожности |
-| 5 | `F` строительство | 0.271 | умеренный стресс, вероятнее через материалы, оборудование и проектирование |
-| 6 | `H` транспорт | 0.258 | умеренный стресс; логистика чувствительна к regulation and safety gates |
-| 7 | `K` финансы | 0.245 | исторически занятость росла, но текущий AI exposure остается высоким |
-| 8 | `DE` энергетика и ЖКХ | 0.144 | низкий KLEMS-score, но strategic throttling может идти через надежность и безопасность |
+| 1 | `J` ИТ и связь | 0.649 | лидер сохраняется, но теперь score опирается не только на legacy telecom proxy, а и на recent digital block |
+| 2 | `C` обрабатывающая | 0.426 | устойчиво высокий throttling-pressure: сочетание capital renewal, ICT use и large employment base |
+| 3 | `K` финансы | 0.363 | главный upward re-rank: recent digitalization и productivity growth поднимают сектор с `7` на `3` место |
+| 4 | `DE` энергетика и ЖКХ | 0.340 | второй крупный upward re-rank: strategic infrastructure больше не выглядит “низким stress” сектором |
+| 5 | `B` добыча | 0.233 | historical pressure был выше, но recent official block делает картину более умеренной |
+| 6 | `H` транспорт | 0.224 | средний, но устойчивый throttling-risk через infra/safety constraints |
+| 7 | `F` строительство | 0.201 | recent block повышает цифровизацию меньше, чем капитальный цикл, поэтому сектор опускается ниже baseline intuition |
+| 8 | `M` проф. и научные услуги | 0.169 | strongest downward re-rank: historical broad KLEMS proxy переоценивал текущий throttling-pressure сектора |
 
-Главный прикладной вывод: для РФ слой надо использовать асимметрично. В `C` и частично `B/F/H` он отражает материально-капитальные constraints. В `J/K/M` он должен связываться с Stage 2 AI exposure, но исторический KLEMS-мэппинг сам по себе недостаточен.
+Главный прикладной вывод изменился: recent official block поднимает `K` и `DE`, а `M` больше не выглядит естественным top-3 bottleneck. Для downstream `Stage 2/4` это важно, потому что institutional throttling теперь сильнее смещается в сторону финансовой инфраструктуры и regulated utility systems, а не только в legacy `J/C`.
 
 ## Как встроить в Stage 2
 

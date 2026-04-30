@@ -104,17 +104,30 @@
     "obsolescence_proxy": "data/processed/managed_obsolescence_sector_proxy.csv"
   },
   "proxy_formulas": {
-    "productivity_hours_gap_cagr": "CAGR(LP_I) - CAGR(H_EMP)",
-    "capital_labour_services_gap_cagr": "CAGR(CAP_QI) - CAGR(LAB_QI)",
-    "ict_nonict_services_gap_cagr": "CAGR(CAPIT_QI) - CAGR(CAPNIT_QI)",
-    "employment_contraction_cagr": "-CAGR(EMP)",
-    "managed_obsolescence_pressure_score": "0.35 productivity-hours + 0.30 capital-labour + 0.20 ICT-nonICT + 0.15 employment-contraction, min-max normalized across project sectors"
+    "klems_productivity_hours_gap_cagr": "CAGR(LP_I) - CAGR(H_EMP)",
+    "klems_capital_labour_services_gap_cagr": "CAGR(CAP_QI) - CAGR(LAB_QI)",
+    "klems_ict_nonict_services_gap_cagr": "CAGR(CAPIT_QI) - CAGR(CAPNIT_QI)",
+    "klems_employment_contraction_cagr": "-CAGR(EMP)",
+    "official_productivity_hours_gap_cagr": "CAGR(real VA per worker proxy, 2017-2024). Hours-worked series is unavailable in the current repo, so worker productivity is used as the observed labour-saving proxy.",
+    "official_capital_labour_services_gap_cagr": "0.5 * (CAGR(real VA, 2017-2024) - CAGR(FOT proxy, 2017-2024)) + 0.5 * CAGR(fixed-asset renewal coefficient, 2017-2020).",
+    "official_ict_nonict_services_gap_cagr": "CAGR(0.5 * server_share_pct + 0.5 * website_share_pct, 2017-2024) from Rosstat ICT usage by activity.",
+    "official_employment_contraction_cagr": "-CAGR(employment, 2017-2024)",
+    "mos_score_updated": "0.35 * updated_productivity + 0.30 * updated_capital_labour + 0.20 * updated_ICT + 0.15 * updated_employment, where updated component score is a year-span-weighted blend of KLEMS 2000-2016 and official 2017-2024 normalized component scores."
   },
   "limitations": [
     "The proxy does not identify deliberate planned obsolescence or collusion.",
     "It measures sectoral pressure under which firms or regulators may prefer staged deployment, compatibility limits, controlled repair/access, or slower capability release.",
     "Russia KLEMS Release 3 uses NACE 1.0 and covers 1995-2016; mapping to current OKVED2 sectors is approximate for J and M.",
     "Russia KLEMS notes that 2015-2016 values are preliminary and labour shares are fixed at the 2014 level in this release.",
-    "Special caution is required for oil and gas related industries because of transfer pricing and cross-industry allocation issues noted by Russia KLEMS."
-  ]
+    "Special caution is required for oil and gas related industries because of transfer pricing and cross-industry allocation issues noted by Russia KLEMS.",
+    "Rosstat fixed-asset renewal table currently contributes 2017-2020 values; the 2021-2024 tail is not published in the same machine-readable table used here.",
+    "Recent official block uses observed VA, employment, wage-bill proxy and ICT-use shares. This is materially better than relying only on 1995-2016 KLEMS, but it remains a proxy layer rather than a direct measure of ICT versus non-ICT capital services."
+  ],
+  "supplemental_sources": {
+    "official_panel_path": "data/processed/russia_sector_panel_official_2011_2025.csv",
+    "ict_usage_url": "https://rosstat.gov.ru/storage/mediabank/ikt_org.xlsx",
+    "ict_usage_raw_path": "data/raw/russia/ikt_org.xlsx",
+    "fixed_asset_renewal_url": "https://rosstat.gov.ru/free_doc/new_site/business/osnfond/KOEF_ved2.xlsx",
+    "fixed_asset_renewal_raw_path": "data/raw/russia/koef_ved_2017_2021.xlsx"
+  }
 }
