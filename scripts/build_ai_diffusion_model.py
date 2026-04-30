@@ -150,8 +150,10 @@ def run_diffusion_paths(base: pd.DataFrame, config: dict) -> pd.DataFrame:
     for _, row in base.iterrows():
         class_params = config["class_parameters"][row["class_id"]]
         for scenario_name, scenario in config["scenario_parameters"].items():
-            p = class_params["p"] * scenario["p_multiplier"]
-            q = class_params["q"] * scenario["q_multiplier"]
+            p_anchor = row["p_draw"] if "p_draw" in row.index and pd.notna(row["p_draw"]) else class_params["p"]
+            q_anchor = row["q_draw"] if "q_draw" in row.index and pd.notna(row["q_draw"]) else class_params["q"]
+            p = p_anchor * scenario["p_multiplier"]
+            q = q_anchor * scenario["q_multiplier"]
             capital_barrier = class_params["capital_barrier"] * scenario.get("capital_barrier_multiplier", 1.0)
             if row["class_id"] in scenario.get("class_overrides", {}):
                 capital_barrier *= scenario["class_overrides"][row["class_id"]].get("capital_barrier_multiplier", 1.0)

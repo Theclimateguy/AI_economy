@@ -96,3 +96,47 @@ L^{AI}_{s,t} = \frac{VA^{AI}_{s,t}}{LP^{AI}_{s,t}},
 - `VA` строится в baseline-ruble units через real growth и AI boosts; номинальная инфляция не моделируется.
 - Параметры `η` заданы сценарно по adoption class и должны идти в sensitivity block.
 - `MOS_s` — pressure proxy, а не доказательство намеренного ограничения внедрения.
+
+## 9. Sensitivity
+
+Формально считаем неопределенность по вектору параметров
+
+\[
+\theta = \left(\{\eta^{VA}_c, \eta^{LP}_c\}_{c \in \{software, hybrid, hardware\}}, \rho, \{p_s, q_s\}_s\right),
+\]
+
+и оцениваем распределение агрегированных исходов
+
+\[
+Y_t(\theta) = \left(VA^{AI}_t, \Pi^{AI}_t, L^{AI}_t - L^{cf}_t\right)
+\]
+
+через Monte Carlo с `N=5000` draws и `seed=20260430`.
+
+### Priors
+
+| parameter | distribution | hyperparameters |
+| --- | --- | --- |
+| $\eta^{VA}_{software}$ | trunc. normal | mean=0.14, sd=0.03, [0.08, 0.22] |
+| $\eta^{LP}_{software}$ | trunc. normal | mean=0.22, sd=0.05, [0.12, 0.35] |
+| $\eta^{VA}_{hybrid}$ | trunc. normal | mean=0.08, sd=0.02, [0.03, 0.15] |
+| $\eta^{LP}_{hybrid}$ | trunc. normal | mean=0.14, sd=0.03, [0.06, 0.24] |
+| $\eta^{VA}_{hardware}$ | trunc. normal | mean=0.04, sd=0.015, [0.00, 0.09] |
+| $\eta^{LP}_{hardware}$ | trunc. normal | mean=0.09, sd=0.025, [0.02, 0.18] |
+| $\rho$ | beta | alpha=6, beta=14, mean=0.30 |
+| $p_s$ | lognormal multiplier on class anchor | sigma=0.35, clip=[0.25x, 2.50x] |
+| $q_s$ | lognormal multiplier on class anchor | sigma=0.25, clip=[0.50x, 2.00x] |
+
+### 2035 percentile outcomes
+
+| metric | p10 | p50 | p90 | deterministic base |
+| --- | --- | --- | --- | --- |
+| VA gain, % | 3.236 | 4.363 | 5.648 | 4.409 |
+| Profit pool gain, % | 10.125 | 12.172 | 14.356 | 12.245 |
+| Employment delta, thousand | -1119.310 | -691.392 | -295.422 | -692.466 |
+
+Медианный исход к `2035` близок к deterministic base, но интервалы уже заметно шире headline-чисел: `VA gain` лежит в диапазоне `[3.24; 5.65]%`, `profit pool gain` — `[10.13; 14.36]%`, а `employment delta` — `[-1119; -295]` тыс. человек.
+
+### Fan charts
+
+![Sensitivity fan charts](/Users/theclimateguy/Documents/science/AI vs economy/output/figures/russia_economy_structure/sensitivity_fan_charts.png)

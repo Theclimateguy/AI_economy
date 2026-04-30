@@ -28,6 +28,7 @@ STAGE_MAP = {
     ],
     "structure": [
         "build_russia_economy_structure.py",
+        "sensitivity_montecarlo.py",
     ],
 }
 STAGE_MAP["all"] = (

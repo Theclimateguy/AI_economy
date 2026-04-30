@@ -37,11 +37,17 @@ def clip_pct_to_rate(series: pd.Series, bounds: dict) -> pd.Series:
     return series.clip(lower=bounds["lower"], upper=bounds["upper"]) / 100.0
 
 
-def load_inputs() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    baseline = pd.read_csv(BASELINE_PATH)
-    official = pd.read_csv(OFFICIAL_PANEL_PATH)
-    returns = pd.read_csv(RETURN_PATHS_PATH)
-    obsolescence = pd.read_csv(OBSOLESCENCE_PATH)[
+def load_inputs(
+    baseline_override: pd.DataFrame | None = None,
+    official_override: pd.DataFrame | None = None,
+    returns_override: pd.DataFrame | None = None,
+    obsolescence_override: pd.DataFrame | None = None,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    baseline = baseline_override.copy() if baseline_override is not None else pd.read_csv(BASELINE_PATH)
+    official = official_override.copy() if official_override is not None else pd.read_csv(OFFICIAL_PANEL_PATH)
+    returns = returns_override.copy() if returns_override is not None else pd.read_csv(RETURN_PATHS_PATH)
+    obsolescence_source = obsolescence_override.copy() if obsolescence_override is not None else pd.read_csv(OBSOLESCENCE_PATH)
+    obsolescence = obsolescence_source[
         ["sector_id", "managed_obsolescence_pressure_score", "managed_obsolescence_pressure_rank", "fit_quality"]
     ]
     return baseline, official, returns, obsolescence
@@ -92,8 +98,19 @@ def build_employment_trend(official: pd.DataFrame, config: dict) -> pd.DataFrame
     return pd.DataFrame(rows)
 
 
-def prepare_base(config: dict) -> pd.DataFrame:
-    baseline, official, returns, obsolescence = load_inputs()
+def prepare_base(
+    config: dict,
+    baseline_override: pd.DataFrame | None = None,
+    official_override: pd.DataFrame | None = None,
+    returns_override: pd.DataFrame | None = None,
+    obsolescence_override: pd.DataFrame | None = None,
+) -> pd.DataFrame:
+    baseline, official, returns, obsolescence = load_inputs(
+        baseline_override=baseline_override,
+        official_override=official_override,
+        returns_override=returns_override,
+        obsolescence_override=obsolescence_override,
+    )
     growth = build_counterfactual_growth(official, config)
     employment = build_employment_trend(official, config)
 
@@ -135,8 +152,20 @@ def prepare_base(config: dict) -> pd.DataFrame:
     return returns[required_return_columns].merge(base, on="sector_id", how="left")
 
 
-def build_structure_paths(config: dict) -> pd.DataFrame:
-    df = prepare_base(config)
+def build_structure_paths(
+    config: dict,
+    baseline_override: pd.DataFrame | None = None,
+    official_override: pd.DataFrame | None = None,
+    returns_override: pd.DataFrame | None = None,
+    obsolescence_override: pd.DataFrame | None = None,
+) -> pd.DataFrame:
+    df = prepare_base(
+        config,
+        baseline_override=baseline_override,
+        official_override=official_override,
+        returns_override=returns_override,
+        obsolescence_override=obsolescence_override,
+    )
     years_from_base = df["year"] - int(config["baseline_year"])
     df["va_cf_bn_rub"] = df["va_current_bn_rub"] * np.power(1.0 + df["va_cf_growth_rate_annual"], years_from_base)
     df["employment_cf_thousand"] = df["employment_thousand_persons"] * np.power(
