@@ -2,11 +2,12 @@
 
 ## Что это
 
-Этот репозиторий оформлен как воспроизводимый research pack по анализу влияния ИИ на отрасли экономики РФ. Логика работы разбита на два этапа:
+Этот репозиторий оформлен как воспроизводимый research pack по анализу влияния ИИ на отрасли экономики РФ. Логика работы разбита на четыре этапа:
 
 1. строгая историческая проверка гипотез об инвариантах технологических революций;
 2. структурная модель диффузии, адаптации и капитальной отдачи для РФ после отказа от неустойчивых универсальных бет;
 3. политэкономический слой managed obsolescence, который переводит исторические механизмы controlled replacement / compatibility / repair restrictions в секторный throttling proxy для РФ.
+4. итоговый accounting layer, который переводит прогнозы в `VA`, отраслевые доли, profit pool, labour income, занятость и производительность труда.
 
 ## Постановка задачи
 
@@ -15,6 +16,7 @@
 - проверить, существуют ли переносимые между технологическими революциями отраслевые инварианты;
 - если таких инвариантов нет, построить более честную сценарную рамку для РФ;
 - получить воспроизводимые sector-level trajectories по labour share, марже, адаптации и капитальным затратам.
+- получить финальную карту winners / losers по структуре экономики.
 
 Объект анализа: 8 секторов `B`, `C`, `DE`, `F`, `H`, `J`, `K`, `M`.
 
@@ -201,6 +203,53 @@ a_{s,t} = q_t A_{s,t}(1-\tau_{s,t})
 
 Графический набор: [managed_obsolescence_figures.md](managed_obsolescence_figures.md).
 
+## Этап 4. Economy structure accounting
+
+### Что добавлено
+
+Финальный слой замыкает предыдущие блоки в секторную accounting-модель:
+
+\[
+VA^{AI}_{s,t} = VA^{cf}_{s,t}
+\exp\left(\sum_{\tau=2025}^{t}\eta^{VA}_{s}\Delta A^m_{s,\tau}\right)
+\]
+
+\[
+LP^{AI}_{s,t} = LP^{cf}_{s,t}
+\exp\left(\sum_{\tau=2025}^{t}\eta^{LP}_{s}\Delta A^m_{s,\tau}\right)
+\]
+
+\[
+L^{AI}_{s,t}=\frac{VA^{AI}_{s,t}}{LP^{AI}_{s,t}},
+\qquad
+\Pi^{AI}_{s,t}=\pi^{AI}_{s,t}VA^{AI}_{s,t}.
+\]
+
+Managed adoption:
+
+\[
+A^m_{s,t}=A_{s,t}(1-\rho MOS_s)
+\]
+
+### Первый результат
+
+В `Base / BaseThrottle` к `2035`:
+
+- aggregate `VA` выше контрфакта на `4.4%`;
+- aggregate profit pool выше на `12.2%`;
+- aggregate labour productivity выше на `6.5%`;
+- занятость ниже контрфакта примерно на `692` тыс. человек в восьми секторах;
+- winners по доле экономики: `K`, `M`, `J`;
+- relative share losers: `B`, `C`, `H`.
+
+Основные артефакты:
+
+- paths: [../data/processed/russia_economy_structure_paths_2025_2035.csv](../data/processed/russia_economy_structure_paths_2025_2035.csv)
+- sector summary: [../data/processed/russia_economy_structure_sector_summary.csv](../data/processed/russia_economy_structure_sector_summary.csv)
+- aggregate summary: [../data/processed/russia_economy_structure_aggregate_summary.csv](../data/processed/russia_economy_structure_aggregate_summary.csv)
+
+Детально: [russia_economy_structure_report.md](russia_economy_structure_report.md).
+
 ## Воспроизводимость
 
 Полный pipeline запускается так:
@@ -217,4 +266,4 @@ python3 scripts/run_pipeline.py --stage all
 
 ## Вывод
 
-Главный научный результат этого пакета не в том, что он "нашел красивую бету", а в том, что он честно отверг слабые инварианты и заменил их более устойчивой структурной рамкой. На текущих данных переносимой universal beta нет, но есть воспроизводимая двухэтапная схема: historical task-content calibration плюс class-based diffusion and capital-return analysis for Russia.
+Главный научный результат этого пакета не в том, что он "нашел красивую бету", а в том, что он честно отверг слабые инварианты и заменил их более устойчивой структурной рамкой. На текущих данных переносимой universal beta нет, но есть воспроизводимая схема: historical task-content calibration плюс class-based diffusion, capital-return analysis, throttling proxy и финальный accounting layer для структуры экономики РФ.

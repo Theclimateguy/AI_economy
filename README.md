@@ -4,7 +4,7 @@
 
 ## Что внутри
 
-Репозиторий собран как воспроизводимый пакет из трех этапов.
+Репозиторий собран как воспроизводимый пакет из четырех этапов.
 
 ### Этап 1. Проверка гипотез инвариантов
 
@@ -26,6 +26,12 @@
 - Russia KLEMS ВШЭ как исторический мост для РФ, 1995-2016
 - proxy давления на staged deployment: productivity-hours gap, capital-labour gap, ICT vs non-ICT capital services, employment contraction
 - формализация разрыва между frontier AI capability и deployed capability
+
+### Этап 4. Economy structure accounting
+
+- перевод diffusion / margin / capital-return paths в `VA`, отраслевые доли, profit pool, labour income, занятость и `VA/L`
+- managed adoption через `A_managed = A * (1 - rho * MOS)`
+- sector winners/losers по доле экономики, прибыли и производительности труда
 
 ## Структура
 
@@ -53,6 +59,7 @@ python3 scripts/run_pipeline.py --stage all
 python3 scripts/run_pipeline.py --stage stage1
 python3 scripts/run_pipeline.py --stage stage2
 python3 scripts/run_pipeline.py --stage managed_obsolescence
+python3 scripts/run_pipeline.py --stage structure
 ```
 
 ## Ключевые документы
@@ -64,6 +71,7 @@ python3 scripts/run_pipeline.py --stage managed_obsolescence
 - [Stage 2: Diffusion, Adaptation, Capital Returns](docs/stage2_diffusion_and_returns.md)
 - [Managed Obsolescence Layer](docs/managed_obsolescence_layer.md)
 - [Managed Obsolescence Figures](docs/managed_obsolescence_figures.md)
+- [Russia Economy Structure Report](docs/russia_economy_structure_report.md)
 - [Reproducibility Guide](docs/reproducibility.md)
 
 ## Ключевые результаты
@@ -86,6 +94,12 @@ python3 scripts/run_pipeline.py --stage managed_obsolescence
 - самый высокий proxy-score у `J`, но это weak proxy из-за NACE 1.0;
 - среди чисто сопоставимых отраслей главный managed-obsolescence pressure показывает `C`.
 
+### Stage 4
+
+- в `Base / BaseThrottle` aggregate `VA` к 2035 выше контрфакта на `4.4%`;
+- profit pool выше на `12.2%`, aggregate `VA/L` выше на `6.5%`;
+- основные winners по доле экономики: `K`, `M`, `J`; главные relative share losers: `B`, `C`, `H`.
+
 ## Основные артефакты
 
 - Historical panel:
@@ -98,6 +112,8 @@ python3 scripts/run_pipeline.py --stage managed_obsolescence
   - `data/processed/ai_capital_return_sector_summary.csv`
 - Managed obsolescence:
   - `data/processed/managed_obsolescence_sector_proxy.csv`
+- Economy structure:
+  - `data/processed/russia_economy_structure_sector_summary.csv`
 
 ## Notes
 

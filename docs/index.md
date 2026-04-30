@@ -31,6 +31,10 @@
 - [Managed Obsolescence Layer](managed_obsolescence_layer.md)
 - [Managed Obsolescence Figures](managed_obsolescence_figures.md)
 
-## 6. Воспроизводимость
+## 6. Этап 4. Структура экономики
+
+- [Russia Economy Structure Report](russia_economy_structure_report.md)
+
+## 7. Воспроизводимость
 
 - [Reproducibility Guide](reproducibility.md)

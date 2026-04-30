@@ -1,0 +1,48 @@
+{
+  "baseline_year": 2024,
+  "projection_start_year": 2025,
+  "projection_end_year": 2035,
+  "counterfactual_growth": {
+    "history_start_year": 2017,
+    "history_end_year": 2024,
+    "method": "median",
+    "growth_column": "va_real_growth_pct",
+    "clip_annual_growth_pct": {
+      "lower": -8.0,
+      "upper": 8.0
+    }
+  },
+  "employment_trend": {
+    "history_start_year": 2017,
+    "history_end_year": 2024,
+    "clip_annual_growth_pct": {
+      "lower": -5.0,
+      "upper": 5.0
+    }
+  },
+  "managed_obsolescence_scenarios": {
+    "NoThrottle": 0.0,
+    "BaseThrottle": 0.3,
+    "StressThrottle": 0.5
+  },
+  "class_productivity_parameters": {
+    "software": {
+      "va_log_boost_per_adoption": 0.14,
+      "lp_log_boost_per_adoption": 0.22
+    },
+    "hybrid": {
+      "va_log_boost_per_adoption": 0.08,
+      "lp_log_boost_per_adoption": 0.14
+    },
+    "hardware": {
+      "va_log_boost_per_adoption": 0.04,
+      "lp_log_boost_per_adoption": 0.09
+    }
+  },
+  "notes": {
+    "currency_basis": "VA paths are in 2024-ruble baseline units: 2024 nominal VA projected with real sector growth and AI log boosts.",
+    "counterfactual": "Sector counterfactual growth is the clipped median of official 2017-2024 real VA growth.",
+    "employment": "Counterfactual employment is projected from sector employment CAGR over 2017-2024; AI employment follows VA divided by AI labour productivity.",
+    "managed_adoption": "A_managed = A * (1 - rho * managed_obsolescence_pressure_score)."
+  }
+}

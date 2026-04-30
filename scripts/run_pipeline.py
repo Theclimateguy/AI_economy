@@ -26,8 +26,16 @@ STAGE_MAP = {
         "build_managed_obsolescence_layer.py",
         "generate_managed_obsolescence_figures.py",
     ],
+    "structure": [
+        "build_russia_economy_structure.py",
+    ],
 }
-STAGE_MAP["all"] = STAGE_MAP["stage1"] + STAGE_MAP["stage2"] + STAGE_MAP["managed_obsolescence"]
+STAGE_MAP["all"] = (
+    STAGE_MAP["stage1"]
+    + STAGE_MAP["stage2"]
+    + STAGE_MAP["managed_obsolescence"]
+    + STAGE_MAP["structure"]
+)
 
 
 def run_script(script_name: str) -> None:

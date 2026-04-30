@@ -66,6 +66,13 @@
   - `data/processed/world_technology_diffusion_benchmarks.csv`
   - `output/figures/managed_obsolescence/*.png`
 
+## Stage 4
+
+- Russia economy structure:
+  - `data/processed/russia_economy_structure_paths_2025_2035.csv`
+  - `data/processed/russia_economy_structure_sector_summary.csv`
+  - `data/processed/russia_economy_structure_aggregate_summary.csv`
+
 ## Смысл разделения raw / processed
 
 - `raw` хранит конкретные скачанные файлы источников;

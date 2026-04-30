@@ -32,6 +32,12 @@ python3 scripts/run_pipeline.py --stage stage2
 python3 scripts/run_pipeline.py --stage managed_obsolescence
 ```
 
+### Economy structure
+
+```bash
+python3 scripts/run_pipeline.py --stage structure
+```
+
 ## Manual script order
 
 ```bash
@@ -46,6 +52,7 @@ python3 scripts/build_ai_diffusion_model.py
 python3 scripts/build_ai_capital_returns.py
 python3 scripts/build_managed_obsolescence_layer.py
 python3 scripts/generate_managed_obsolescence_figures.py
+python3 scripts/build_russia_economy_structure.py
 ```
 
 ## Notes

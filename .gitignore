@@ -1,7 +1,21 @@
+# Python
 __pycache__/
 *.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# OS/editor noise
 .DS_Store
-.ipynb_checkpoints/
+
+# Local environments
 .venv/
 venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Project intermediates and generated report drafts
 data/interim/
+output/reports/
+output/figures/*.png

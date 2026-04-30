@@ -5,3 +5,4 @@ requests>=2.32
 statsmodels>=0.14
 xlrd>=2.0
 matplotlib>=3.8
+qrcode[pil]>=8.2

@@ -50,6 +50,10 @@
   - `managed_obsolescence_sector_proxy.csv`
   - `russia_klems_metadata.json`
   - `world_technology_diffusion_benchmarks.csv`
+- Economy structure:
+  - `russia_economy_structure_paths_2025_2035.csv`
+  - `russia_economy_structure_sector_summary.csv`
+  - `russia_economy_structure_aggregate_summary.csv`
 
 ## Принцип воспроизводимости
 
