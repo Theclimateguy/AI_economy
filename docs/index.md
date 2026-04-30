@@ -30,6 +30,7 @@
 
 - [Managed Obsolescence Layer](managed_obsolescence_layer.md)
 - [IO Macro Closure](io_macro_closure.md)
+- [Welfare Distributional Report](welfare_distributional_report.md)
 - [Managed Obsolescence Figures](managed_obsolescence_figures.md)
 
 ## 6. Этап 4. Структура экономики

@@ -32,6 +32,7 @@ STAGE_MAP = {
         "build_russia_economy_structure.py",
         "sensitivity_montecarlo.py",
         "io_leontief_propagation.py",
+        "welfare_distributional.py",
     ],
 }
 STAGE_MAP["all"] = (
