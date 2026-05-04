@@ -232,6 +232,59 @@ def weighted_average_wage(
     return weighted, {"wage_rows": wage_matches, "employment_rows": emp_matches}
 
 
+def apply_sector_proxies(panel: pd.DataFrame, config: dict) -> pd.DataFrame:
+    """Apply explicit proxy rules for sectors not fully published in all Rosstat blocks."""
+    proxy_cfg = {
+        sector_id: rows
+        for sector_id, rows in config["row_labels"].items()
+        if "proxy_note" in rows
+    }
+    if "C_mach" not in proxy_cfg or "C_mach" not in set(panel["sector_id"]):
+        return panel
+
+    c_reference = panel.loc[panel["sector_id"].eq("C"), ["year", "va_current_bn_rub"]].rename(
+        columns={"va_current_bn_rub": "va_current_c_bn_rub"}
+    )
+    panel = panel.merge(c_reference, on="year", how="left")
+    mask = panel["sector_id"].eq("C_mach")
+    cmach_share = (panel.loc[mask, "va_current_bn_rub"] / panel.loc[mask, "va_current_c_bn_rub"]).clip(0.0, 1.0)
+    panel.loc[mask, "employment_thousand_persons"] = panel.loc[mask, "employment_thousand_persons"] * cmach_share
+    panel.loc[mask, "source_layer"] = "official_proxy"
+    cmach_values = panel.loc[mask, ["year", "employment_thousand_persons"]].rename(
+        columns={"employment_thousand_persons": "employment_cmach_thousand_persons"}
+    )
+    for value_col in ["va_current_bn_rub", "va_constant_2016_bn_rub", "va_constant_2021_bn_rub"]:
+        cmach_values = cmach_values.merge(
+            panel.loc[mask, ["year", value_col]].rename(columns={value_col: f"{value_col}_cmach"}),
+            on="year",
+            how="left",
+        )
+    panel = panel.merge(cmach_values, on="year", how="left")
+    residual_mask = panel["sector_id"].eq("C")
+    panel.loc[residual_mask, "sector_name_ru"] = "Обрабатывающая промышленность без машиностроения"
+    panel.loc[residual_mask, "okved"] = "C excl. 26-30"
+    panel.loc[residual_mask, "employment_thousand_persons"] = (
+        panel.loc[residual_mask, "employment_thousand_persons"]
+        - panel.loc[residual_mask, "employment_cmach_thousand_persons"]
+    ).clip(lower=0.0)
+    for value_col in ["va_current_bn_rub", "va_constant_2016_bn_rub", "va_constant_2021_bn_rub"]:
+        panel.loc[residual_mask, value_col] = (
+            panel.loc[residual_mask, value_col]
+            - panel.loc[residual_mask, f"{value_col}_cmach"]
+        ).clip(lower=0.0)
+    panel = panel.drop(columns=["va_current_c_bn_rub"])
+    panel = panel.drop(
+        columns=[
+            "employment_cmach_thousand_persons",
+            "va_current_bn_rub_cmach",
+            "va_constant_2016_bn_rub_cmach",
+            "va_constant_2021_bn_rub_cmach",
+        ],
+        errors="ignore",
+    )
+    return panel
+
+
 def build_panel(config: dict) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     source_paths = ensure_sources(config)
     sector_meta = load_sector_metadata(config)
@@ -315,6 +368,21 @@ def build_panel(config: dict) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     ].notna().all(axis=1)
     panel["has_complete_real_va_inputs"] = panel[["va_constant_2021_bn_rub", "va_volume_index_prev_year_pct"]].notna().all(axis=1)
     panel["source_layer"] = np.where(panel["has_complete_labor_share_inputs"], "official_complete", "official_partial")
+    panel = apply_sector_proxies(panel, config)
+    panel["employment_persons"] = panel["employment_thousand_persons"] * 1000.0
+    panel["fot_proxy_bn_rub"] = panel["employment_thousand_persons"] * panel["avg_monthly_wage_rub"] * 12.0 / 1_000_000.0
+    panel["labour_share_proxy"] = panel["fot_proxy_bn_rub"] / panel["va_current_bn_rub"]
+    panel["va_nominal_index_prev_year_pct"] = (
+        panel.groupby("sector_id")["va_current_bn_rub"].pct_change().add(1.0) * 100.0
+    )
+    panel["va_volume_index_prev_year_pct"] = (
+        panel.groupby("sector_id")["va_constant_2021_bn_rub"].pct_change().add(1.0) * 100.0
+    )
+    panel["va_deflator_index_prev_year_pct"] = (
+        panel["va_nominal_index_prev_year_pct"] / panel["va_volume_index_prev_year_pct"] * 100.0
+    )
+    panel["va_real_growth_pct"] = panel["va_volume_index_prev_year_pct"] - 100.0
+    panel["va_deflator_growth_pct"] = panel["va_deflator_index_prev_year_pct"] - 100.0
 
     ordered_columns = [
         "year",

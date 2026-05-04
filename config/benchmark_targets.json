@@ -85,8 +85,8 @@
     },
     {
       "sector_id": "C",
-      "sector_name_ru": "Обрабатывающая промышленность",
-      "okved": "C",
+      "sector_name_ru": "Обрабатывающая промышленность без машиностроения",
+      "okved": "C excl. 26-30",
       "klems_code": "C",
       "share_code": "C",
       "stan_code": "C",
@@ -95,6 +95,20 @@
       ],
       "staffing_proxy_exact": true,
       "ai_intensity": "low_medium",
+      "is_proxy_mn": false
+    },
+    {
+      "sector_id": "C_mach",
+      "sector_name_ru": "Машиностроение (ОКВЭД 26–30)",
+      "okved": "C 26-30",
+      "klems_code": "C",
+      "share_code": "C",
+      "stan_code": "C",
+      "staffing_codes": [
+        "ECO_ISIC3_D"
+      ],
+      "staffing_proxy_exact": false,
+      "ai_intensity": "medium",
       "is_proxy_mn": false
     },
     {
@@ -136,6 +150,20 @@
         "ECO_ISIC3_I"
       ],
       "staffing_proxy_exact": false,
+      "ai_intensity": "medium",
+      "is_proxy_mn": false
+    },
+    {
+      "sector_id": "G",
+      "sector_name_ru": "Оптовая и розничная торговля",
+      "okved": "G",
+      "klems_code": "G",
+      "share_code": "G",
+      "stan_code": "G",
+      "staffing_codes": [
+        "ECO_ISIC3_G"
+      ],
+      "staffing_proxy_exact": true,
       "ai_intensity": "medium",
       "is_proxy_mn": false
     },

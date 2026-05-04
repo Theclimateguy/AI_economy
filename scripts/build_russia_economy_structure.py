@@ -20,6 +20,7 @@ IMPORT_FRICTION_PATH = ROOT / "data" / "processed" / "import_dependency_sector.c
 OUTPUT_PATHS = ROOT / "data" / "processed" / "russia_economy_structure_paths_2025_2035.csv"
 OUTPUT_SECTOR = ROOT / "data" / "processed" / "russia_economy_structure_sector_summary.csv"
 OUTPUT_AGGREGATE = ROOT / "data" / "processed" / "russia_economy_structure_aggregate_summary.csv"
+OUTPUT_SCENARIO_TABLE = ROOT / "output" / "scenario_table_2030_2035.csv"
 OUTPUT_REPORT = ROOT / "docs" / "russia_economy_structure_report.md"
 
 
@@ -376,12 +377,12 @@ def build_structure_paths(
 
 def build_sector_summary(paths: pd.DataFrame, config: dict) -> pd.DataFrame:
     final_year = int(config["projection_end_year"])
+    snapshot_years = sorted(set(config.get("intermediate_snapshots", []) + [final_year]))
     rows: list[dict] = []
     for (scenario, throttle_scenario, sector_id), group in paths.groupby(["scenario", "throttle_scenario", "sector_id"]):
         group = group.sort_values("year").reset_index(drop=True)
         final = group.loc[group["year"].eq(final_year)].iloc[0]
-        rows.append(
-            {
+        row = {
                 "scenario": scenario,
                 "throttle_scenario": throttle_scenario,
                 "sector_id": sector_id,
@@ -389,29 +390,35 @@ def build_sector_summary(paths: pd.DataFrame, config: dict) -> pd.DataFrame:
                 "class_id": final["class_id"],
                 "ai_intensity": final["ai_intensity"],
                 "managed_obsolescence_pressure_score": float(final["managed_obsolescence_pressure_score"]),
-                "adaptation_2035": float(final["adaptation"]),
-                "adaptation_managed_2035": float(final["adaptation_managed"]),
-                "va_cf_2035_bn_rub": float(final["va_cf_bn_rub"]),
-                "va_ai_2035_bn_rub": float(final["va_ai_bn_rub"]),
-                "incremental_va_2035_bn_rub": float(final["incremental_va_vs_cf_bn_rub"]),
-                "va_share_cf_2035": float(final["va_share_cf"]),
-                "va_share_ai_2035": float(final["va_share_ai"]),
-                "delta_va_share_pp_2035": float(final["delta_va_share_pp"]),
-                "profit_pool_ai_2035_bn_rub": float(final["profit_pool_ai_bn_rub"]),
-                "incremental_profit_pool_2035_bn_rub": float(final["incremental_profit_pool_vs_cf_bn_rub"]),
-                "labour_income_ai_2035_bn_rub": float(final["labour_income_ai_bn_rub"]),
-                "incremental_labour_income_2035_bn_rub": float(final["incremental_labour_income_vs_cf_bn_rub"]),
-                "employment_ai_2035_thousand": float(final["employment_ai_thousand"]),
-                "employment_delta_2035_thousand": float(final["employment_delta_vs_cf_thousand"]),
-                "labour_productivity_ai_2035_mrub_per_person": float(final["labour_productivity_ai_mrub_per_person"]),
-                "lp_gain_vs_cf_2035_pct": float(final["lp_gain_vs_cf_pct"]),
-                "cumulative_capex_2035_bn_rub": float(final["cumulative_delta_k_need_managed_bn_rub"]),
-                "cumulative_incremental_profit_pool_2035_bn_rub": float(
-                    final["cumulative_incremental_profit_pool_vs_cf_bn_rub"]
-                ),
-                "cumulative_net_value_after_capex_2035_bn_rub": float(final["cumulative_net_value_after_capex_bn_rub"]),
             }
-        )
+        for year in snapshot_years:
+            snap = group.loc[group["year"].eq(year)].iloc[0]
+            row.update(
+                {
+                    f"adaptation_{year}": float(snap["adaptation"]),
+                    f"adaptation_managed_{year}": float(snap["adaptation_managed"]),
+                    f"va_cf_{year}_bn_rub": float(snap["va_cf_bn_rub"]),
+                    f"va_ai_{year}_bn_rub": float(snap["va_ai_bn_rub"]),
+                    f"incremental_va_{year}_bn_rub": float(snap["incremental_va_vs_cf_bn_rub"]),
+                    f"va_share_cf_{year}": float(snap["va_share_cf"]),
+                    f"va_share_ai_{year}": float(snap["va_share_ai"]),
+                    f"delta_va_share_pp_{year}": float(snap["delta_va_share_pp"]),
+                    f"profit_pool_ai_{year}_bn_rub": float(snap["profit_pool_ai_bn_rub"]),
+                    f"incremental_profit_pool_{year}_bn_rub": float(snap["incremental_profit_pool_vs_cf_bn_rub"]),
+                    f"labour_income_ai_{year}_bn_rub": float(snap["labour_income_ai_bn_rub"]),
+                    f"incremental_labour_income_{year}_bn_rub": float(snap["incremental_labour_income_vs_cf_bn_rub"]),
+                    f"employment_ai_{year}_thousand": float(snap["employment_ai_thousand"]),
+                    f"employment_delta_{year}_thousand": float(snap["employment_delta_vs_cf_thousand"]),
+                    f"labour_productivity_ai_{year}_mrub_per_person": float(snap["labour_productivity_ai_mrub_per_person"]),
+                    f"lp_gain_vs_cf_{year}_pct": float(snap["lp_gain_vs_cf_pct"]),
+                    f"cumulative_capex_{year}_bn_rub": float(snap["cumulative_delta_k_need_managed_bn_rub"]),
+                    f"cumulative_incremental_profit_pool_{year}_bn_rub": float(
+                        snap["cumulative_incremental_profit_pool_vs_cf_bn_rub"]
+                    ),
+                    f"cumulative_net_value_after_capex_{year}_bn_rub": float(snap["cumulative_net_value_after_capex_bn_rub"]),
+                }
+            )
+        rows.append(row)
     return pd.DataFrame(rows).sort_values(
         ["scenario", "throttle_scenario", "delta_va_share_pp_2035"],
         ascending=[True, True, False],
@@ -420,46 +427,48 @@ def build_sector_summary(paths: pd.DataFrame, config: dict) -> pd.DataFrame:
 
 def build_aggregate_summary(paths: pd.DataFrame, config: dict) -> pd.DataFrame:
     final_year = int(config["projection_end_year"])
-    final = paths.loc[paths["year"].eq(final_year)].copy()
+    snapshot_years = sorted(set(config.get("intermediate_snapshots", []) + [final_year]))
     rows: list[dict] = []
-    for (scenario, throttle_scenario), group in final.groupby(["scenario", "throttle_scenario"]):
-        total_va_cf = float(group["va_cf_bn_rub"].sum())
-        total_va_ai = float(group["va_ai_bn_rub"].sum())
-        total_profit_cf = float(group["profit_pool_cf_bn_rub"].sum())
-        total_profit_ai = float(group["profit_pool_ai_bn_rub"].sum())
-        total_labour_cf = float(group["labour_income_cf_bn_rub"].sum())
-        total_labour_ai = float(group["labour_income_ai_bn_rub"].sum())
-        total_emp_cf = float(group["employment_cf_thousand"].sum())
-        total_emp_ai = float(group["employment_ai_thousand"].sum())
-        rows.append(
-            {
-                "scenario": scenario,
-                "throttle_scenario": throttle_scenario,
-                "total_va_cf_2035_bn_rub": total_va_cf,
-                "total_va_ai_2035_bn_rub": total_va_ai,
-                "total_va_gain_2035_pct": (total_va_ai / total_va_cf - 1.0) * 100.0,
-                "total_profit_pool_cf_2035_bn_rub": total_profit_cf,
-                "total_profit_pool_ai_2035_bn_rub": total_profit_ai,
-                "total_profit_pool_gain_2035_pct": (total_profit_ai / total_profit_cf - 1.0) * 100.0,
-                "total_labour_income_cf_2035_bn_rub": total_labour_cf,
-                "total_labour_income_ai_2035_bn_rub": total_labour_ai,
-                "total_labour_income_gain_2035_pct": (total_labour_ai / total_labour_cf - 1.0) * 100.0,
-                "total_employment_cf_2035_thousand": total_emp_cf,
-                "total_employment_ai_2035_thousand": total_emp_ai,
-                "total_employment_delta_2035_thousand": total_emp_ai - total_emp_cf,
-                "aggregate_lp_cf_2035_mrub_per_person": total_va_cf * 1000.0 / total_emp_cf,
-                "aggregate_lp_ai_2035_mrub_per_person": total_va_ai * 1000.0 / total_emp_ai,
-                "aggregate_lp_gain_vs_cf_2035_pct": (total_va_ai / total_emp_ai) / (total_va_cf / total_emp_cf) * 100.0
-                - 100.0,
-                "cumulative_capex_2035_bn_rub": float(group["cumulative_delta_k_need_managed_bn_rub"].sum()),
-                "cumulative_incremental_profit_pool_2035_bn_rub": float(
-                    group["cumulative_incremental_profit_pool_vs_cf_bn_rub"].sum()
-                ),
-                "cumulative_net_value_after_capex_2035_bn_rub": float(
-                    group["cumulative_net_value_after_capex_bn_rub"].sum()
-                ),
-            }
-        )
+    for (scenario, throttle_scenario), full_group in paths.groupby(["scenario", "throttle_scenario"]):
+        row = {"scenario": scenario, "throttle_scenario": throttle_scenario}
+        for year in snapshot_years:
+            group = full_group.loc[full_group["year"].eq(year)]
+            total_va_cf = float(group["va_cf_bn_rub"].sum())
+            total_va_ai = float(group["va_ai_bn_rub"].sum())
+            total_profit_cf = float(group["profit_pool_cf_bn_rub"].sum())
+            total_profit_ai = float(group["profit_pool_ai_bn_rub"].sum())
+            total_labour_cf = float(group["labour_income_cf_bn_rub"].sum())
+            total_labour_ai = float(group["labour_income_ai_bn_rub"].sum())
+            total_emp_cf = float(group["employment_cf_thousand"].sum())
+            total_emp_ai = float(group["employment_ai_thousand"].sum())
+            row.update(
+                {
+                    f"total_va_cf_{year}_bn_rub": total_va_cf,
+                    f"total_va_ai_{year}_bn_rub": total_va_ai,
+                    f"total_va_gain_{year}_pct": (total_va_ai / total_va_cf - 1.0) * 100.0,
+                    f"total_profit_pool_cf_{year}_bn_rub": total_profit_cf,
+                    f"total_profit_pool_ai_{year}_bn_rub": total_profit_ai,
+                    f"total_profit_pool_gain_{year}_pct": (total_profit_ai / total_profit_cf - 1.0) * 100.0,
+                    f"total_labour_income_cf_{year}_bn_rub": total_labour_cf,
+                    f"total_labour_income_ai_{year}_bn_rub": total_labour_ai,
+                    f"total_labour_income_gain_{year}_pct": (total_labour_ai / total_labour_cf - 1.0) * 100.0,
+                    f"total_employment_cf_{year}_thousand": total_emp_cf,
+                    f"total_employment_ai_{year}_thousand": total_emp_ai,
+                    f"total_employment_delta_{year}_thousand": total_emp_ai - total_emp_cf,
+                    f"aggregate_lp_cf_{year}_mrub_per_person": total_va_cf * 1000.0 / total_emp_cf,
+                    f"aggregate_lp_ai_{year}_mrub_per_person": total_va_ai * 1000.0 / total_emp_ai,
+                    f"aggregate_lp_gain_vs_cf_{year}_pct": (total_va_ai / total_emp_ai) / (total_va_cf / total_emp_cf) * 100.0
+                    - 100.0,
+                    f"cumulative_capex_{year}_bn_rub": float(group["cumulative_delta_k_need_managed_bn_rub"].sum()),
+                    f"cumulative_incremental_profit_pool_{year}_bn_rub": float(
+                        group["cumulative_incremental_profit_pool_vs_cf_bn_rub"].sum()
+                    ),
+                    f"cumulative_net_value_after_capex_{year}_bn_rub": float(
+                        group["cumulative_net_value_after_capex_bn_rub"].sum()
+                    ),
+                }
+            )
+        rows.append(row)
     return pd.DataFrame(rows).sort_values(["scenario", "throttle_scenario"]).reset_index(drop=True)
 
 
@@ -490,6 +499,7 @@ def build_report(sector_summary: pd.DataFrame, aggregate_summary: pd.DataFrame, 
     profit_winners = base.sort_values("incremental_profit_pool_2035_bn_rub", ascending=False).head(5)
     productivity_winners = base.sort_values("lp_gain_vs_cf_2035_pct", ascending=False).head(5)
     employment_declines = base.sort_values("employment_delta_2035_thousand", ascending=True).head(5)
+    operational_2030 = base.sort_values("incremental_va_2030_bn_rub", ascending=False).head(10)
 
     return f"""# Russia Economy Structure Report
 
@@ -548,6 +558,27 @@ L^{{AI}}_{{s,t}} = \\frac{{VA^{{AI}}_{{s,t}}}}{{LP^{{AI}}_{{s,t}}}},
         "aggregate_lp_gain_vs_cf_2035_pct",
         "total_employment_delta_2035_thousand",
         "cumulative_net_value_after_capex_2035_bn_rub",
+    ],
+)}
+
+## 2a. Операционный горизонт 2030
+
+{markdown_table(
+    operational_2030,
+    columns=[
+        "sector_id",
+        "sector_name_ru",
+        "class_id",
+        "adaptation_managed_2030",
+        "incremental_va_2030_bn_rub",
+        "incremental_profit_pool_2030_bn_rub",
+        "employment_delta_2030_thousand",
+    ],
+    float_cols=[
+        "adaptation_managed_2030",
+        "incremental_va_2030_bn_rub",
+        "incremental_profit_pool_2030_bn_rub",
+        "employment_delta_2030_thousand",
     ],
 )}
 
@@ -652,6 +683,8 @@ def main() -> None:
     paths.to_csv(OUTPUT_PATHS, index=False)
     sector_summary.to_csv(OUTPUT_SECTOR, index=False)
     aggregate_summary.to_csv(OUTPUT_AGGREGATE, index=False)
+    OUTPUT_SCENARIO_TABLE.parent.mkdir(parents=True, exist_ok=True)
+    aggregate_summary.to_csv(OUTPUT_SCENARIO_TABLE, index=False)
     OUTPUT_REPORT.write_text(build_report(sector_summary, aggregate_summary, config), encoding="utf-8")
 
     print(f"Saved paths: {OUTPUT_PATHS}")

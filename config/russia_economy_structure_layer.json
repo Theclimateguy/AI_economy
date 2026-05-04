@@ -2,6 +2,7 @@
   "baseline_year": 2024,
   "projection_start_year": 2025,
   "projection_end_year": 2035,
+  "intermediate_snapshots": [2030],
   "counterfactual_growth": {
     "history_start_year": 2017,
     "history_end_year": 2024,

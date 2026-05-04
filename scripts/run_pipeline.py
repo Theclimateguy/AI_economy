@@ -18,6 +18,7 @@ STAGE_MAP = {
     "stage2": [
         "build_russia_ai_scenarios.py",
         "build_russia_sector_panel.py",
+        "build_cmach_share_proxy.py",
         "build_russia_ai_summary_report.py",
         "build_ai_diffusion_model.py",
         "build_ai_capital_returns.py",

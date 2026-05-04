@@ -58,8 +58,10 @@ CLASS_LABELS = {
 SECTOR_LABELS = {
     "B": "Mining",
     "C": "Manufactur.",
+    "C_mach": "Machinery",
     "DE": "Energy",
     "F": "Constr.",
+    "G": "Trade",
     "H": "Transport",
     "J": "IT",
     "K": "Finance",
@@ -546,6 +548,40 @@ def make_fig5() -> None:
     save_figure(fig, OUTPUT_DIR / "fig5_payback_year.png")
 
 
+def make_fig6_io_heatmap() -> None:
+    """Supplier-recipient heatmap for indirect VA effects."""
+    path = DATA_DIR / "io_indirect_decomposition.csv"
+    if not path.exists():
+        return
+    df = read_csv(path)
+    base = df[
+        (df["table_year"] == 2019)
+        & (df["scenario"] == "Base")
+        & (df["throttle_scenario"] == "BaseThrottle")
+    ].copy()
+    if base.empty:
+        return
+    order = [sector for sector in SECTOR_LABELS if sector in set(base["supplier_sector"])]
+    matrix = base.pivot_table(
+        index="supplier_sector",
+        columns="recipient_sector",
+        values="indirect_va_effect_bn_rub",
+        aggfunc="sum",
+        fill_value=0.0,
+    ).reindex(index=order, columns=order, fill_value=0.0)
+
+    fig, ax = plt.subplots(figsize=FIGSIZE, dpi=SAVE_DPI)
+    im = ax.imshow(matrix.to_numpy(), cmap="Blues", aspect="auto")
+    ax.set_xticks(np.arange(len(order)), [SECTOR_LABELS[s] for s in order], rotation=35, ha="right")
+    ax.set_yticks(np.arange(len(order)), [SECTOR_LABELS[s] for s in order])
+    ax.set_xlabel("Recipient sector receiving direct AI impulse")
+    ax.set_ylabel("Supplier sector with induced VA")
+    ax.set_title("IO Indirect VA Decomposition — Base / BaseThrottle, 2019 table")
+    cbar = fig.colorbar(im, ax=ax, fraction=0.035, pad=0.02)
+    cbar.set_label("Indirect VA effect, bn rub")
+    save_figure(fig, OUTPUT_DIR / "fig6_io_indirect_heatmap.png")
+
+
 def main() -> None:
     """Generate the five publication figures for the AI-sector impact study."""
     configure_style()
@@ -556,6 +592,7 @@ def main() -> None:
     make_fig3()
     make_fig4()
     make_fig5()
+    make_fig6_io_heatmap()
 
 
 if __name__ == "__main__":

@@ -18,8 +18,12 @@ OUTPUT_REPORT = ROOT / "docs" / "russia_ai_sector_report.md"
 def load_inputs() -> pd.DataFrame:
     baseline = pd.read_csv(BASELINE_PATH)
     scenarios = pd.read_csv(SCENARIOS_PATH)
-    join_keys = ["sector_id", "sector_name_ru", "okved", "ai_intensity", "is_proxy_mn", "staffing_proxy_exact"]
-    return baseline.merge(scenarios, on=join_keys, how="left")
+    scenario_cols = [
+        column
+        for column in scenarios.columns
+        if column not in {"sector_name_ru", "okved", "ai_intensity", "is_proxy_mn", "staffing_proxy_exact"}
+    ]
+    return baseline.merge(scenarios[scenario_cols], on="sector_id", how="left")
 
 
 def apply_scenarios(dataframe: pd.DataFrame) -> pd.DataFrame:

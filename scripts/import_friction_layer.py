@@ -38,6 +38,13 @@ SECTOR_PRIORS = {
         "market_concentration_prior": 0.55,
         "strategic_sector_flag": 0.60,
     },
+    "C_mach": {
+        "equipment_import_dependency": 0.82,
+        "software_cloud_dependency": 0.42,
+        "gpu_dependency": 0.50,
+        "market_concentration_prior": 0.60,
+        "strategic_sector_flag": 0.75,
+    },
     "DE": {
         "equipment_import_dependency": 0.55,
         "software_cloud_dependency": 0.30,
@@ -51,6 +58,13 @@ SECTOR_PRIORS = {
         "gpu_dependency": 0.25,
         "market_concentration_prior": 0.35,
         "strategic_sector_flag": 0.40,
+    },
+    "G": {
+        "equipment_import_dependency": 0.35,
+        "software_cloud_dependency": 0.50,
+        "gpu_dependency": 0.35,
+        "market_concentration_prior": 0.45,
+        "strategic_sector_flag": 0.25,
     },
     "H": {
         "equipment_import_dependency": 0.60,

@@ -9,7 +9,7 @@
 | class_id | start_year | end_year | techint_start_median | techint_end_median | techint_delta_median | positive_dA_share | p_hat_disc | q_hat_disc | fit_is_structurally_clean |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | hardware | 1995 | 2017 | 0.010 | 0.025 | 0.015 | 0.633 | 0.033 | -0.063 | False |
-| hybrid | 1995 | 2017 | 0.013 | 0.032 | 0.019 | 0.709 | 0.124 | -0.435 | False |
+| hybrid | 1995 | 2017 | 0.020 | 0.040 | 0.020 | 0.722 | 0.046 | -0.099 | False |
 | software | 1995 | 2017 | 0.066 | 0.175 | 0.109 | 0.714 | 0.195 | -0.675 | False |
 
 Вывод по калибровке:
@@ -25,7 +25,7 @@ Base-scenario class trajectories:
 | class_id | A_2030 | A_2035 | year_A50 | peak_speed_year | peak_speed | cumulative_delta_k_need_bn_rub |
 | --- | --- | --- | --- | --- | --- | --- |
 | hardware | 0.043 | 0.113 |  | 2035 | 0.018 | 875.367 |
-| hybrid | 0.106 | 0.330 |  | 2035 | 0.057 | 979.003 |
+| hybrid | 0.106 | 0.330 |  | 2035 | 0.057 | 1131.272 |
 | software | 0.384 | 0.876 | 2032 | 2032 | 0.115 | 387.493 |
 
 Главный рисунок здесь простой:
@@ -42,7 +42,7 @@ Base-scenario class trajectories:
 | --- | --- | --- | --- | --- | --- |
 | K | Финансы и страхование | software | 0.876 | -0.064 | 0.278 |
 | J | ИТ и связь | software | 0.876 | -0.060 | 0.507 |
-| M | Профессиональные и научные услуги | software | 0.876 | -0.033 | 0.470 |
+| G | Оптовая и розничная торговля | hybrid | 0.330 | -0.045 | 0.519 |
 
 Сектора с наибольшим margin peak в `Fast`:
 
@@ -50,7 +50,7 @@ Base-scenario class trajectories:
 | --- | --- | --- | --- | --- |
 | B | Добыча полезных ископаемых | hardware | 2035 | 0.867 |
 | K | Финансы и страхование | software | 2035 | 0.758 |
-| C | Обрабатывающая промышленность | hybrid | 2035 | 0.601 |
+| C | Обрабатывающая промышленность без машиностроения | hybrid | 2035 | 0.601 |
 
 Сектора с наибольшей cumulative capital need в `Friction`:
 
@@ -58,7 +58,7 @@ Base-scenario class trajectories:
 | --- | --- | --- | --- |
 | B | Добыча полезных ископаемых | hardware | 685.043 |
 | DE | Энергетика и ЖКХ | hybrid | 317.782 |
-| C | Обрабатывающая промышленность | hybrid | 234.830 |
+| H | Транспорт и логистика | hardware | 194.468 |
 
 ## 4. Интерпретация
 

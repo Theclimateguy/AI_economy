@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+import re
 
 import numpy as np
 import pandas as pd
@@ -18,15 +19,18 @@ STRUCTURE_AGGREGATE_PATH = ROOT / "data" / "processed" / "russia_economy_structu
 IMPORT_FRICTION_PATH = ROOT / "data" / "processed" / "import_dependency_sector.csv"
 
 OUTPUT_SUMMARY = ROOT / "data" / "processed" / "io_multiplier_sector_summary.csv"
+OUTPUT_DECOMPOSITION = ROOT / "data" / "processed" / "io_indirect_decomposition.csv"
 OUTPUT_DOC = ROOT / "docs" / "io_macro_closure.md"
 STRUCTURE_REPORT_PATH = ROOT / "docs" / "russia_economy_structure_report.md"
 
-SECTORS = ["B", "C", "DE", "F", "H", "J", "K", "M"]
+SECTORS = ["B", "C", "C_mach", "DE", "F", "G", "H", "J", "K", "M"]
 SECTOR_NAMES = {
     "B": "Добыча полезных ископаемых",
     "C": "Обрабатывающая промышленность",
+    "C_mach": "Машиностроение (ОКВЭД 26–30)",
     "DE": "Энергетика и ЖКХ",
     "F": "Строительство",
+    "G": "Оптовая и розничная торговля",
     "H": "Транспорт и логистика",
     "J": "ИТ и связь",
     "K": "Финансы и страхование",
@@ -82,12 +86,16 @@ def map_2019_code(code: object) -> str | None:
     value = str(code).strip()
     if value.startswith("B "):
         return "B"
+    if value.startswith(("С 26", "C 26", "С 27", "C 27", "С 28", "C 28", "С 29", "C 29", "С 30", "C 30")):
+        return "C_mach"
     if value.startswith("С") or value.startswith("C "):
         return "C"
     if value.startswith("D ") or value.startswith("Е ") or value.startswith("E "):
         return "DE"
     if value.startswith("F "):
         return "F"
+    if value.startswith("G "):
+        return "G"
     if value.startswith("H "):
         return "H"
     if value.startswith("J "):
@@ -105,6 +113,8 @@ def map_2016_code(code: object) -> str | None:
         return None
     if value.startswith(("10", "11", "12", "13", "14")):
         return "B"
+    if re.search(r"\b(29|30|31|32|33|34|35)(\.|\b)", value):
+        return "C_mach"
     if value.startswith(
         (
             "15",
@@ -121,13 +131,6 @@ def map_2016_code(code: object) -> str | None:
             "26",
             "27",
             "28",
-            "29",
-            "30",
-            "31",
-            "32",
-            "33",
-            "34",
-            "35",
             "36",
             "37",
             "39.9",
@@ -138,6 +141,8 @@ def map_2016_code(code: object) -> str | None:
         return "DE"
     if value.startswith("45"):
         return "F"
+    if re.search(r"\b(50|51|52)(\.|\b)", value):
+        return "G"
     if value.startswith(("60", "61", "62", "63")):
         return "H"
     if value.startswith("64"):
@@ -222,9 +227,10 @@ def build_summary_rows(
     sector_summary: pd.DataFrame,
     aggregate_summary: pd.DataFrame,
     import_friction: pd.DataFrame,
-) -> pd.DataFrame:
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     import_wedges = import_friction.set_index("sector_id").reindex(SECTORS)
     rows: list[dict[str, object]] = []
+    decomposition_rows: list[dict[str, object]] = []
 
     for table_year, system in io_systems.items():
         value_added_coefficients = system["value_added_coefficients"]
@@ -269,6 +275,32 @@ def build_summary_rows(
             io_total_va_gain_bn = direct_va_total_bn + indirect_va_total_bn
             direct_emp_total_thousand = float(direct_emp_thousand.sum())
             indirect_emp_total_thousand = float(indirect_emp_thousand.sum())
+
+            for recipient_id in SECTORS:
+                recipient_pos = SECTOR_INDEX[recipient_id]
+                response_by_supplier_mn = leontief_inverse[:, recipient_pos] * direct_output_impulse_mn[recipient_pos]
+                response_by_supplier_mn[recipient_pos] -= direct_output_impulse_mn[recipient_pos]
+                for supplier_id in SECTORS:
+                    supplier_pos = SECTOR_INDEX[supplier_id]
+                    decomposition_rows.append(
+                        {
+                            "table_year": table_year,
+                            "scenario": scenario,
+                            "throttle_scenario": throttle_scenario,
+                            "recipient_sector": recipient_id,
+                            "recipient_sector_name_ru": SECTOR_NAMES[recipient_id],
+                            "supplier_sector": supplier_id,
+                            "supplier_sector_name_ru": SECTOR_NAMES[supplier_id],
+                            "direct_recipient_va_impulse_bn_rub": float(direct_va_bn[recipient_pos]),
+                            "indirect_output_effect_bn_rub": float(response_by_supplier_mn[supplier_pos] / 1000.0),
+                            "indirect_va_effect_bn_rub": float(
+                                value_added_coefficients[supplier_pos] * response_by_supplier_mn[supplier_pos] / 1000.0
+                            ),
+                            "indirect_employment_effect_thousand": float(
+                                employment_coefficients[supplier_pos] * response_by_supplier_mn[supplier_pos]
+                            ),
+                        }
+                    )
 
             rows.append(
                 {
@@ -358,9 +390,13 @@ def build_summary_rows(
                     }
                 )
 
-    return pd.DataFrame(rows).sort_values(
+    summary = pd.DataFrame(rows).sort_values(
         ["record_type", "table_year", "scenario", "throttle_scenario", "sector_id"]
     ).reset_index(drop=True)
+    decomposition = pd.DataFrame(decomposition_rows).sort_values(
+        ["table_year", "scenario", "throttle_scenario", "recipient_sector", "supplier_sector"]
+    ).reset_index(drop=True)
+    return summary, decomposition
 
 
 def markdown_table(dataframe: pd.DataFrame, columns: list[str], float_columns: list[str]) -> str:
@@ -378,6 +414,7 @@ def markdown_table(dataframe: pd.DataFrame, columns: list[str], float_columns: l
 
 
 def build_doc(summary: pd.DataFrame) -> str:
+    decomposition = pd.read_csv(OUTPUT_DECOMPOSITION) if OUTPUT_DECOMPOSITION.exists() else pd.DataFrame()
     aggregate_base = summary.loc[
         summary["record_type"].eq("aggregate")
         & summary["table_year"].eq(2019)
@@ -397,6 +434,17 @@ def build_doc(summary: pd.DataFrame) -> str:
     ].copy()
     sector_base = sector_base.sort_values("io_indirect_va_gain_2035_bn_rub", ascending=False)
     strongest_import = sector_base.sort_values("import_content_base_2035_bn_rub", ascending=False)
+    top_pairs = pd.DataFrame()
+    if not decomposition.empty:
+        top_pairs = (
+            decomposition.loc[
+                decomposition["table_year"].eq(2019)
+                & decomposition["scenario"].eq("Base")
+                & decomposition["throttle_scenario"].eq("BaseThrottle")
+            ]
+            .sort_values("indirect_employment_effect_thousand", ascending=False)
+            .head(5)
+        )
 
     return f"""# IO Macro Closure
 
@@ -496,7 +544,17 @@ m^{{sanction}}_s = m_s (1 - \\omega_s)
 
 Для агрегированного `2019 BaseThrottle` shock vector import content оценивается в `{aggregate_base["import_content_base_2035_bn_rub"]:.3f} млрд руб.`. First-pass sanction substitution haircut снижает его до `{aggregate_base["import_content_sanction_base_2035_bn_rub"]:.3f} млрд руб.` в `SanctionBase` equivalent accounting, то есть экономит `{aggregate_base["import_content_sanction_saving_base_2035_bn_rub"]:.3f} млрд руб.` внешней компонентной зависимости.
 
-## 6. Ограничения
+## 6. Межотраслевые цепочки спроса
+
+Топ-5 пар поставщик → реципиент по косвенному эффекту занятости:
+
+{markdown_table(
+    top_pairs[["supplier_sector", "recipient_sector", "indirect_va_effect_bn_rub", "indirect_employment_effect_thousand"]],
+    ["supplier_sector", "recipient_sector", "indirect_va_effect_bn_rub", "indirect_employment_effect_thousand"],
+    ["indirect_va_effect_bn_rub", "indirect_employment_effect_thousand"],
+) if not top_pairs.empty else "_Decomposition output is unavailable._"}
+
+## 7. Ограничения
 
 - `2019` строится из supply-use, а не из опубликованной симметричной `ТЗВ`; это корректно на уровне `8` агрегатов, но слабее full product-technology reconstruction.
 - Используется открытая quantity-side Leontief closure без цен, substitution, bottleneck capacity и monetary policy.
@@ -537,12 +595,14 @@ def update_structure_report(summary: pd.DataFrame) -> None:
 def main() -> None:
     io_systems = {year: aggregate_io_system(spec) for year, spec in IO_SPECS.items()}
     sector_summary, aggregate_summary, import_friction = load_structure_inputs()
-    summary = build_summary_rows(io_systems, sector_summary, aggregate_summary, import_friction)
+    summary, decomposition = build_summary_rows(io_systems, sector_summary, aggregate_summary, import_friction)
     OUTPUT_SUMMARY.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_SUMMARY.write_text(summary.to_csv(index=False), encoding="utf-8")
+    OUTPUT_DECOMPOSITION.write_text(decomposition.to_csv(index=False), encoding="utf-8")
     OUTPUT_DOC.write_text(build_doc(summary), encoding="utf-8")
     update_structure_report(summary)
     print(f"Saved IO summary: {OUTPUT_SUMMARY}")
+    print(f"Saved IO decomposition: {OUTPUT_DECOMPOSITION}")
     print(f"Saved IO report: {OUTPUT_DOC}")
 
 

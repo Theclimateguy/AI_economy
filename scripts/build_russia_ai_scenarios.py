@@ -61,6 +61,37 @@ def build_rti_summary(config: dict) -> tuple[pd.DataFrame, dict]:
     return summary, {"low_cutoff": low_cutoff, "high_cutoff": high_cutoff}
 
 
+def add_proxy_rows(source: pd.DataFrame, sector_meta: pd.DataFrame, proxy_map: dict[str, str]) -> pd.DataFrame:
+    """Clone benchmark rows for newly split sectors and overwrite identity columns."""
+    frames = [source]
+    for target_sector, source_sector in proxy_map.items():
+        if target_sector in set(source["sector_id"]):
+            continue
+        source_rows = source.loc[source["sector_id"].eq(source_sector)].copy()
+        target_meta = sector_meta.loc[sector_meta["sector_id"].eq(target_sector)]
+        if source_rows.empty or target_meta.empty:
+            continue
+        for column in ["sector_id", "sector_name_ru", "okved", "ai_intensity", "is_proxy_mn", "staffing_proxy_exact"]:
+            if column in source_rows.columns and column in target_meta.columns:
+                source_rows[column] = target_meta[column].iloc[0]
+        if "dominant_task_shift" in source_rows.columns and target_sector == "G":
+            source_rows["dominant_task_shift"] = "task_displacing"
+            source_rows["mean_delta_tc_long"] = -0.040
+            source_rows["median_delta_tc_long"] = -0.035
+            source_rows["std_delta_tc_long"] = source_rows["std_delta_tc_long"].clip(lower=0.055)
+            source_rows["q25_delta_tc_long"] = -0.080
+            source_rows["q10_delta_tc_long"] = -0.120
+        if "dominant_task_shift" in source_rows.columns and target_sector == "C_mach":
+            source_rows["dominant_task_shift"] = "task_displacing"
+            source_rows["mean_delta_tc_long"] = -0.055
+            source_rows["median_delta_tc_long"] = -0.050
+            source_rows["std_delta_tc_long"] = source_rows["std_delta_tc_long"].clip(lower=0.070)
+            source_rows["q25_delta_tc_long"] = -0.105
+            source_rows["q10_delta_tc_long"] = -0.150
+        frames.append(source_rows)
+    return pd.concat(frames, ignore_index=True)
+
+
 def extract_margin_lambda(config: dict) -> dict:
     lambda_cfg = config["lambda_source"]
     terms = pd.read_csv(resolve_path(config, "screen_terms_path"))
@@ -88,14 +119,23 @@ def build_scenarios(config: dict) -> tuple[pd.DataFrame, dict]:
     sector_meta = load_sector_metadata(config)
     task_content = pd.read_csv(resolve_path(config, "task_content_benchmarks_path"))
     rti_summary, rti_cutoffs = build_rti_summary(config)
+    proxy_map = {"G": "H", "C_mach": "C"}
+    task_content = add_proxy_rows(task_content, sector_meta, proxy_map)
+    rti_summary = add_proxy_rows(rti_summary, sector_meta, proxy_map)
     margin_lambda = extract_margin_lambda(config)
 
-    scenarios = sector_meta.merge(
-        task_content,
-        on=["sector_id", "sector_name_ru", "ai_intensity", "is_proxy_mn", "staffing_proxy_exact"],
-        how="left",
+    task_content = task_content.drop(
+        columns=[column for column in ["sector_name_ru", "ai_intensity", "is_proxy_mn", "staffing_proxy_exact"] if column in task_content.columns]
     )
-    scenarios = scenarios.merge(rti_summary, on=["sector_id", "sector_name_ru"], how="left")
+    rti_summary = rti_summary.drop(
+        columns=[column for column in ["sector_name_ru", "is_proxy_mn", "staffing_proxy_exact"] if column in rti_summary.columns]
+    )
+    scenarios = sector_meta.merge(task_content, on="sector_id", how="left")
+    scenarios = scenarios.merge(rti_summary, on="sector_id", how="left")
+    scenarios["rti_bucket"] = scenarios["rti_bucket"].fillna("medium")
+    scenarios["rti_median_hist"] = scenarios["rti_median_hist"].fillna(scenarios["rti_median_hist"].median())
+    scenarios["rti_mean_hist"] = scenarios["rti_mean_hist"].fillna(scenarios["rti_mean_hist"].median())
+    scenarios["rti_std_hist"] = scenarios["rti_std_hist"].fillna(scenarios["rti_std_hist"].median())
 
     sigma_multipliers = scenarios.apply(
         lambda row: apply_sigma_rule(row["ai_intensity"], row["rti_bucket"], config),

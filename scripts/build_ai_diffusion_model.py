@@ -21,6 +21,7 @@ OUTPUT_PATHS = ROOT / "data" / "processed" / "ai_diffusion_paths_2025_2035.csv"
 OUTPUT_SUMMARY = ROOT / "data" / "processed" / "ai_diffusion_sector_summary.csv"
 OUTPUT_CLASS_SUMMARY = ROOT / "data" / "processed" / "ai_diffusion_class_summary.csv"
 OUTPUT_DIAGNOSTICS = ROOT / "data" / "processed" / "ai_diffusion_calibration_diagnostics.csv"
+OUTPUT_SNAPSHOT_TEMPLATE = ROOT / "data" / "processed" / "ai_diffusion_snapshot_{year}.csv"
 OUTPUT_REPORT = ROOT / "docs" / "russia_ai_diffusion_report.md"
 
 
@@ -32,8 +33,12 @@ def load_json(path: Path) -> dict:
 def load_russia_inputs(config: dict) -> pd.DataFrame:
     baseline = pd.read_csv(BASELINE_PATH)
     scenarios = pd.read_csv(SCENARIOS_PATH)
-    join_keys = ["sector_id", "sector_name_ru", "okved", "ai_intensity", "is_proxy_mn", "staffing_proxy_exact"]
-    df = baseline.merge(scenarios, on=join_keys, how="left")
+    scenario_cols = [
+        column
+        for column in scenarios.columns
+        if column not in {"sector_name_ru", "okved", "ai_intensity", "is_proxy_mn", "staffing_proxy_exact"}
+    ]
+    df = baseline.merge(scenarios[scenario_cols], on="sector_id", how="left")
     df["class_id"] = df["sector_id"].map(config["class_map"])
     df["delta_sL_potential"] = df[config["potential_shock_column"]]
     return df
@@ -148,7 +153,8 @@ def run_diffusion_paths(base: pd.DataFrame, config: dict) -> pd.DataFrame:
     records: list[dict] = []
 
     for _, row in base.iterrows():
-        class_params = config["class_parameters"][row["class_id"]]
+        class_params = dict(config["class_parameters"][row["class_id"]])
+        class_params.update(config.get("sector_parameter_overrides", {}).get(row["sector_id"], {}))
         for scenario_name, scenario in config["scenario_parameters"].items():
             p_anchor = row["p_draw"] if "p_draw" in row.index and pd.notna(row["p_draw"]) else class_params["p"]
             q_anchor = row["q_draw"] if "q_draw" in row.index and pd.notna(row["q_draw"]) else class_params["q"]
@@ -264,6 +270,25 @@ def summarize_paths(paths: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     sector_summary = pd.DataFrame(summary_rows).sort_values(["scenario", "peak_speed_year", "sector_id"]).reset_index(drop=True)
     class_summary = pd.DataFrame(class_rows).sort_values(["scenario", "class_id"]).reset_index(drop=True)
     return sector_summary, class_summary
+
+
+def build_snapshot(paths: pd.DataFrame, snapshot_year: int, final_year: int) -> pd.DataFrame:
+    subset = paths.loc[paths["year"].isin([snapshot_year, final_year])].copy()
+    wide = subset.pivot_table(
+        index=["scenario", "sector_id", "sector_name_ru", "class_id"],
+        columns="year",
+        values=["adaptation", "delta_sL_t", "labour_share_t", "margin_t"],
+        aggfunc="first",
+    )
+    wide.columns = [f"{metric}_{year}" for metric, year in wide.columns]
+    wide = wide.reset_index()
+    rename = {
+        f"adaptation_{snapshot_year}": f"A_{snapshot_year}",
+        f"adaptation_{final_year}": f"A_{final_year}",
+        f"delta_sL_t_{snapshot_year}": f"delta_sL_{snapshot_year}",
+        f"delta_sL_t_{final_year}": f"delta_sL_{final_year}",
+    }
+    return wide.rename(columns=rename).sort_values(["scenario", "sector_id"]).reset_index(drop=True)
 
 
 def format_markdown_table(dataframe: pd.DataFrame, columns: list[str], float_cols: list[str]) -> str:
@@ -398,6 +423,9 @@ def main() -> None:
     sector_summary.to_csv(OUTPUT_SUMMARY, index=False)
     class_summary.to_csv(OUTPUT_CLASS_SUMMARY, index=False)
     diagnostics.to_csv(OUTPUT_DIAGNOSTICS, index=False)
+    for snapshot_year in config.get("intermediate_snapshots", []):
+        snapshot_path = Path(str(OUTPUT_SNAPSHOT_TEMPLATE).format(year=snapshot_year))
+        build_snapshot(paths, int(snapshot_year), int(config["projection_end_year"])).to_csv(snapshot_path, index=False)
     OUTPUT_REPORT.write_text(build_report(diagnostics, class_summary, sector_summary, config), encoding="utf-8")
 
     print(f"Saved paths: {OUTPUT_PATHS}")

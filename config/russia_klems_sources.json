@@ -45,6 +45,13 @@
       "fit_note": "Russia KLEMS NACE 1.0 D is manufacturing; maps to OKVED2 C."
     },
     {
+      "sector_id": "C_mach",
+      "sector_name_ru": "Машиностроение (ОКВЭД 26–30)",
+      "russia_klems_codes": ["29", "30t33", "34t35"],
+      "fit_quality": "partial_proxy",
+      "fit_note": "Russia KLEMS NACE 1.0 machinery NEC, electrical and optical equipment, and transport equipment proxy OKVED2 26-30."
+    },
+    {
       "sector_id": "DE",
       "sector_name_ru": "Энергетика и ЖКХ",
       "russia_klems_codes": ["E"],
@@ -64,6 +71,13 @@
       "russia_klems_codes": ["60t63"],
       "fit_quality": "partial_old_nace",
       "fit_note": "Russia KLEMS 60t63 covers transport and storage; it excludes post and telecommunications."
+    },
+    {
+      "sector_id": "G",
+      "sector_name_ru": "Оптовая и розничная торговля",
+      "russia_klems_codes": ["G"],
+      "fit_quality": "good_proxy",
+      "fit_note": "Russia KLEMS G covers wholesale, retail and motor vehicle trade; maps to OKVED2 G with a minor repair-services boundary difference."
     },
     {
       "sector_id": "J",

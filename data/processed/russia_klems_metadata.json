@@ -17,6 +17,30 @@
       "fit_note": "Russia KLEMS NACE 1.0 D is manufacturing; maps to OKVED2 C."
     },
     {
+      "sector_id": "C_mach",
+      "sector_name_ru": "Машиностроение (ОКВЭД 26–30)",
+      "russia_klems_code": "29",
+      "russia_klems_desc": "MACHINERY, NEC",
+      "fit_quality": "partial_proxy",
+      "fit_note": "Russia KLEMS NACE 1.0 machinery NEC, electrical and optical equipment, and transport equipment proxy OKVED2 26-30."
+    },
+    {
+      "sector_id": "C_mach",
+      "sector_name_ru": "Машиностроение (ОКВЭД 26–30)",
+      "russia_klems_code": "30t33",
+      "russia_klems_desc": "ELECTRICAL AND OPTICAL EQUIPMENT",
+      "fit_quality": "partial_proxy",
+      "fit_note": "Russia KLEMS NACE 1.0 machinery NEC, electrical and optical equipment, and transport equipment proxy OKVED2 26-30."
+    },
+    {
+      "sector_id": "C_mach",
+      "sector_name_ru": "Машиностроение (ОКВЭД 26–30)",
+      "russia_klems_code": "34t35",
+      "russia_klems_desc": "Motor vehicles, trailers and semi-trailers;  Other transport equipment",
+      "fit_quality": "partial_proxy",
+      "fit_note": "Russia KLEMS NACE 1.0 machinery NEC, electrical and optical equipment, and transport equipment proxy OKVED2 26-30."
+    },
+    {
       "sector_id": "DE",
       "sector_name_ru": "Энергетика и ЖКХ",
       "russia_klems_code": "E",
@@ -39,6 +63,14 @@
       "russia_klems_desc": "TRANSPORT AND STORAGE",
       "fit_quality": "partial_old_nace",
       "fit_note": "Russia KLEMS 60t63 covers transport and storage; it excludes post and telecommunications."
+    },
+    {
+      "sector_id": "G",
+      "sector_name_ru": "Оптовая и розничная торговля",
+      "russia_klems_code": "G",
+      "russia_klems_desc": "WHOLESALE AND RETAIL TRADE",
+      "fit_quality": "good_proxy",
+      "fit_note": "Russia KLEMS G covers wholesale, retail and motor vehicle trade; maps to OKVED2 G with a minor repair-services boundary difference."
     },
     {
       "sector_id": "J",
@@ -97,8 +129,8 @@
   "raw_path": "data/raw/russia_klems/RUS_december_2019_0.xlsx",
   "year_start": 1995,
   "year_end": 2016,
-  "n_panel_rows": 176,
-  "n_proxy_rows": 8,
+  "n_panel_rows": 220,
+  "n_proxy_rows": 10,
   "outputs": {
     "sector_panel": "data/processed/russia_klems_sector_panel_1995_2016.csv",
     "obsolescence_proxy": "data/processed/managed_obsolescence_sector_proxy.csv"
