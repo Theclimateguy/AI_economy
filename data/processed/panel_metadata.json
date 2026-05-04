@@ -8,10 +8,10 @@
     "start_year": 1995,
     "end_year": 2005
   },
-  "n_rows": 3858,
+  "n_rows": 4708,
   "n_countries": 30,
-  "n_sectors": 8,
-  "n_benchmark_ready_rows": 1166,
+  "n_sectors": 10,
+  "n_benchmark_ready_rows": 1343,
   "sources": {
     "eu_klems_archive": [
       "Statistical_National-Accounts.csv",
@@ -77,7 +77,7 @@
     {
       "year": 1985,
       "sector_id": "C",
-      "sector_name_ru": "Обрабатывающая промышленность",
+      "sector_name_ru": "Обрабатывающая промышленность без машиностроения",
       "n_rows": 17,
       "n_countries_stan": 17,
       "n_countries_klems": 0,
@@ -90,7 +90,7 @@
     {
       "year": 1995,
       "sector_id": "C",
-      "sector_name_ru": "Обрабатывающая промышленность",
+      "sector_name_ru": "Обрабатывающая промышленность без машиностроения",
       "n_rows": 30,
       "n_countries_stan": 25,
       "n_countries_klems": 30,
@@ -103,7 +103,46 @@
     {
       "year": 2005,
       "sector_id": "C",
-      "sector_name_ru": "Обрабатывающая промышленность",
+      "sector_name_ru": "Обрабатывающая промышленность без машиностроения",
+      "n_rows": 30,
+      "n_countries_stan": 25,
+      "n_countries_klems": 30,
+      "n_benchmark_ready": 17,
+      "n_requested_countries": 30,
+      "stan_coverage_ratio": 0.8333333333333334,
+      "klems_coverage_ratio": 1.0,
+      "benchmark_ready_ratio": 0.5666666666666667
+    },
+    {
+      "year": 1985,
+      "sector_id": "C_mach",
+      "sector_name_ru": "Машиностроение (ОКВЭД 26–30)",
+      "n_rows": 17,
+      "n_countries_stan": 17,
+      "n_countries_klems": 0,
+      "n_benchmark_ready": 0,
+      "n_requested_countries": 30,
+      "stan_coverage_ratio": 0.5666666666666667,
+      "klems_coverage_ratio": 0.0,
+      "benchmark_ready_ratio": 0.0
+    },
+    {
+      "year": 1995,
+      "sector_id": "C_mach",
+      "sector_name_ru": "Машиностроение (ОКВЭД 26–30)",
+      "n_rows": 30,
+      "n_countries_stan": 25,
+      "n_countries_klems": 30,
+      "n_benchmark_ready": 15,
+      "n_requested_countries": 30,
+      "stan_coverage_ratio": 0.8333333333333334,
+      "klems_coverage_ratio": 1.0,
+      "benchmark_ready_ratio": 0.5
+    },
+    {
+      "year": 2005,
+      "sector_id": "C_mach",
+      "sector_name_ru": "Машиностроение (ОКВЭД 26–30)",
       "n_rows": 30,
       "n_countries_stan": 25,
       "n_countries_klems": 30,
@@ -190,6 +229,32 @@
       "stan_coverage_ratio": 0.8333333333333334,
       "klems_coverage_ratio": 1.0,
       "benchmark_ready_ratio": 0.5666666666666667
+    },
+    {
+      "year": 1995,
+      "sector_id": "G",
+      "sector_name_ru": "Оптовая и розничная торговля",
+      "n_rows": 30,
+      "n_countries_stan": 0,
+      "n_countries_klems": 30,
+      "n_benchmark_ready": 0,
+      "n_requested_countries": 30,
+      "stan_coverage_ratio": 0.0,
+      "klems_coverage_ratio": 1.0,
+      "benchmark_ready_ratio": 0.0
+    },
+    {
+      "year": 2005,
+      "sector_id": "G",
+      "sector_name_ru": "Оптовая и розничная торговля",
+      "n_rows": 30,
+      "n_countries_stan": 0,
+      "n_countries_klems": 30,
+      "n_benchmark_ready": 0,
+      "n_requested_countries": 30,
+      "stan_coverage_ratio": 0.0,
+      "klems_coverage_ratio": 1.0,
+      "benchmark_ready_ratio": 0.0
     },
     {
       "year": 1985,

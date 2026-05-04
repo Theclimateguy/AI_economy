@@ -107,13 +107,19 @@ L^{AI}_{s,t} = \frac{VA^{AI}_{s,t}}{LP^{AI}_{s,t}},
 
 ## 8. Ограничения
 
+- Это accounting layer, а не general equilibrium: цены, межотраслевые связи и спрос не замыкаются.
+- `VA` строится в baseline-ruble units через real growth и AI boosts; номинальная инфляция не моделируется.
+- Параметры `η` заданы сценарно по adoption class и должны идти в sensitivity block.
+- `MOS_s` — pressure proxy, а не доказательство намеренного ограничения внедрения.
+
+## 8. Ограничения
+
 - Базовые headline-цифры выше остаются direct accounting layer; partial IO-closure вынесен в `docs/io_macro_closure.md`.
 - По `2019` Rosstat `TRI` тот же `Base / BaseThrottle` shock vector даёт `IO-adjusted VA gain = 7.200%` против accounting `4.549%`, то есть ещё `+5203.245` млрд руб. через межотраслевые связи.
 - Direct employment effect в accounting layer равен `-978.392` тыс., но Leontief demand-support добавляет `1260.024` тыс.; net partial-closure outcome становится `281.632` тыс. Это не GE-оценка и не учитывает wages/prices crowding-out.
 - `VA` строится в baseline-ruble units через real growth и AI boosts; номинальная инфляция не моделируется.
 - Параметры `η` заданы сценарно по adoption class и должны идти в sensitivity block.
 - `MOS_s` — pressure proxy, а не доказательство намеренного ограничения внедрения.
-
 
 ## 9. Sensitivity
 
@@ -157,4 +163,4 @@ Y_t(\theta) = \left(VA^{AI}_t, \Pi^{AI}_t, L^{AI}_t - L^{cf}_t\right)
 
 ### Fan charts
 
-![Sensitivity fan charts](/Users/theclimateguy/Documents/science/AI vs economy/output/figures/russia_economy_structure/sensitivity_fan_charts.png)
+![Sensitivity fan charts](/home/user/workspace/AI_economy-317066fb/output/figures/russia_economy_structure/sensitivity_fan_charts.png)

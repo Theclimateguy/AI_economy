@@ -1,152 +1,192 @@
 country_iso3,sector_id,sector_name_ru,rti_staffing_base,rti_base_year,rti_base_source,rti_n_occ_available,rti_weight_coverage,rti_sector_total_employment,rti_classified_employment,rti_total_source,is_proxy_mn,staffing_proxy_exact,rti_proxy_source,rti_year_priority,rti_year_distance,rti_base_year_exact
 AUT,B,Добыча полезных ископаемых,0.5980657569438204,1995,BA:103,6,0.9615384615384615,11.57,11.125,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
-AUT,C,Обрабатывающая промышленность,0.4073316193158589,1995,BA:103,8,0.9999987648221345,809.6,809.599,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+AUT,C,Обрабатывающая промышленность без машиностроения,0.4073316193158589,1995,BA:103,8,0.9999987648221345,809.6,809.599,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+AUT,C_mach,Машиностроение (ОКВЭД 26–30),0.4073316193158589,1995,BA:103,8,0.9999987648221345,809.6,809.599,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 AUT,DE,Энергетика и ЖКХ,0.26732275082853324,1995,BA:103,7,1.0,36.631,36.631,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 AUT,F,Строительство,0.4576923550793138,1995,BA:103,7,0.9989525020281674,321.719,321.382,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+AUT,G,Оптовая и розничная торговля,0.2578381790810784,1995,BA:103,8,1.0,572.606,572.606,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 AUT,H,Транспорт и логистика,0.4809243260687242,1995,BA:103,8,1.0,241.80700000000002,241.80700000000002,sum_digits,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 AUT,J,ИТ и связь,0.23160743062210137,1995,BA:103,8,0.9986090602589366,198.427,198.151,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 AUT,K,Финансы и страхование,0.1583203971011524,1995,BA:103,6,0.995505928968913,137.292,136.675,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 AUT,M,Профессиональные и научные услуги,0.23160743062210137,1995,BA:103,8,0.9986090602589366,198.427,198.151,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 BEL,B,Добыча полезных ископаемых,0.3604395627117264,1995,BA:2257,7,0.9880914065014483,12.428,12.28,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
-BEL,C,Обрабатывающая промышленность,0.39407816807177853,1995,BA:2257,9,0.9998978141396409,763.315,763.237,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+BEL,C,Обрабатывающая промышленность без машиностроения,0.39407816807177853,1995,BA:2257,9,0.9998978141396409,763.315,763.237,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+BEL,C_mach,Машиностроение (ОКВЭД 26–30),0.39407816807177853,1995,BA:2257,9,0.9998978141396409,763.315,763.237,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 BEL,DE,Энергетика и ЖКХ,0.10923801819861567,1995,BA:2257,7,0.9907883648621162,34.413,34.096000000000004,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 BEL,F,Строительство,0.41389917683729105,1995,BA:2257,8,0.9986714804761231,261.193,260.846,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+BEL,G,Оптовая и розничная торговля,0.05068746408179453,1995,BA:2257,9,0.9999999999999999,577.398,577.398,sum_digits,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 BEL,H,Транспорт и логистика,0.37818923185768094,1995,BA:2257,8,1.0,282.745,282.745,sum_digits,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 BEL,J,ИТ и связь,-0.10268289113902607,1995,BA:2257,9,0.9993629580131418,224.475,224.332,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 BEL,K,Финансы и страхование,-0.06994234597438452,1995,BA:2257,6,0.9978040112528181,153.917,153.579,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 BEL,M,Профессиональные и научные услуги,-0.10268289113902607,1995,BA:2257,9,0.9993629580131418,224.475,224.332,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 CZE,B,Добыча полезных ископаемых,0.6542630352735384,1997,BA:149,8,1.0,88.324,88.324,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
-CZE,C,Обрабатывающая промышленность,0.5501292204396996,1997,BA:149,9,0.9997896789459952,1383.599,1383.308,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+CZE,C,Обрабатывающая промышленность без машиностроения,0.5501292204396996,1997,BA:149,9,0.9997896789459952,1383.599,1383.308,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+CZE,C_mach,Машиностроение (ОКВЭД 26–30),0.5501292204396996,1997,BA:149,9,0.9997896789459952,1383.599,1383.308,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 CZE,DE,Энергетика и ЖКХ,0.48127342162826514,1997,BA:149,8,0.9983148670851414,94.948,94.788,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 CZE,F,Строительство,0.48225329643935594,1997,BA:149,8,0.9997618865389358,470.364,470.25199999999995,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+CZE,G,Оптовая и розничная торговля,0.3028643138484893,1997,BA:149,8,0.9990121338362287,662.033,661.379,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 CZE,H,Транспорт и логистика,0.5432982905950625,1997,BA:149,8,0.9979880426306212,384.7,383.926,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 CZE,J,ИТ и связь,-0.025181497459416793,1997,BA:149,8,0.9986033575126235,251.317,250.966,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 CZE,K,Финансы и страхование,-0.024176423919026482,1997,BA:149,6,0.9873054959984715,94.214,93.018,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 CZE,M,Профессиональные и научные услуги,-0.025181497459416793,1997,BA:149,8,0.9986033575126235,251.317,250.966,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 DEU,B,Добыча полезных ископаемых,0.44604310043824225,1995,BA:2242,8,0.9641424342196276,253.001,243.929,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
-DEU,C,Обрабатывающая промышленность,0.39312807709672426,1995,BA:2242,9,0.9707690340106068,8929.332,8668.319,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+DEU,C,Обрабатывающая промышленность без машиностроения,0.39312807709672426,1995,BA:2242,9,0.9707690340106068,8929.332,8668.319,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+DEU,C_mach,Машиностроение (ОКВЭД 26–30),0.39312807709672426,1995,BA:2242,9,0.9707690340106068,8929.332,8668.319,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 DEU,DE,Энергетика и ЖКХ,0.27731856153249795,1995,BA:2242,8,0.9735687269217387,356.396,346.976,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 DEU,F,Строительство,0.4478248558909597,1995,BA:2242,8,0.9741439870422369,3343.787,3257.33,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+DEU,G,Оптовая и розничная торговля,0.2592492591497937,1995,BA:2242,9,0.9736999344405509,5164.778,5028.944,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 DEU,H,Транспорт и логистика,0.46319787613987917,1995,BA:2242,9,0.9778423684424026,2058.433,2012.8229999999999,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 DEU,J,ИТ и связь,0.12367554837253417,1995,BA:2242,9,0.9742878035624754,2209.924,2153.102,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 DEU,K,Финансы и страхование,0.1673077452277687,1995,BA:2242,8,0.9777567510626031,1333.753,1304.086,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 DEU,M,Профессиональные и научные услуги,0.12367554837253417,1995,BA:2242,9,0.9742878035624754,2209.924,2153.102,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
-DNK,C,Обрабатывающая промышленность,0.28220714779673234,1995,BA:2487,8,0.9821769108056567,519.663,510.401,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+DNK,C,Обрабатывающая промышленность без машиностроения,0.28220714779673234,1995,BA:2487,8,0.9821769108056567,519.663,510.401,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+DNK,C_mach,Машиностроение (ОКВЭД 26–30),0.28220714779673234,1995,BA:2487,8,0.9821769108056567,519.663,510.401,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 DNK,DE,Энергетика и ЖКХ,0.04019576817105182,1995,BA:2487,5,0.9700074515648287,16.104,15.621,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 DNK,F,Строительство,0.3472406460928864,1995,BA:2487,7,0.9865268085262816,163.213,161.014,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+DNK,G,Оптовая и розничная торговля,0.0920434763625838,1995,BA:2487,8,0.9840855570868918,368.596,362.72999999999996,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 DNK,H,Транспорт и логистика,0.2998841385669272,1995,BA:2487,8,0.9902577794729984,188.766,186.927,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 DNK,J,ИТ и связь,-0.15536898120287554,1995,BA:2487,8,0.9876857703439529,184.502,182.23000000000002,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 DNK,K,Финансы и страхование,-0.15557606569547255,1995,BA:2487,5,0.9845016628559552,76.976,75.783,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 DNK,M,Профессиональные и научные услуги,-0.15536898120287554,1995,BA:2487,8,0.9876857703439529,184.502,182.23000000000002,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 ESP,B,Добыча полезных ископаемых,0.40265179448881677,1995,BA:2244,8,0.9999999999999999,67.735,67.735,sum_digits,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
-ESP,C,Обрабатывающая промышленность,0.35293513605837984,1995,BA:2244,9,1.0,2415.286,2415.286,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+ESP,C,Обрабатывающая промышленность без машиностроения,0.35293513605837984,1995,BA:2244,9,1.0,2415.286,2415.286,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+ESP,C_mach,Машиностроение (ОКВЭД 26–30),0.35293513605837984,1995,BA:2244,9,1.0,2415.286,2415.286,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 ESP,DE,Энергетика и ЖКХ,0.19174183505170284,1995,BA:2244,7,0.9934529321818535,92.866,92.25800000000001,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 ESP,F,Строительство,0.3830597123329775,1995,BA:2244,8,0.9999999999999999,1197.967,1197.967,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+ESP,G,Оптовая и розничная торговля,0.08823375648351105,1995,BA:2244,9,0.9999995152734901,2063.019,2063.018,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 ESP,H,Транспорт и логистика,0.4025146392825263,1995,BA:2244,8,1.0,750.578,750.578,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 ESP,J,ИТ и связь,0.04831703411638705,1995,BA:2244,8,0.9999985247691263,677.86,677.859,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 ESP,K,Финансы и страхование,-0.081645910777668,1995,BA:2244,6,0.9946638174556789,328.512,326.75899999999996,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 ESP,M,Профессиональные и научные услуги,0.04831703411638705,1995,BA:2244,8,0.9999985247691263,677.86,677.859,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
-EST,C,Обрабатывающая промышленность,0.45563763305164,1997,BA:42,8,0.9973788126361656,146.88,146.495,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+EST,C,Обрабатывающая промышленность без машиностроения,0.45563763305164,1997,BA:42,8,0.9973788126361656,146.88,146.495,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+EST,C_mach,Машиностроение (ОКВЭД 26–30),0.45563763305164,1997,BA:42,8,0.9973788126361656,146.88,146.495,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 EST,F,Строительство,0.39572607573224383,1997,BA:42,6,0.999937150399095,31.822,31.82,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+EST,G,Оптовая и розничная торговля,0.06349778338921622,1997,BA:42,8,0.9976755912484165,81.311,81.122,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 EST,H,Транспорт и логистика,0.3744688839976583,1997,BA:42,8,1.0,58.079,58.079,sum_digits,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 EST,J,ИТ и связь,-0.06293005216017869,1997,BA:42,8,0.999968092913436,31.341,31.34,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 EST,M,Профессиональные и научные услуги,-0.06293005216017869,1997,BA:42,8,0.999968092913436,31.341,31.34,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
-FIN,C,Обрабатывающая промышленность,0.19887731342782966,1997,BA:2486,8,0.9911888964500396,423.216,419.48699999999997,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+FIN,C,Обрабатывающая промышленность без машиностроения,0.19887731342782966,1997,BA:2486,8,0.9911888964500396,423.216,419.48699999999997,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+FIN,C_mach,Машиностроение (ОКВЭД 26–30),0.19887731342782966,1997,BA:2486,8,0.9911888964500396,423.216,419.48699999999997,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 FIN,DE,Энергетика и ЖКХ,0.19034229607253245,1997,BA:2486,7,0.9808399692792756,24.739,24.265,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 FIN,F,Строительство,0.1962334909280459,1997,BA:2486,7,0.994001345200294,127.862,127.095,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+FIN,G,Оптовая и розничная торговля,0.0390017107933894,1997,BA:2486,8,0.9898829799370895,245.428,242.945,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 FIN,H,Транспорт и логистика,0.30045114345733315,1997,BA:2486,8,0.9968492198217273,159.643,159.14,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 FIN,J,ИТ и связь,-0.10203183445428854,1997,BA:2486,8,0.9882919052960972,169.37,167.387,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 FIN,K,Финансы и страхование,-0.09499466464992667,1997,BA:2486,4,0.9707321412685704,56.205,54.56,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 FIN,M,Профессиональные и научные услуги,-0.10203183445428854,1997,BA:2486,8,0.9882919052960972,169.37,167.387,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 FRA,B,Добыча полезных ископаемых,0.4044821490528808,1995,BA:148,7,0.978612280927598,54.377,53.214,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
-FRA,C,Обрабатывающая промышленность,0.29810506155519795,1995,BA:148,9,0.9967186377210329,4127.554,4114.009999999999,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+FRA,C,Обрабатывающая промышленность без машиностроения,0.29810506155519795,1995,BA:148,9,0.9967186377210329,4127.554,4114.009999999999,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+FRA,C_mach,Машиностроение (ОКВЭД 26–30),0.29810506155519795,1995,BA:148,9,0.9967186377210329,4127.554,4114.009999999999,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 FRA,DE,Энергетика и ЖКХ,0.0890104995971132,1995,BA:148,6,0.9878183831672205,202.272,199.808,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 FRA,F,Строительство,0.3248974021333818,1995,BA:148,9,0.9981924293366673,1514.187,1511.45,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+FRA,G,Оптовая и розничная торговля,0.04274217685730169,1995,BA:148,9,0.998258703700145,2966.181,2961.016,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 FRA,H,Транспорт и логистика,0.2677034236610324,1995,BA:148,9,0.9989355653594536,1389.47,1387.991,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 FRA,J,ИТ и связь,-0.037358154619102774,1995,BA:148,9,0.9980285258899015,1835.175,1831.557,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 FRA,K,Финансы и страхование,-0.15213254317863154,1995,BA:148,7,0.9963710557081407,715.084,712.489,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 FRA,M,Профессиональные и научные услуги,-0.037358154619102774,1995,BA:148,9,0.9980285258899015,1835.175,1831.557,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 GBR,B,Добыча полезных ископаемых,0.07963583850854337,1995,BA:2247,8,0.9970680941731673,113.578,113.245,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
-GBR,C,Обрабатывающая промышленность,0.16097906083066724,1995,BA:2247,9,0.9979917960048572,4918.823,4908.945,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+GBR,C,Обрабатывающая промышленность без машиностроения,0.16097906083066724,1995,BA:2247,9,0.9979917960048572,4918.823,4908.945,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+GBR,C_mach,Машиностроение (ОКВЭД 26–30),0.16097906083066724,1995,BA:2247,9,0.9979917960048572,4918.823,4908.945,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 GBR,DE,Энергетика и ЖКХ,-0.027714997997838456,1995,BA:2247,8,0.9953473361482397,223.098,222.06,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 GBR,F,Строительство,0.2028297844438297,1995,BA:2247,8,0.9988056499934463,1838.657,1836.4609999999998,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+GBR,G,Оптовая и розничная торговля,0.050993902183394266,1995,BA:2247,9,0.9992168249686129,4069.333,4066.1459999999997,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 GBR,H,Транспорт и логистика,0.2385102829795345,1995,BA:2247,8,0.9981697683113625,1658.26,1655.225,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 GBR,J,ИТ и связь,-0.15010840412089876,1995,BA:2247,9,0.9988697830032848,2425.198,2422.457,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 GBR,K,Финансы и страхование,-0.17557461885182402,1995,BA:2247,7,0.996189459980697,1158.366,1153.952,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 GBR,M,Профессиональные и научные услуги,-0.15010840412089876,1995,BA:2247,9,0.9988697830032848,2425.198,2422.457,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 GRC,B,Добыча полезных ископаемых,0.6889737094241674,1995,BA:317,5,0.9647865618739405,12.978,12.520999999999999,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
-GRC,C,Обрабатывающая промышленность,0.5162271628142001,1995,BA:317,8,0.9998543446090027,514.914,514.839,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+GRC,C,Обрабатывающая промышленность без машиностроения,0.5162271628142001,1995,BA:317,8,0.9998543446090027,514.914,514.839,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+GRC,C_mach,Машиностроение (ОКВЭД 26–30),0.5162271628142001,1995,BA:317,8,0.9998543446090027,514.914,514.839,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 GRC,DE,Энергетика и ЖКХ,0.39896083061301135,1995,BA:317,7,0.9966311061201572,37.401,37.275,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 GRC,F,Строительство,0.5565370866487904,1995,BA:317,7,0.9996479236886331,213.022,212.94699999999997,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+GRC,G,Оптовая и розничная торговля,0.09087574950595047,1995,BA:317,9,0.9998672664786872,557.508,557.434,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 GRC,H,Транспорт и логистика,0.5440787677373137,1995,BA:317,9,0.9996577023722126,222.029,221.953,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 GRC,J,ИТ и связь,-0.1071393135705985,1995,BA:317,8,1.0,137.68,137.68,sum_digits,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 GRC,K,Финансы и страхование,0.1327261080291801,1995,BA:317,8,0.9999883653286794,85.95,85.949,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 GRC,M,Профессиональные и научные услуги,-0.1071393135705985,1995,BA:317,8,1.0,137.68,137.68,sum_digits,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 HUN,B,Добыча полезных ископаемых,0.5594975454992145,1997,BA:656,7,0.9979318856532906,29.979,29.916999999999998,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
-HUN,C,Обрабатывающая промышленность,0.5537598031604012,1997,BA:656,9,0.9999485683894308,855.505,855.461,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+HUN,C,Обрабатывающая промышленность без машиностроения,0.5537598031604012,1997,BA:656,9,0.9999485683894308,855.505,855.461,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+HUN,C_mach,Машиностроение (ОКВЭД 26–30),0.5537598031604012,1997,BA:656,9,0.9999485683894308,855.505,855.461,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 HUN,DE,Энергетика и ЖКХ,0.4198819071596067,1997,BA:656,8,0.997671249047573,93.183,92.96600000000001,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 HUN,F,Строительство,0.553303095627884,1997,BA:656,8,1.0,210.859,210.85899999999998,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+HUN,G,Оптовая и розничная торговля,0.3203030947734337,1997,BA:656,8,0.9979035596659562,490.355,489.327,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 HUN,H,Транспорт и логистика,0.5761691609772547,1997,BA:656,8,0.9991068902937092,314.631,314.35,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 HUN,J,ИТ и связь,0.0814899928749887,1997,BA:656,8,0.9946354159456204,144.466,143.691,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 HUN,K,Финансы и страхование,-0.14253797413656677,1997,BA:656,6,0.9894124448941244,83.022,82.143,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 HUN,M,Профессиональные и научные услуги,0.0814899928749887,1997,BA:656,8,0.9946354159456204,144.466,143.691,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 IRL,B,Добыча полезных ископаемых,0.6677772630191542,1995,BA:772,7,0.9753977062523123,5.406,5.273,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
-IRL,C,Обрабатывающая промышленность,0.44678955265513964,1995,BA:772,8,0.9858816040738383,235.65,232.323,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+IRL,C,Обрабатывающая промышленность без машиностроения,0.44678955265513964,1995,BA:772,8,0.9858816040738383,235.65,232.323,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+IRL,C_mach,Машиностроение (ОКВЭД 26–30),0.44678955265513964,1995,BA:772,8,0.9858816040738383,235.65,232.323,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 IRL,DE,Энергетика и ЖКХ,0.4185990299069767,1995,BA:772,8,0.9768287142208087,13.206,12.9,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 IRL,F,Строительство,0.5567536644185433,1995,BA:772,8,0.9961438238137268,95.172,94.805,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+IRL,G,Оптовая и розничная торговля,0.34096322047592664,1995,BA:772,9,0.9901647588622895,174.983,173.262,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 IRL,H,Транспорт и логистика,0.5910581611248878,1995,BA:772,8,0.9963027860522166,57.07,56.859,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 IRL,J,ИТ и связь,-0.1250593590855957,1996,BA:772,8,0.9986539446568751,83.949,83.83600000000001,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,3,1,False
 IRL,K,Финансы и страхование,0.07195252822071242,1995,BA:772,6,0.952370123829409,48.373,46.069,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 IRL,M,Профессиональные и научные услуги,-0.1250593590855957,1996,BA:772,8,0.9986539446568751,83.949,83.83600000000001,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,3,1,False
 ITA,B,Добыча полезных ископаемых,0.49509847968571086,1995,BA:2238,7,0.9901096442157082,67.035,66.372,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
-ITA,C,Обрабатывающая промышленность,0.5879050472241573,1995,BA:2238,8,1.0,4926.576,4926.576,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+ITA,C,Обрабатывающая промышленность без машиностроения,0.5879050472241573,1995,BA:2238,8,1.0,4926.576,4926.576,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+ITA,C_mach,Машиностроение (ОКВЭД 26–30),0.5879050472241573,1995,BA:2238,8,1.0,4926.576,4926.576,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 ITA,DE,Энергетика и ЖКХ,0.4853751453593446,1995,BA:2238,8,1.0,199.196,199.196,sum_digits,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 ITA,F,Строительство,0.5513244211151807,1995,BA:2238,7,0.9992153513885339,1529.347,1528.147,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+ITA,G,Оптовая и розничная торговля,0.5369962436082405,1995,BA:2238,8,0.9999996873368288,3198.33,3198.3289999999997,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 ITA,H,Транспорт и логистика,0.6281434497775906,1995,BA:2238,8,0.9999990384384241,1039.975,1039.974,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 ITA,J,ИТ и связь,0.1456533373513876,1995,BA:2238,8,0.9999989810609804,981.413,981.412,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 ITA,K,Финансы и страхование,0.1596396500685649,1995,BA:2238,8,0.9999999999999999,666.522,666.522,sum_digits,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 ITA,M,Профессиональные и научные услуги,0.1456533373513876,1995,BA:2238,8,0.9999989810609804,981.413,981.412,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
-LUX,C,Обрабатывающая промышленность,0.44002982229726684,1995,BA:2261,8,0.9966343564889607,22.284,22.209,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+LUX,C,Обрабатывающая промышленность без машиностроения,0.44002982229726684,1995,BA:2261,8,0.9966343564889607,22.284,22.209,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+LUX,C_mach,Машиностроение (ОКВЭД 26–30),0.44002982229726684,1995,BA:2261,8,0.9966343564889607,22.284,22.209,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 LUX,DE,Энергетика и ЖКХ,0.2569361302415459,1995,BA:2261,5,0.961895910780669,1.076,1.0350000000000001,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 LUX,F,Строительство,0.5219333795312773,1995,BA:2261,8,1.0,17.153,17.153,sum_digits,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+LUX,G,Оптовая и розничная торговля,0.19897845864032587,1995,BA:2261,9,1.0,22.829,22.829,sum_digits,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 LUX,H,Транспорт и логистика,0.4590044844030809,1995,BA:2261,8,0.9998166483314999,10.908,10.905999999999999,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 LUX,J,ИТ и связь,0.006502389306882739,1995,BA:2261,7,0.9939882169051341,8.317,8.267,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 LUX,K,Финансы и страхование,-0.0823587790098746,1995,BA:2261,5,0.9877421905891656,15.174,14.988,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 LUX,M,Профессиональные и научные услуги,0.006502389306882739,1995,BA:2261,7,0.9939882169051341,8.317,8.267,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 NLD,B,Добыча полезных ископаемых,-0.1325051890962572,1994,BA:2236,6,0.9637341153470186,10.23,9.859,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,2,1,False
-NLD,C,Обрабатывающая промышленность,0.14708391766898643,1995,BA:2236,9,0.9501811661182386,1081.88,1027.982,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+NLD,C,Обрабатывающая промышленность без машиностроения,0.14708391766898643,1995,BA:2236,9,0.9501811661182386,1081.88,1027.982,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+NLD,C_mach,Машиностроение (ОКВЭД 26–30),0.14708391766898643,1995,BA:2236,9,0.9501811661182386,1081.88,1027.982,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 NLD,DE,Энергетика и ЖКХ,-0.12458064229793708,1995,BA:2236,7,0.9764917132773318,48.451,47.312,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 NLD,F,Строительство,0.1331069024933709,1995,BA:2236,9,0.9768251699335473,394.566,385.42199999999997,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+NLD,G,Оптовая и розничная торговля,0.017129776857543043,1995,BA:2236,9,0.9586384077733027,1107.38,1061.577,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 NLD,H,Транспорт и логистика,0.24967774533817472,1995,BA:2236,8,0.9614944395851557,400.15,384.742,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 NLD,J,ИТ и связь,-0.16641866212273887,1995,BA:2236,9,0.960947009439855,654.777,629.206,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 NLD,K,Финансы и страхование,-0.19873104181439297,1995,BA:2236,8,0.9636379546982803,217.122,209.227,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 NLD,M,Профессиональные и научные услуги,-0.16641866212273887,1995,BA:2236,9,0.960947009439855,654.777,629.206,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
-PRT,C,Обрабатывающая промышленность,0.38046945364581247,1995,BA:2252,8,0.9958093524105679,1004.618,1000.4079999999999,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+PRT,C,Обрабатывающая промышленность без машиностроения,0.38046945364581247,1995,BA:2252,8,0.9958093524105679,1004.618,1000.4079999999999,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+PRT,C_mach,Машиностроение (ОКВЭД 26–30),0.38046945364581247,1995,BA:2252,8,0.9958093524105679,1004.618,1000.4079999999999,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 PRT,DE,Энергетика и ЖКХ,0.2792359768215488,1995,BA:2252,6,0.9561152746658426,38.829,37.125,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 PRT,F,Строительство,0.44144450882455144,1995,BA:2252,8,0.9985679743997885,363.122,362.602,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
+PRT,G,Оптовая и розничная торговля,0.11300939289794065,1995,BA:2252,8,0.9890985683846255,654.226,647.094,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 PRT,H,Транспорт и логистика,0.32402054789308526,1995,BA:2252,8,0.9982632248193445,193.462,193.126,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 PRT,J,ИТ и связь,-0.058521563834704735,1995,BA:2252,8,0.9985960234130773,198.009,197.731,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 PRT,K,Финансы и страхование,-0.07591583024603304,1995,BA:2252,5,0.9816153622253515,127.117,124.78,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 PRT,M,Профессиональные и научные услуги,-0.058521563834704735,1995,BA:2252,8,0.9985960234130773,198.009,197.731,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,1,0,True
 ROU,B,Добыча полезных ископаемых,0.7557515895349987,1997,BA:436,6,0.9884045650649268,235.265,232.53699999999998,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
-ROU,C,Обрабатывающая промышленность,0.6830402252160575,1997,BA:436,9,0.9999995911682529,2445.994,2445.993,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+ROU,C,Обрабатывающая промышленность без машиностроения,0.6830402252160575,1997,BA:436,9,0.9999995911682529,2445.994,2445.993,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+ROU,C_mach,Машиностроение (ОКВЭД 26–30),0.6830402252160575,1997,BA:436,9,0.9999995911682529,2445.994,2445.993,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 ROU,DE,Энергетика и ЖКХ,0.6758392327625251,1997,BA:436,8,1.0,228.74,228.74,sum_digits,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 ROU,F,Строительство,0.6342188591063259,1997,BA:436,7,0.9963351847100015,483.244,481.47299999999996,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+ROU,G,Оптовая и розничная торговля,0.49625385135619654,1997,BA:436,8,0.999998850828323,870.192,870.191,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 ROU,H,Транспорт и логистика,0.7148238566723699,1997,BA:436,8,1.0,527.781,527.781,sum_digits,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 ROU,J,ИТ и связь,0.17358385727677417,1997,BA:436,8,0.995858573724824,174.819,174.095,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 ROU,K,Финансы и страхование,0.1527130993998759,1997,BA:436,6,0.995857053139118,98.722,98.313,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 ROU,M,Профессиональные и научные услуги,0.17358385727677417,1997,BA:436,8,0.995858573724824,174.819,174.095,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 SVN,B,Добыча полезных ископаемых,0.4868405712881472,1996,BA:446,5,0.9554439226821012,9.157,8.749,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,3,1,False
-SVN,C,Обрабатывающая промышленность,0.6215173479994985,1996,BA:446,8,0.9972997634335924,295.9,295.101,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,3,1,False
+SVN,C,Обрабатывающая промышленность без машиностроения,0.6215173479994985,1996,BA:446,8,0.9972997634335924,295.9,295.101,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,3,1,False
+SVN,C_mach,Машиностроение (ОКВЭД 26–30),0.6215173479994985,1996,BA:446,8,0.9972997634335924,295.9,295.101,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,3,1,False
 SVN,DE,Энергетика и ЖКХ,0.33692146119858996,1996,BA:446,7,0.9956321659776928,12.821,12.765,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,3,1,False
 SVN,F,Строительство,0.4806583190252806,1996,BA:446,8,1.0000000000000002,47.111,47.111,sum_digits,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,3,1,False
+SVN,G,Оптовая и розничная торговля,0.30092200634161137,1996,BA:446,8,0.9984758778357465,102.354,102.19800000000001,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,3,1,False
 SVN,H,Транспорт и логистика,0.5891321088700332,1996,BA:446,8,0.9980592801693718,51.012,50.913,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,3,1,False
 SVN,J,ИТ и связь,-0.02763839375570515,1996,BA:446,7,0.9819057755868019,35.702,35.056,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,3,1,False
 SVN,K,Финансы и страхование,-0.028819923827755917,1996,BA:446,4,0.9660390047074647,20.818,20.111,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,3,1,False
 SVN,M,Профессиональные и научные услуги,-0.02763839375570515,1996,BA:446,7,0.9819057755868019,35.702,35.056,reported_total,True,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,3,1,False
-SWE,C,Обрабатывающая промышленность,0.23679763492970568,1997,BA:2519,8,0.9980272232569932,753.253,751.7669999999999,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+SWE,C,Обрабатывающая промышленность без машиностроения,0.23679763492970568,1997,BA:2519,8,0.9980272232569932,753.253,751.7669999999999,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+SWE,C_mach,Машиностроение (ОКВЭД 26–30),0.23679763492970568,1997,BA:2519,8,0.9980272232569932,753.253,751.7669999999999,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 SWE,DE,Энергетика и ЖКХ,-0.014073621462745586,1997,BA:2519,6,0.97975,32.0,31.352,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 SWE,F,Строительство,0.2051748352795403,1997,BA:2519,8,0.9947329883823098,204.86,203.78100000000003,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
+SWE,G,Оптовая и розничная торговля,0.023838798029538286,1997,BA:2519,8,0.9977467924379955,483.311,482.222,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 SWE,H,Транспорт и логистика,0.30937260576020464,1997,BA:2519,8,0.9983833303395007,256.082,255.668,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 SWE,J,ИТ и связь,-0.16882752010827273,1997,BA:2519,8,0.9916826157726224,391.349,388.094,reported_total,False,False,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False
 SWE,K,Финансы и страхование,-0.3570990384641976,1997,BA:2519,4,0.9762743134850547,88.891,86.782,reported_total,False,True,Lewandowski RTI x ILOSTAT base-year staffing matrix,5,2,False

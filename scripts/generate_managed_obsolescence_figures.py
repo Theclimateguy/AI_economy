@@ -28,8 +28,10 @@ TECH_VALUE_COL = "Technology Diffusion (Comin and Hobijn (2004) and others)"
 SECTOR_LABELS = {
     "B": "Mining",
     "C": "Manufacturing",
+    "C_mach": "Machinery",
     "DE": "Energy & utilities",
     "F": "Construction",
+    "G": "Trade",
     "H": "Transport",
     "J": "IT & comms",
     "K": "Finance",

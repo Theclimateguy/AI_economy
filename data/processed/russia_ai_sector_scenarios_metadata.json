@@ -1,8 +1,8 @@
 {
   "rti_bucket_method": "sector_median_terciles",
   "rti_bucket_cutoffs": {
-    "low_cutoff": 0.057147677458241834,
-    "high_cutoff": 0.42074133912647527
+    "low_cutoff": 0.1025264346302622,
+    "high_cutoff": 0.4007048936938187
   },
   "ai_sigma_multipliers": {
     "high": {
