@@ -1,0 +1,11 @@
+sector_id,sector_name_ru,ai_intensity,attention_dependency,integration_capacity,platform_markup_mid,cac_saving_mid,vulnerable_sme_share,platform_rent_receiver,notes,source,year,confidence,assumption_tag
+B,Добыча полезных ископаемых,low,0.15,0.45,0.05,0.05,0.2,False,Low direct consumer-attention exposure; strategic B2B sector.,Issue #7 expert ranges + team first-pass sector priors,2024,L,[EXPERT_ASSUMPTION]
+C,Обрабатывающая промышленность без машиностроения,low_medium,0.35,0.4,0.08,0.08,0.45,False,Mixed B2B/B2C manufacturing exposure.,Issue #7 expert ranges + team first-pass sector priors,2024,L,[EXPERT_ASSUMPTION]
+C_mach,Машиностроение (ОКВЭД 26–30),medium,0.25,0.5,0.06,0.07,0.35,False,"Machinery: weaker attention channel, stronger API/B2B integration potential.",Issue #7 expert ranges + team first-pass sector priors,2024,L,[EXPERT_ASSUMPTION]
+DE,Энергетика и ЖКХ,low,0.2,0.35,0.04,0.04,0.25,False,Regulated utilities; low direct intention-market exposure.,Issue #7 expert ranges + team first-pass sector priors,2024,L,[EXPERT_ASSUMPTION]
+F,Строительство,low,0.55,0.3,0.2,0.12,0.7,False,Local services and contractors exposed to assistant-mediated discovery.,Issue #7 expert ranges + team first-pass sector priors,2024,L,[EXPERT_ASSUMPTION]
+G,Оптовая и розничная торговля,medium,0.85,0.7,0.1,0.25,0.7,False,Retail/e-commerce: high attention exposure but high integration upside for large players.,Issue #7 expert ranges + team first-pass sector priors,2024,M,[EXPERT_ASSUMPTION]
+H,Транспорт и логистика,medium,0.45,0.45,0.12,0.1,0.55,False,Transport/logistics marketplaces and service discovery channel.,Issue #7 expert ranges + team first-pass sector priors,2024,L,[EXPERT_ASSUMPTION]
+J,ИТ и связь,high,0.9,0.9,0.18,0.3,0.2,True,IT/telecom ecosystems capture platform access rents.,Issue #7 expert ranges + team first-pass sector priors,2024,M,[EXPERT_ASSUMPTION]
+K,Финансы и страхование,high,0.75,0.8,0.03,0.22,0.25,False,"Finance: high recommendation value, lower markup due to regulation.",Issue #7 expert ranges + team first-pass sector priors,2024,M,[EXPERT_ASSUMPTION]
+M,Профессиональные и научные услуги,high,0.7,0.55,0.22,0.18,0.65,False,Professional services and agencies: high exposure to discovery/intermediation.,Issue #7 expert ranges + team first-pass sector priors,2024,M,[EXPERT_ASSUMPTION]

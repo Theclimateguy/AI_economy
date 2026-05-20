@@ -1,0 +1,126 @@
+# Scenario: AI assistant monopoly over user attention.
+# Units are shares in [0, 1] unless specified otherwise.
+
+scenario:
+  name: attention_monopoly
+  baseline_year: 2024
+  start_year: 2025
+  end_year: 2035
+  main_scenario: Base
+
+diffusion:
+  # [EXPERT_ASSUMPTION: M] Issue #7, WeChat/Yandex-style ecosystem adoption analogue.
+  p: 0.02
+  q: 0.35
+  initial_share: 0.02
+  saturation_share:
+    low: 0.20
+    base: 0.40
+    high: 0.60
+
+abm:
+  # [EXPERT_ASSUMPTION: M] 12-month retention / cognitive lock-in proxy.
+  cognitive_lock_in: 0.75
+  n_users_index: 100.0
+  n_sme_index: 100.0
+  platform_count: 2
+
+risk_weights:
+  attention_dependency: 0.35
+  integration_deficit: 0.25
+  markup_intensity: 0.20
+  sme_vulnerability: 0.15
+  ai_adoption: 0.05
+
+deadweight_loss:
+  # [EXPERT_ASSUMPTION: L] Reduced-form demand elasticity for intention access.
+  demand_elasticity_abs: 1.20
+  competitive_markup: 0.03
+
+capital_reallocation:
+  # [EXPERT_ASSUMPTION: M] Share of extracted access rent captured by AI-platform sectors.
+  platform_rent_capture_share: 0.65
+  # [EXPERT_ASSUMPTION: M] Share of integrated-sector CAC savings retained as sectoral VA.
+  cac_saving_retention: 0.50
+
+sector_priors:
+  B:
+    attention_dependency: 0.15
+    integration_capacity: 0.45
+    platform_markup_mid: 0.05
+    cac_saving_mid: 0.05
+    vulnerable_sme_share: 0.20
+    platform_rent_receiver: false
+    notes: "Low direct consumer-attention exposure; strategic B2B sector."
+  C:
+    attention_dependency: 0.35
+    integration_capacity: 0.40
+    platform_markup_mid: 0.08
+    cac_saving_mid: 0.08
+    vulnerable_sme_share: 0.45
+    platform_rent_receiver: false
+    notes: "Mixed B2B/B2C manufacturing exposure."
+  C_mach:
+    attention_dependency: 0.25
+    integration_capacity: 0.50
+    platform_markup_mid: 0.06
+    cac_saving_mid: 0.07
+    vulnerable_sme_share: 0.35
+    platform_rent_receiver: false
+    notes: "Machinery: weaker attention channel, stronger API/B2B integration potential."
+  DE:
+    attention_dependency: 0.20
+    integration_capacity: 0.35
+    platform_markup_mid: 0.04
+    cac_saving_mid: 0.04
+    vulnerable_sme_share: 0.25
+    platform_rent_receiver: false
+    notes: "Regulated utilities; low direct intention-market exposure."
+  F:
+    attention_dependency: 0.55
+    integration_capacity: 0.30
+    platform_markup_mid: 0.20
+    cac_saving_mid: 0.12
+    vulnerable_sme_share: 0.70
+    platform_rent_receiver: false
+    notes: "Local services and contractors exposed to assistant-mediated discovery."
+  G:
+    attention_dependency: 0.85
+    integration_capacity: 0.70
+    platform_markup_mid: 0.10
+    cac_saving_mid: 0.25
+    vulnerable_sme_share: 0.70
+    platform_rent_receiver: false
+    notes: "Retail/e-commerce: high attention exposure but high integration upside for large players."
+  H:
+    attention_dependency: 0.45
+    integration_capacity: 0.45
+    platform_markup_mid: 0.12
+    cac_saving_mid: 0.10
+    vulnerable_sme_share: 0.55
+    platform_rent_receiver: false
+    notes: "Transport/logistics marketplaces and service discovery channel."
+  J:
+    attention_dependency: 0.90
+    integration_capacity: 0.90
+    platform_markup_mid: 0.18
+    cac_saving_mid: 0.30
+    vulnerable_sme_share: 0.20
+    platform_rent_receiver: true
+    notes: "IT/telecom ecosystems capture platform access rents."
+  K:
+    attention_dependency: 0.75
+    integration_capacity: 0.80
+    platform_markup_mid: 0.03
+    cac_saving_mid: 0.22
+    vulnerable_sme_share: 0.25
+    platform_rent_receiver: false
+    notes: "Finance: high recommendation value, lower markup due to regulation."
+  M:
+    attention_dependency: 0.70
+    integration_capacity: 0.55
+    platform_markup_mid: 0.22
+    cac_saving_mid: 0.18
+    vulnerable_sme_share: 0.65
+    platform_rent_receiver: false
+    notes: "Professional services and agencies: high exposure to discovery/intermediation."

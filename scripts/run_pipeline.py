@@ -35,6 +35,9 @@ STAGE_MAP = {
         "io_leontief_propagation.py",
         "welfare_distributional.py",
     ],
+    "attention_monopoly": [
+        "scenario_runner.py --scenario attention_monopoly",
+    ],
 }
 STAGE_MAP["all"] = (
     STAGE_MAP["stage1"]
@@ -45,9 +48,10 @@ STAGE_MAP["all"] = (
 
 
 def run_script(script_name: str) -> None:
-    script_path = ROOT / "scripts" / script_name
+    parts = script_name.split()
+    script_path = ROOT / "scripts" / parts[0]
     print(f"[run_pipeline] running {script_name}", flush=True)
-    subprocess.run([sys.executable, str(script_path)], check=True, cwd=ROOT)
+    subprocess.run([sys.executable, str(script_path), *parts[1:]], check=True, cwd=ROOT)
 
 
 def main() -> None:
