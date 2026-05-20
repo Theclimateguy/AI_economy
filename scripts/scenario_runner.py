@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 SCENARIOS = {
-    "attention_monopoly": ["io_klems_attention.py"],
+    "attention_monopoly": ["io_klems_attention.py", "generate_attention_monopoly_report_pdf.py"],
 }
 
 

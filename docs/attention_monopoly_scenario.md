@@ -84,5 +84,6 @@ VA_s \bar A D_s I_s c_s \rho
 - `output/attention_monopoly_gva_shift.png`
 - `output/attention_abm_dynamics.png`
 - `output/attention_deadweight_loss.png`
+- `output/reports/attention_monopoly_scenario_report_ru.pdf`
 - `data/benchmarks_attention_monopoly.csv`
 - `data/processed/attention_monopoly_sector_summary.csv`
