@@ -38,6 +38,8 @@ SECTOR_LABELS = {
     "DE": "Энергия и ЖКХ",
     "F": "Стройка",
     "G": "Торговля",
+    "G_food": "Еда",
+    "G_nonfood": "Не еда",
     "H": "Транспорт",
     "J": "ИТ и связь",
     "K": "Финансы",
@@ -51,6 +53,8 @@ LABEL_OFFSETS = {
     "DE": (0.015, -0.030),
     "F": (0.015, 0.020),
     "G": (0.015, 0.015),
+    "G_food": (0.015, -0.030),
+    "G_nonfood": (0.015, 0.015),
     "H": (0.015, 0.012),
     "J": (0.015, 0.010),
     "K": (0.015, -0.030),
@@ -83,7 +87,37 @@ def load_model_inputs(config: dict) -> pd.DataFrame:
         ["sector_id", "delta_va_share_pp_2035", "incremental_va_2035_bn_rub"],
     ]
     cols = ["sector_id", "sector_name_ru", "ai_intensity", "va_current_bn_rub", "employment_thousand_persons"]
-    return baseline[cols].merge(returns, on="sector_id", how="left").merge(structure, on="sector_id", how="left")
+    inputs = baseline[cols].merge(returns, on="sector_id", how="left").merge(structure, on="sector_id", how="left")
+    return apply_retail_split(inputs, config)
+
+
+def apply_retail_split(inputs: pd.DataFrame, config: dict) -> pd.DataFrame:
+    split_cfg = config.get("retail_split")
+    if not split_cfg:
+        return inputs
+
+    source_sector = split_cfg["source_sector_id"]
+    source = inputs.loc[inputs["sector_id"].eq(source_sector)]
+    if source.empty:
+        return inputs
+
+    source_row = source.iloc[0]
+    component_rows: list[dict] = []
+    for component_id, component_cfg in split_cfg["components"].items():
+        share = float(component_cfg["va_share_within_source"])
+        record = source_row.to_dict()
+        record["sector_id"] = component_id
+        record["sector_name_ru"] = component_cfg["sector_name_ru"]
+        record["va_current_bn_rub"] = float(source_row["va_current_bn_rub"]) * share
+        record["employment_thousand_persons"] = float(source_row["employment_thousand_persons"]) * share
+        if pd.notna(source_row.get("incremental_va_2035_bn_rub")):
+            record["incremental_va_2035_bn_rub"] = float(source_row["incremental_va_2035_bn_rub"]) * share
+        component_rows.append(record)
+
+    return pd.concat(
+        [inputs.loc[~inputs["sector_id"].eq(source_sector)], pd.DataFrame(component_rows)],
+        ignore_index=True,
+    )
 
 
 def build_benchmarks(config: dict, inputs: pd.DataFrame) -> pd.DataFrame:
@@ -92,7 +126,7 @@ def build_benchmarks(config: dict, inputs: pd.DataFrame) -> pd.DataFrame:
         row = {"sector_id": sector_id, **priors}
         row["source"] = "Issue #7 expert ranges + team first-pass sector priors"
         row["year"] = config["scenario"]["baseline_year"]
-        row["confidence"] = "M" if sector_id in {"G", "J", "K", "M"} else "L"
+        row["confidence"] = "M" if sector_id in {"G", "G_food", "G_nonfood", "J", "K", "M"} else "L"
         row["assumption_tag"] = "[EXPERT_ASSUMPTION]"
         rows.append(row)
 

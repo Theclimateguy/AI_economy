@@ -140,7 +140,8 @@ def page_problem(pdf: PdfPages, summary: pd.DataFrame, abm: pd.DataFrame) -> Non
         "Гипотеза: пользовательские намерения концентрируются в 1-2 интерфейсах. Для отраслей это меняет цену доступа к спросу: "
         "часть компаний получает более дешёвое привлечение клиента через intent-based targeting, а уязвимые фирмы платят платформенную ренту "
         "или теряют прямой канал к пользователю. В терминах KLEMS это сценарий перераспределения S и K: расходы на маркетинг, медиа и "
-        "customer access перетекают в ИТ-экосистемы и капитальные активы платформ."
+        "customer access перетекают в ИТ-экосистемы и капитальные активы платформ. Агрегированная торговля G в этом отчёте разделена "
+        "на продукты питания и непродовольственные товары только внутри сценарного слоя, потому что базовые Rosstat/KLEMS таблицы пока дают G агрегатом."
     )
     wrapped_text(ax, 0.055, 0.750, text, width=120, fontsize=9.5)
 
@@ -169,7 +170,7 @@ def page_problem(pdf: PdfPages, summary: pd.DataFrame, abm: pd.DataFrame) -> Non
         0.28,
         0.16,
         "Цвет",
-        "Composite risk R_s от 0 до 100: зависимость от внимания, дефицит интеграции, markup, доля уязвимых МСП, gatekeeping exposure и AI adoption.",
+        "Composite risk R_s от 0 до 100: зависимость от внимания, дефицит интеграции, markup, доля уязвимых МСП и AI adoption.",
     )
 
     section_label(ax, 0.04, 0.345, "Ключевые числа базовой калибровки")
@@ -209,7 +210,6 @@ def page_model(pdf: PdfPages) -> None:
         r"$I_s \in [0,1]$ — способность встроиться в AI/platform stack",
         r"$m_s$ — platform markup за доступ к пользователю",
         r"$E_s$ — доля уязвимых МСП / игроков без собственного API-канала",
-        r"$G_s$ — gatekeeping exposure: риск ранжирования, lead allocation и default-рекомендаций",
         r"$A_s(2035)$ — adoption из существующего diffusion/capital-return слоя",
     ]
     y = 0.740
@@ -221,7 +221,7 @@ def page_model(pdf: PdfPages) -> None:
     ax.text(
         0.060,
         0.360,
-        r"$R_s = 100\left(w_DD_s+w_I(1-I_s)+w_m\frac{m_s}{\max_j m_j}+w_EE_s+w_GG_s+w_AA_s(2035)\right)$",
+        r"$R_s = 100\left(w_DD_s+w_I(1-I_s)+w_m\frac{m_s}{\max_j m_j}+w_EE_s+w_AA_s(2035)\right)$",
         fontsize=15.0,
         color=INK,
     )
@@ -257,7 +257,7 @@ def page_risk_gradient(pdf: PdfPages, summary: pd.DataFrame) -> None:
     top = summary.sort_values("attention_risk_score", ascending=False).head(5).copy()
     top_table = pd.DataFrame(
         {
-            "Сектор": top["sector_label_ru"],
+            "Сектор": top["sector_id"],
             "D": top["attention_dependency"].map(lambda x: f"{x:.2f}"),
             "I": top["integration_capacity"].map(lambda x: f"{x:.2f}"),
             "R": top["attention_risk_score"].map(lambda x: f"{x:.1f}"),
@@ -289,9 +289,9 @@ def page_gva_results(pdf: PdfPages, summary: pd.DataFrame) -> None:
     winners = summary.sort_values("attention_gva_shift_bn_rub", ascending=False).head(4)
     table = pd.DataFrame(
         {
-            "Потери": losers["sector_label_ru"].to_list(),
+            "Losers": losers["sector_id"].to_list(),
             "ΔVA, млрд": losers["attention_gva_shift_bn_rub"].map(lambda x: f"{x:.0f}").to_list(),
-            "Выигрыш": winners["sector_label_ru"].to_list(),
+            "Winners": winners["sector_id"].to_list(),
             "ΔVA, млрд ": winners["attention_gva_shift_bn_rub"].map(lambda x: f"{x:.0f}").to_list(),
         }
     )
@@ -331,12 +331,12 @@ def page_abm_dwl(pdf: PdfPages, summary: pd.DataFrame, dwl: pd.DataFrame) -> Non
     top_dwl = dwl.sort_values("deadweight_loss_bn_rub", ascending=False).head(5)
     dwl_table = pd.DataFrame(
         {
-            "Сектор": top_dwl["sector_label_ru"],
+            "Сектор": top_dwl["sector_id"],
             "DWL, млрд": top_dwl["deadweight_loss_bn_rub"].map(lambda x: f"{x:.1f}"),
             "markup": top_dwl["platform_markup_mid"].map(lambda x: f"{x:.2f}"),
         }
     )
-    section_label(ax, 0.61, 0.450, "Максимальные welfare losses")
+    section_label(ax, 0.61, 0.450, "Top welfare losses")
     add_table(ax, dwl_table, [0.61, 0.225, 0.31, 0.185], fontsize=8.4)
     total_dwl = float(dwl["deadweight_loss_bn_rub"].sum())
     wrapped_text(
@@ -366,6 +366,7 @@ def page_assumptions(pdf: PdfPages, summary: pd.DataFrame) -> None:
             ["Platform markup", "3-22% midpoint by sector", "marketplace/API proxy"],
             ["CAC saving", "4-30% midpoint by sector", "intent targeting proxy"],
             ["SME vulnerability", "20-70% by sector", "expert assumption"],
+            ["Trade split", "food 30%; non-food 70% of G", "scenario-layer proxy"],
         ],
         columns=["Параметр", "Значение", "Источник"],
     )
@@ -374,7 +375,7 @@ def page_assumptions(pdf: PdfPages, summary: pd.DataFrame) -> None:
     table = summary.sort_values("attention_risk_score", ascending=False).copy()
     diagnostic = pd.DataFrame(
         {
-            "Сектор": table["sector_label_ru"],
+            "Сектор": table["sector_id"],
             "R": table["attention_risk_score"].map(lambda x: f"{x:.1f}"),
             "Fee": table["platform_access_fee_bn_rub"].map(lambda x: f"{x:.0f}"),
             "CAC gain": table["cac_saving_va_gain_bn_rub"].map(lambda x: f"{x:.0f}"),

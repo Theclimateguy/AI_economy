@@ -44,6 +44,19 @@ capital_reallocation:
   # [EXPERT_ASSUMPTION: M] Share of integrated-sector CAC savings retained as sectoral VA.
   cac_saving_retention: 0.50
 
+retail_split:
+  # [EXPERT_ASSUMPTION: L] Scenario-layer split of aggregate OKVED G because processed Rosstat/KLEMS data currently publish G as one aggregate.
+  source_sector_id: G
+  components:
+    G_food:
+      sector_name_ru: "Торговля: продукты питания"
+      va_share_within_source: 0.30
+      notes: "Food/grocery retail proxy inside aggregate G; lower discretionary search, higher repeat purchase and offline share."
+    G_nonfood:
+      sector_name_ru: "Торговля: непродовольственные товары"
+      va_share_within_source: 0.70
+      notes: "Non-food retail/e-commerce proxy inside aggregate G; higher recommendation, comparison-shopping and platform gatekeeping exposure."
+
 sector_priors:
   B:
     attention_dependency: 0.15
@@ -99,6 +112,24 @@ sector_priors:
     gatekeeping_exposure: 0.75
     platform_rent_receiver: false
     notes: "Retail/e-commerce: high attention exposure but high integration upside for large players."
+  G_food:
+    attention_dependency: 0.65
+    integration_capacity: 0.75
+    platform_markup_mid: 0.07
+    cac_saving_mid: 0.18
+    vulnerable_sme_share: 0.45
+    gatekeeping_exposure: 0.55
+    platform_rent_receiver: false
+    notes: "Food retail/grocery: lower discretionary discovery and higher repeat/offline demand, but delivery and marketplace ranking remain relevant."
+  G_nonfood:
+    attention_dependency: 0.90
+    integration_capacity: 0.68
+    platform_markup_mid: 0.12
+    cac_saving_mid: 0.28
+    vulnerable_sme_share: 0.80
+    gatekeeping_exposure: 0.85
+    platform_rent_receiver: false
+    notes: "Non-food retail/e-commerce: stronger search, recommendations, comparison and marketplace gatekeeping channel."
   H:
     attention_dependency: 0.45
     integration_capacity: 0.45
