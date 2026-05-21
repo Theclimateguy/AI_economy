@@ -32,16 +32,29 @@ DWL_FIG = FIG_DIR / "attention_deadweight_loss.png"
 
 
 SECTOR_LABELS = {
-    "B": "Mining",
-    "C": "Manufact.",
-    "C_mach": "Machinery",
-    "DE": "Energy",
-    "F": "Constr.",
-    "G": "Trade",
-    "H": "Transport",
-    "J": "IT",
-    "K": "Finance",
-    "M": "Prof.Svcs",
+    "B": "Добыча",
+    "C": "Обработка",
+    "C_mach": "Машиностр.",
+    "DE": "Энергия и ЖКХ",
+    "F": "Стройка",
+    "G": "Торговля",
+    "H": "Транспорт",
+    "J": "ИТ и связь",
+    "K": "Финансы",
+    "M": "Проф. услуги",
+}
+
+LABEL_OFFSETS = {
+    "B": (0.015, 0.010),
+    "C": (0.015, -0.030),
+    "C_mach": (0.015, 0.012),
+    "DE": (0.015, -0.030),
+    "F": (0.015, 0.020),
+    "G": (0.015, 0.015),
+    "H": (0.015, 0.012),
+    "J": (0.015, 0.010),
+    "K": (0.015, -0.030),
+    "M": (0.015, 0.012),
 }
 
 
@@ -129,6 +142,7 @@ def build_attention_sector_summary(inputs: pd.DataFrame, benchmarks: pd.DataFram
         + weights["integration_deficit"] * df["integration_deficit"]
         + weights["markup_intensity"] * df["markup_intensity"]
         + weights["sme_vulnerability"] * df["vulnerable_sme_share"]
+        + weights["gatekeeping_exposure"] * df["gatekeeping_exposure"]
         + weights["ai_adoption"] * df["A_2035"].fillna(df["A_2035"].median())
     )
 
@@ -168,6 +182,7 @@ def build_attention_sector_summary(inputs: pd.DataFrame, benchmarks: pd.DataFram
         bins=[-np.inf, 45.0, 60.0, np.inf],
         labels=["low", "medium", "high"],
     )
+    df["sector_label_ru"] = df["sector_id"].map(SECTOR_LABELS).fillna(df["sector_name_ru"])
     return df.sort_values("attention_risk_score", ascending=False).reset_index(drop=True)
 
 
@@ -180,7 +195,16 @@ def build_deadweight_loss(summary: pd.DataFrame, config: dict) -> pd.DataFrame:
         config["diffusion"]["saturation_share"]["base"]
     )
     df["deadweight_loss_bn_rub"] = 0.5 * elasticity * excess_markup.pow(2) * addressable_market
-    return df[["sector_id", "sector_name_ru", "deadweight_loss_bn_rub", "platform_markup_mid", "attention_dependency"]]
+    return df[
+        [
+            "sector_id",
+            "sector_name_ru",
+            "sector_label_ru",
+            "deadweight_loss_bn_rub",
+            "platform_markup_mid",
+            "attention_dependency",
+        ]
+    ]
 
 
 def configure_style() -> None:
@@ -222,6 +246,7 @@ def plot_risk_gradient(summary: pd.DataFrame, config: dict) -> None:
         + weights["integration_deficit"] * xx
         + weights["markup_intensity"] * mean_markup
         + weights["sme_vulnerability"] * mean_sme
+        + weights["gatekeeping_exposure"] * float(summary["gatekeeping_exposure"].mean())
         + weights["ai_adoption"] * mean_adoption
     )
 
@@ -238,16 +263,17 @@ def plot_risk_gradient(summary: pd.DataFrame, config: dict) -> None:
         zorder=3,
     )
     for row in summary.itertuples(index=False):
-        ax.text(row.integration_deficit + 0.015, row.attention_dependency + 0.012, SECTOR_LABELS[row.sector_id], fontsize=9)
+        dx, dy = LABEL_OFFSETS.get(row.sector_id, (0.015, 0.012))
+        ax.text(row.integration_deficit + dx, row.attention_dependency + dy, row.sector_label_ru, fontsize=9)
 
-    ax.set_title("Attention monopoly risk gradient by sector")
-    ax.set_xlabel("Integration deficit: 1 - AI/platform integration capacity")
-    ax.set_ylabel("Dependence on user attention / discovery channel")
+    ax.set_title("Градиент риска AI-монополии внимания по отраслям")
+    ax.set_xlabel("Дефицит интеграции: 1 - способность встроиться в AI/platform stack")
+    ax.set_ylabel("Зависимость от пользовательского внимания / discovery channel")
     ax.set_xlim(-0.02, 1.02)
     ax.set_ylim(-0.02, 1.02)
     ax.grid(color="#E5E7EB", linewidth=0.6)
     cbar = fig.colorbar(contour, ax=ax, pad=0.015)
-    cbar.set_label("Composite risk score, 0-100")
+    cbar.set_label("Композитный риск, 0-100")
     save_fig(fig, RISK_FIG)
 
 
@@ -255,11 +281,11 @@ def plot_gva_shift(summary: pd.DataFrame) -> None:
     df = summary.sort_values("attention_gva_shift_bn_rub")
     colors = np.where(df["attention_gva_shift_bn_rub"] >= 0, "#059669", "#DC2626")
     fig, ax = plt.subplots(figsize=(12, 7))
-    ax.barh(df["sector_id"], df["attention_gva_shift_bn_rub"], color=colors)
+    ax.barh(df["sector_label_ru"], df["attention_gva_shift_bn_rub"], color=colors)
     ax.axvline(0.0, color="#111827", linewidth=1.0)
-    ax.set_title("Attention-monopoly sector GVA shift, base 2035 saturation")
-    ax.set_xlabel("Net sector GVA / capital-attraction shift, bn RUB")
-    ax.set_ylabel("Sector")
+    ax.set_title("Сдвиг ВДС по отраслям в сценарии AI-монополии внимания")
+    ax.set_xlabel("Чистый сдвиг ВДС / притяжения капитала, млрд руб.")
+    ax.set_ylabel("Отрасль")
     ax.grid(axis="x", color="#E5E7EB", linewidth=0.7)
     save_fig(fig, GVA_FIG)
 
@@ -287,10 +313,10 @@ def plot_abm(abm: pd.DataFrame) -> None:
 def plot_deadweight_loss(dwl: pd.DataFrame) -> None:
     df = dwl.sort_values("deadweight_loss_bn_rub", ascending=True)
     fig, ax = plt.subplots(figsize=(11, 7))
-    ax.barh(df["sector_id"], df["deadweight_loss_bn_rub"], color="#7C2D12")
-    ax.set_title("Deadweight loss from monopoly access to intentions")
-    ax.set_xlabel("DWL, bn RUB")
-    ax.set_ylabel("Sector")
+    ax.barh(df["sector_label_ru"], df["deadweight_loss_bn_rub"], color="#7C2D12")
+    ax.set_title("Потери благосостояния от монопольного доступа к намерениям")
+    ax.set_xlabel("DWL, млрд руб.")
+    ax.set_ylabel("Отрасль")
     ax.grid(axis="x", color="#E5E7EB", linewidth=0.7)
     save_fig(fig, DWL_FIG)
 
@@ -328,7 +354,7 @@ m_s \\quad \\text{{platform markup}}.
 
 \[
 R_s = 100\\left(
-w_D D_s + w_I(1-I_s) + w_m \\frac{{m_s}}{{\\max_j m_j}} + w_E E_s + w_A A_s(2035)
+w_D D_s + w_I(1-I_s) + w_m \\frac{{m_s}}{{\\max_j m_j}} + w_E E_s + w_G G_s + w_A A_s(2035)
 \\right).
 \]
 
@@ -341,7 +367,7 @@ VA_s \\bar A D_s I_s c_s \\rho
 + \\mathbf{{1}}_{{s \\in platform}}\\Omega,
 \]
 
-где \(E_s\) — vulnerable SME share, \(c_s\) — CAC saving midpoint, \(\bar A=0.4\) — base saturation доля AI-интерфейса, \(\rho=0.5\) — retained CAC saving, \(\Omega\) — доля платформенной ренты, направленная в IT/platform sector.
+где \(E_s\) — vulnerable SME share, \(G_s\) — gatekeeping exposure, \(c_s\) — CAC saving midpoint, \(\bar A=0.4\) — base saturation доля AI-интерфейса, \(\rho=0.5\) — retained CAC saving, \(\Omega\) — доля платформенной ренты, направленная в IT/platform sector.
 
 ## 2. Highest Risk Sectors
 
@@ -354,6 +380,7 @@ VA_s \\bar A D_s I_s c_s \\rho
         "integration_capacity",
         "platform_markup_mid",
         "vulnerable_sme_share",
+        "gatekeeping_exposure",
         "attention_risk_score",
     ],
 )}
