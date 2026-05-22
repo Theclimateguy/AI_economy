@@ -59,14 +59,14 @@ retail_split:
 
 sector_priors:
   B:
-    attention_dependency: 0.15
-    integration_capacity: 0.30
+    attention_dependency: 0.10
+    integration_capacity: 0.15
     platform_markup_mid: 0.05
     cac_saving_mid: 0.05
     vulnerable_sme_share: 0.20
-    gatekeeping_exposure: 0.25
+    gatekeeping_exposure: 0.15
     platform_rent_receiver: false
-    notes: "Low direct consumer-attention exposure; strategic B2B sector with weaker digital/interface readiness than consumer sectors."
+    notes: "Mining/extraction: low direct search/discovery exposure and weak fit for consumer AI-platform integration."
   C:
     attention_dependency: 0.35
     integration_capacity: 0.30
@@ -95,17 +95,17 @@ sector_priors:
     platform_rent_receiver: false
     notes: "D+E aggregate: energy, gas, steam, water supply, waste and utilities; mostly regulated demand, nonzero household/service interface exposure, and lower digital/interface readiness."
   F:
-    attention_dependency: 0.35
-    integration_capacity: 0.45
+    attention_dependency: 0.20
+    integration_capacity: 0.20
     platform_markup_mid: 0.08
     cac_saving_mid: 0.08
     vulnerable_sme_share: 0.55
-    gatekeeping_exposure: 0.35
+    gatekeeping_exposure: 0.25
     platform_rent_receiver: false
-    notes: "Construction is partly local-discovery exposed, but core investment/B2B demand is not primarily mediated by a consumer AI assistant."
+    notes: "Construction: mostly local project/B2B demand; lower direct search dependence and weaker standardized platform integration."
   G:
     attention_dependency: 0.85
-    integration_capacity: 0.70
+    integration_capacity: 0.85
     platform_markup_mid: 0.10
     cac_saving_mid: 0.25
     vulnerable_sme_share: 0.70
@@ -113,17 +113,17 @@ sector_priors:
     platform_rent_receiver: false
     notes: "Retail/e-commerce: high attention exposure but high integration upside for large players."
   G_food:
-    attention_dependency: 0.65
-    integration_capacity: 0.75
+    attention_dependency: 0.78
+    integration_capacity: 0.82
     platform_markup_mid: 0.07
     cac_saving_mid: 0.18
     vulnerable_sme_share: 0.45
-    gatekeeping_exposure: 0.55
+    gatekeeping_exposure: 0.70
     platform_rent_receiver: false
-    notes: "Food retail/grocery: lower discretionary discovery and higher repeat/offline demand, but delivery and marketplace ranking remain relevant."
+    notes: "Food retail/grocery: repeat demand is higher, but delivery, marketplaces, maps and assistant ranking make it strongly platform-connectable."
   G_nonfood:
     attention_dependency: 0.90
-    integration_capacity: 0.68
+    integration_capacity: 0.85
     platform_markup_mid: 0.12
     cac_saving_mid: 0.28
     vulnerable_sme_share: 0.80
