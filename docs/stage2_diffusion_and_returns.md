@@ -24,17 +24,17 @@
 
 ## Формализация
 
-\[
+$$
 \frac{dA_s}{dt} = (p_s + q_s A_s)(1 - A_s)
-\]
+$$
 
-\[
+$$
 \Delta s^L_{s,t} = \Delta s^{L,potential}_s \cdot A_s(t)
-\]
+$$
 
-\[
+$$
 \pi_{s,t} = \pi_{s,0} + \gamma_s A_s(t) - \lambda \pi_{s,t-1}
-\]
+$$
 
 ## Ключевой вывод по классам
 

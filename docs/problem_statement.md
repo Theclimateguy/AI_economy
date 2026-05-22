@@ -55,29 +55,29 @@
 
 ## Формализация ядра
 
-\[
+$$
 \frac{dA_s}{dt} = (p_s + q_s A_s)(1 - A_s)
-\]
+$$
 
-\[
+$$
 \Delta s^L_{s,t} = \Delta s^{L,potential}_s \cdot A_s(t)
-\]
+$$
 
-\[
+$$
 \pi_{s,t} = \pi_{s,0} + \gamma_s A_s(t) - \lambda \pi_{s,t-1}
-\]
+$$
 
-\[
+$$
 a_{s,t} = q_t A_s(t)(1-\tau_{s,t})
-\]
+$$
 
 где:
 
-- \(A_s(t)\) — накопленная адаптация;
-- \(p_s, q_s\) — параметры диффузии;
-- \(\Delta s^{L,potential}_s\) — потенциальный шок доли труда;
-- \(\gamma_s\) — adoption premium;
-- \(\lambda\) — исторически выжившая скорость эрозии маржи;
-- \(q_t\) — frontier capability ИИ;
-- \(a_{s,t}\) — deployed capability в секторе;
-- \(\tau_{s,t}\) — managed-obsolescence / throttling wedge.
+- $A_s(t)$ — накопленная адаптация;
+- $p_s, q_s$ — параметры диффузии;
+- $\Delta s^{L,potential}_s$ — потенциальный шок доли труда;
+- $\gamma_s$ — adoption premium;
+- $\lambda$ — исторически выжившая скорость эрозии маржи;
+- $q_t$ — frontier capability ИИ;
+- $a_{s,t}$ — deployed capability в секторе;
+- $\tau_{s,t}$ — managed-obsolescence / throttling wedge.

@@ -374,34 +374,34 @@ def build_report(summary: pd.DataFrame, dwl: pd.DataFrame) -> str:
 
 ## 1. Формализация
 
-Для отрасли \(s\):
+Для отрасли $s$:
 
-\[
+$$
 D_s \\in [0,1] \\quad \\text{{attention dependency}},
 \\qquad
 I_s \\in [0,1] \\quad \\text{{platform integration capacity}},
 \\qquad
 m_s \\quad \\text{{platform markup}}.
-\]
+$$
 
 Композитный риск:
 
-\[
+$$
 R_s = 100\\left(
 w_D D_s + w_I(1-I_s) + w_m \\frac{{m_s}}{{\\max_j m_j}} + w_E E_s + w_G G_s + w_A A_s(2035)
 \\right).
-\]
+$$
 
 Сдвиг ВДС:
 
-\[
+$$
 \\Delta VA_s^{{att}} =
 VA_s \\bar A D_s I_s c_s \\rho
 - VA_s \\bar A D_s m_s (1-I_s) \\frac{{1+E_s}}{{2}}
 + \\mathbf{{1}}_{{s \\in platform}}\\Omega,
-\]
+$$
 
-где \(E_s\) — vulnerable SME share, \(G_s\) — gatekeeping exposure, \(c_s\) — CAC saving midpoint, \(\bar A=0.4\) — base saturation доля AI-интерфейса, \(\rho=0.5\) — retained CAC saving, \(\Omega\) — доля платформенной ренты, направленная в IT/platform sector.
+где $E_s$ — vulnerable SME share, $G_s$ — gatekeeping exposure, $c_s$ — CAC saving midpoint, $\bar A=0.4$ — base saturation доля AI-интерфейса, $\rho=0.5$ — retained CAC saving, $\Omega$ — доля платформенной ренты, направленная в IT/platform sector.
 
 ## 2. Highest Risk Sectors
 

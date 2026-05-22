@@ -387,15 +387,15 @@ def build_sensitivity_section(fan: pd.DataFrame) -> str:
 
 Формально считаем неопределенность по вектору параметров
 
-\\[
+$$
 \\theta = \\left(\\{{\\eta^{{VA}}_c, \\eta^{{LP}}_c\\}}_{{c \\in \\{{software, hybrid, hardware\\}}}}, \\rho, \\{{p_s, q_s\\}}_s\\right),
-\\]
+$$
 
 и оцениваем распределение агрегированных исходов
 
-\\[
+$$
 Y_t(\\theta) = \\left(VA^{{AI}}_t, \\Pi^{{AI}}_t, L^{{AI}}_t - L^{{cf}}_t\\right)
-\\]
+$$
 
 через Monte Carlo с `N={N_DRAWS}` draws и `seed={SEED}`.
 

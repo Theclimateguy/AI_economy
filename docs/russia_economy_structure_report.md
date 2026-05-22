@@ -6,31 +6,31 @@
 
 Контрфактический выпуск:
 
-\[
+$$
 VA^{cf}_{s,t} = VA_{s,2024} \prod_{\tau=2025}^t (1 + g^{cf}_s)
-\]
+$$
 
 Managed adoption:
 
-\[
+$$
 A^{m}_{s,t} = A_{s,t}(1 - \rho MOS_s)
-\]
+$$
 
 AI output and labour-productivity boosts:
 
-\[
+$$
 VA^{AI}_{s,t} = VA^{cf}_{s,t} \exp\left(\sum_{\tau=2025}^t \eta^{VA}_s \Delta A^m_{s,\tau}\right)
-\]
+$$
 
-\[
+$$
 LP^{AI}_{s,t} = LP^{cf}_{s,t} \exp\left(\sum_{\tau=2025}^t \eta^{LP}_s \Delta A^m_{s,\tau}\right)
-\]
+$$
 
-\[
+$$
 L^{AI}_{s,t} = \frac{VA^{AI}_{s,t}}{LP^{AI}_{s,t}},
 \qquad
 \Pi^{AI}_{s,t} = \pi^{AI}_{s,t} VA^{AI}_{s,t}
-\]
+$$
 
 Контрфактический рост `VA` — clipped median official real growth за `2017-2024`. Денежные величины интерпретируются как рубли baseline 2024, а не номинальный прогноз инфляции.
 
@@ -125,15 +125,15 @@ L^{AI}_{s,t} = \frac{VA^{AI}_{s,t}}{LP^{AI}_{s,t}},
 
 Формально считаем неопределенность по вектору параметров
 
-\[
+$$
 \theta = \left(\{\eta^{VA}_c, \eta^{LP}_c\}_{c \in \{software, hybrid, hardware\}}, \rho, \{p_s, q_s\}_s\right),
-\]
+$$
 
 и оцениваем распределение агрегированных исходов
 
-\[
+$$
 Y_t(\theta) = \left(VA^{AI}_t, \Pi^{AI}_t, L^{AI}_t - L^{cf}_t\right)
-\]
+$$
 
 через Monte Carlo с `N=5000` draws и `seed=20260430`.
 

@@ -4,18 +4,18 @@
 
 ## 1. Исторический benchmark
 
-Для каждого сектора \(s\) используется long-difference распределение:
+Для каждого сектора $s$ используется long-difference распределение:
 
-\[
+$$
 \Delta TC_{c,s}^{1995\rightarrow 2005} = \left(\frac{wL}{VA}\right)_{c,s,2005} - \left(\frac{wL}{VA}\right)_{c,s,1995}.
-\]
+$$
 
 Из него уже рассчитаны:
 
-- \(\mu_s = \mathbb{E}[\Delta TC_s]\)
-- \(\tilde{\mu}_s = \text{median}(\Delta TC_s)\)
-- \(\sigma_s = \text{sd}(\Delta TC_s)\)
-- tail anchors \(q10_s, q25_s\)
+- $\mu_s = \mathbb{E}[\Delta TC_s]$
+- $\tilde{\mu}_s = \text{median}(\Delta TC_s)$
+- $\sigma_s = \text{sd}(\Delta TC_s)$
+- tail anchors $q10_s, q25_s$
 
 Источник: [task_content_sector_benchmarks_1995_2005.csv](../data/processed/task_content_sector_benchmarks_1995_2005.csv).
 
@@ -23,40 +23,40 @@
 
 Так как российская staffing matrix ещё не построена из ОРС/ОКЗ, текущий `RTI` для сценариев берётся как historical sector median из comparator panel:
 
-\[
+$$
 RTI_s^{hist} = \text{median}_c(RTI_{c,s}).
-\]
+$$
 
 Дальше сектора раскладываются на `low / medium / high` по tertiles этого historical sector RTI.
 
 Текущие cutoffs, полученные из [russia_ai_sector_scenarios_metadata.json](../data/processed/russia_ai_sector_scenarios_metadata.json):
 
-- `low`: \(RTI_s^{hist} \le 0.0571\)
-- `medium`: \(0.0571 < RTI_s^{hist} \le 0.4207\)
-- `high`: \(RTI_s^{hist} > 0.4207\)
+- `low`: $RTI_s^{hist} \le 0.0571$
+- `medium`: $0.0571 < RTI_s^{hist} \le 0.4207$
+- `high`: $RTI_s^{hist} > 0.4207$
 
 Это временный proxy. Когда будет построен российский `RTI_s^{RU}`, bucketization нужно будет просто заменить без изменения downstream formulas.
 
 ## 3. Сценарий шока по доле труда
 
-Для сектора \(s\) задаются три anchors:
+Для сектора $s$ задаются три anchors:
 
-\[
+$$
 \Delta s^{L,\text{baseline}}_s = \mu_s,
-\]
+$$
 
-\[
+$$
 \Delta s^{L,\text{core}}_s = \mu_s - m^{AI}_{core}(s)\,w^{RTI}(s)\,\sigma_s,
-\]
+$$
 
-\[
+$$
 \Delta s^{L,\text{stress}}_s = \mu_s - m^{AI}_{stress}(s)\,w^{RTI}(s)\,\sigma_s.
-\]
+$$
 
 Где:
 
-- \(m^{AI}_{core}, m^{AI}_{stress}\) — множители по `AI_intensity`
-- \(w^{RTI}\) — вес по RTI bucket
+- $m^{AI}_{core}, m^{AI}_{stress}$ — множители по `AI_intensity`
+- $w^{RTI}$ — вес по RTI bucket
 
 ### AI multipliers
 
@@ -81,16 +81,16 @@ RTI_s^{hist} = \text{median}_c(RTI_{c,s}).
 
 Из screening переносится не tech beta, а только скорость эрозии маржи:
 
-\[
+$$
 \Delta margin_{s,t} = -\lambda\,margin_{s,t-1} + \varepsilon_{s,t},
-\]
+$$
 
-где \(\lambda = |\hat{\beta}_{I6,\;lag\_margin}|\).
+где $\lambda = |\hat{\beta}_{I6,\;lag\_margin}|$.
 
 Практически это означает:
 
 - initial profit pulse в модели можно задать экзогенно;
-- дальше маржа затухает со скоростью \(\lambda\), не требуя спорной оценки прямого AI-effect на margins.
+- дальше маржа затухает со скоростью $\lambda$, не требуя спорной оценки прямого AI-effect на margins.
 
 Текущая оценка из screening:
 

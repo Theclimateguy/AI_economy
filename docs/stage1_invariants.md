@@ -19,9 +19,9 @@
 
 Изначально тестировались структурные спецификации вида:
 
-\[
+$$
 \Delta y_{c,s,t} = f(\Delta Tech_{c,s,t-1}, RTI_{c,s}, K/L_{c,s,t-1}) + FE + \varepsilon_{c,s,t}.
-\]
+$$
 
 ## Главный результат
 
@@ -40,9 +40,9 @@
 
 После провала universal betas модель была переопределена:
 
-\[
+$$
 \Delta TC_{c,s} = \Delta(wL/VA)_{c,s}
-\]
+$$
 
 и именно empirical distribution `ΔTC` стала источником sector-level shocks.
 

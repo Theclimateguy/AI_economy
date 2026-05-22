@@ -8,18 +8,18 @@
 
 Секторный employment shock распределяется по occupations как exposure-weighted allocation:
 
-\[
+$$
 \omega_{s,o} =
 \frac{l_{s,o} e_o}{\sum_{o'} l_{s,o'} e_{o'}},
 \qquad
 \Delta L_{s,o} = \omega_{s,o} \Delta L_s
-\]
+$$
 
 Базовый labour income по ячейке:
 
-\[
+$$
 Y^L_{s,o} = L_{s,o} \cdot w_s \cdot \mu_o
-\]
+$$
 
 где `w_s` — официальный sector wage за `2024`, а `\mu_o` — occupation wage multiplier proxy по ISCO08 major groups.
 

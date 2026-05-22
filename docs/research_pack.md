@@ -22,19 +22,19 @@
 
 Ядро второй стадии задается системой:
 
-\[
+$$
 \frac{dA_s}{dt} = (p_s + q_s A_s)(1 - A_s)
-\]
+$$
 
-\[
+$$
 \Delta s^L_{s,t} = \Delta s^{L,potential}_s \cdot A_s(t)
-\]
+$$
 
-\[
+$$
 \pi_{s,t} = \pi_{s,0} + \gamma_s A_s(t) - \lambda \pi_{s,t-1}
-\]
+$$
 
-где \(\lambda = 0.04195\) взят из survived historical screening.
+где $\lambda = 0.04195$ взят из survived historical screening.
 
 См. также: [problem_statement.md](problem_statement.md).
 
@@ -85,9 +85,9 @@
 
 После провала регрессионной стратегии модель была переопределена через исторические распределения смещения task content:
 
-\[
+$$
 \Delta TC_{c,s} = \Delta(wL/VA)_{c,s}
-\]
+$$
 
 Это стало источником scenario anchors для `Δs^L`.
 
@@ -176,11 +176,11 @@
 
 Новый слой формализует риск, что frontier AI capability будет внедряться не полностью:
 
-\[
+$$
 a_{s,t} = q_t A_{s,t}(1-\tau_{s,t})
-\]
+$$
 
-где \(\tau_{s,t}\) отражает не только regulation, но и экономику replacement cycles, compatibility lock-in, repair/access restrictions и controlled release.
+где $\tau_{s,t}$ отражает не только regulation, но и экономику replacement cycles, compatibility lock-in, repair/access restrictions и controlled release.
 
 ### Новый источник данных
 
@@ -209,27 +209,27 @@ a_{s,t} = q_t A_{s,t}(1-\tau_{s,t})
 
 Финальный слой замыкает предыдущие блоки в секторную accounting-модель:
 
-\[
+$$
 VA^{AI}_{s,t} = VA^{cf}_{s,t}
 \exp\left(\sum_{\tau=2025}^{t}\eta^{VA}_{s}\Delta A^m_{s,\tau}\right)
-\]
+$$
 
-\[
+$$
 LP^{AI}_{s,t} = LP^{cf}_{s,t}
 \exp\left(\sum_{\tau=2025}^{t}\eta^{LP}_{s}\Delta A^m_{s,\tau}\right)
-\]
+$$
 
-\[
+$$
 L^{AI}_{s,t}=\frac{VA^{AI}_{s,t}}{LP^{AI}_{s,t}},
 \qquad
 \Pi^{AI}_{s,t}=\pi^{AI}_{s,t}VA^{AI}_{s,t}.
-\]
+$$
 
 Managed adoption:
 
-\[
+$$
 A^m_{s,t}=A_{s,t}(1-\rho MOS_s)
-\]
+$$
 
 ### Первый результат
 

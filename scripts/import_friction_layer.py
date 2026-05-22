@@ -156,21 +156,21 @@ def apply_sanction_scenarios(df: pd.DataFrame, config: dict) -> pd.DataFrame:
 def update_docs() -> None:
     path = DOC_PATH
     text = path.read_text(encoding="utf-8")
-    old = """\\[
+    old = """$$
 \\tau_{s,t} =
 \\alpha_1 MOS_s
 + \\alpha_2 \\text{employment\\_share}_{s,t}
 + \\alpha_3 \\text{strategic\\_sector}_s
 + \\alpha_4 \\text{import\\_dependency}_{s,t}
 + \\alpha_5 \\text{market\\_concentration}_{s,t}
-\\]
+$$
 """
-    new = """\\[
+    new = """$$
 \\tau_{s,t} =
 \\rho MOS_s
 + \\alpha_4 \\text{import\\_dependency}_{s}
 + \\alpha_5 \\text{market\\_concentration}_{s}
-\\]
+$$
 
 где в текущей first-pass реализации
 

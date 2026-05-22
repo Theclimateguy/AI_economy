@@ -4,17 +4,17 @@
 
 Используем две величины:
 
-\[
+$$
 R^{K,gross}_{s,t} = \frac{\gamma_s A_s(t) \cdot VA_{s,0}}{\Delta K_{s,t}},
 \qquad
 R^{K,net}_{s,t} = \frac{\left(\pi_{s,t} - \pi^{cf}_{s,t}\right) \cdot VA_{s,0}}{\Delta K_{s,t}},
-\]
+$$
 
 где контрфактуал маржи задан как
 
-\[
+$$
 \pi^{cf}_{s,t} = \pi_{s,0} - \lambda \pi^{cf}_{s,t-1},
-\]
+$$
 
 то есть сравнение идет не со статическим `π0`, а с той же траекторией historical erosion без AI-premium.
 

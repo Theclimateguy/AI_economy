@@ -6,53 +6,53 @@
 
 Для агрегированного `8 x 8` use matrix:
 
-\[
+$$
 A_{ij} = \frac{Z_{ij}}{x_j},
 \qquad
 L = (I - A)^{-1}
-\]
+$$
 
 где `Z` — промежуточное потребление, `x` — выпуск сектора, `A` — матрица прямых затрат.
 
 Direct `Stage 4` shock переводится в output-equivalent impulse через value-added coefficient:
 
-\[
+$$
 v_s = \frac{VA_s}{x_s},
 \qquad
 \Delta f_s = \frac{\Delta VA^{direct}_s}{v_s}
-\]
+$$
 
 Тогда total output response:
 
-\[
+$$
 \Delta x = L \Delta f,
 \qquad
 \Delta x^{indirect} = (L - I) \Delta f
-\]
+$$
 
 А IO-adjusted value added и занятость считаются через fixed coefficients:
 
-\[
+$$
 \Delta VA^{IO} = \operatorname{diag}(v) \Delta x,
 \qquad
 \Delta EMP^{indirect} = \operatorname{diag}(n) \Delta x^{indirect}
-\]
+$$
 
 где `n_s = EMP_s / x_s` калибруется на `2035` counterfactual из `Stage 4`.
 
 Import content:
 
-\[
+$$
 m_s = \frac{M_s}{x_s},
 \qquad
 IC = \sum_s m_s \Delta x_s
-\]
+$$
 
 Для санкционного import substitution считаем first-pass haircut:
 
-\[
+$$
 m^{sanction}_s = m_s (1 - \omega_s)
-\]
+$$
 
 где `\omega_s` — sector sanction wedge из `import_friction_layer.py`.
 

@@ -2,17 +2,17 @@
 
 Текущий `RTI` в панели строится через historical staffing matrix с фиксированными base-year weights:
 
-\[
+$$
 RTI_{c,s,t_0} = \sum_{o=1}^{9} \omega_{c,s,o,t_0}\,RTI^{\text{Lewandowski}}_{c,o},
-\]
+$$
 
 где:
 
-- \(c\) — страна,
-- \(s\) — сектор,
-- \(o\) — 1-digit occupation group (`ISCO-88`),
-- \(t_0\) — base year окна (`1995`, fallback: `1994`, `1996`, `1993`, `1997`),
-- \(\omega_{c,s,o,t_0} = Emp_{c,s,o,t_0} / Emp_{c,s,t_0}\) — доля профессии в секторе на старте окна.
+- $c$ — страна,
+- $s$ — сектор,
+- $o$ — 1-digit occupation group (`ISCO-88`),
+- $t_0$ — base year окна (`1995`, fallback: `1994`, `1996`, `1993`, `1997`),
+- $\omega_{c,s,o,t_0} = Emp_{c,s,o,t_0} / Emp_{c,s,t_0}$ — доля профессии в секторе на старте окна.
 
 ## Staffing Matrix Aggregation
 
@@ -38,24 +38,24 @@ RTI_{c,s,t_0} = \sum_{o=1}^{9} \omega_{c,s,o,t_0}\,RTI^{\text{Lewandowski}}_{c,o
 6. Sector RTI считается только если coverage occupation weights не ниже `0.95`.
 7. Внутри наблюдаемой occupation mass веса нормируются:
 
-\[
+$$
 \tilde{\omega}_{c,s,o,t_0} =
 \frac{\omega_{c,s,o,t_0}}{\sum_{o \in \mathcal{O}_{obs}} \omega_{c,s,o,t_0}}.
-\]
+$$
 
 Итоговый секторный индекс:
 
-\[
+$$
 RTI_{c,s,t_0} = \sum_{o \in \mathcal{O}_{obs}} \tilde{\omega}_{c,s,o,t_0}\,RTI_{c,o}.
-\]
+$$
 
 ## Почему именно base-year weights
 
 Если использовать contemporaneous weights, возникает эндогенность:
 
-\[
+$$
 \text{technology shock} \rightarrow \text{сжатие рутинных профессий} \rightarrow \text{падение их веса} \rightarrow RTI_{c,s,t} \downarrow
-\]
+$$
 
 тогда сам индекс рутинности частично становится следствием технологического шока. Base-year aggregation устраняет этот канал.
 

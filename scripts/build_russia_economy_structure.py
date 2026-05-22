@@ -509,31 +509,31 @@ def build_report(sector_summary: pd.DataFrame, aggregate_summary: pd.DataFrame, 
 
 Контрфактический выпуск:
 
-\\[
+$$
 VA^{{cf}}_{{s,t}} = VA_{{s,2024}} \\prod_{{\\tau=2025}}^t (1 + g^{{cf}}_s)
-\\]
+$$
 
 Managed adoption:
 
-\\[
+$$
 A^{{m}}_{{s,t}} = A_{{s,t}}(1 - \\rho MOS_s)
-\\]
+$$
 
 AI output and labour-productivity boosts:
 
-\\[
+$$
 VA^{{AI}}_{{s,t}} = VA^{{cf}}_{{s,t}} \\exp\\left(\\sum_{{\\tau=2025}}^t \\eta^{{VA}}_s \\Delta A^m_{{s,\\tau}}\\right)
-\\]
+$$
 
-\\[
+$$
 LP^{{AI}}_{{s,t}} = LP^{{cf}}_{{s,t}} \\exp\\left(\\sum_{{\\tau=2025}}^t \\eta^{{LP}}_s \\Delta A^m_{{s,\\tau}}\\right)
-\\]
+$$
 
-\\[
+$$
 L^{{AI}}_{{s,t}} = \\frac{{VA^{{AI}}_{{s,t}}}}{{LP^{{AI}}_{{s,t}}}},
 \\qquad
 \\Pi^{{AI}}_{{s,t}} = \\pi^{{AI}}_{{s,t}} VA^{{AI}}_{{s,t}}
-\\]
+$$
 
 Контрфактический рост `VA` — clipped median official real growth за `{config["counterfactual_growth"]["history_start_year"]}-{config["counterfactual_growth"]["history_end_year"]}`. Денежные величины интерпретируются как рубли baseline 2024, а не номинальный прогноз инфляции.
 
