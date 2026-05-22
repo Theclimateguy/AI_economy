@@ -93,7 +93,7 @@ def build_report() -> None:
             ax.text(0.06, y, formula, fontsize=10.0, color=INK, va="top")
             y -= 0.044
 
-        section(ax, 0.04, 0.600, "Смысл изменения")
+        section(ax, 0.04, 0.615, "Смысл изменения")
         body = (
             "Ось X теперь трактуется как прямая интеграционная емкость $I_s$, а не дефицит $1-I_s$. "
             "Поэтому опасная зона графика — правый верхний угол: отрасли, где пользовательский выбор сильно "
@@ -101,20 +101,20 @@ def build_report() -> None:
             "Это не отменяет отдельный loss-factor $1-I_s$ в формуле чистого сдвига ВДС: там он описывает потери "
             "игроков, не встроившихся в платформу."
         )
-        wrapped_text(ax, 0.06, 0.560, body, width=92, fontsize=9.4, line_height=0.024)
+        wrapped_text(ax, 0.06, 0.575, body, width=86, fontsize=8.7, line_height=0.021)
 
-        section(ax, 0.04, 0.410, "Калибровочные допущения")
+        section(ax, 0.04, 0.448, "Калибровочные допущения")
         assumptions = (
             "Торговля и ИТ сдвинуты вправо-вверх: поиск, маркетплейсы, delivery, карты, API и рекомендации "
             "делают их одновременно attention-sensitive и platform-connectable. Добыча и строительство "
             "сдвинуты влево-вниз: спрос там более B2B/project-based, менее discovery-driven и хуже стандартизуется "
             "под единый AI-интерфейс."
         )
-        wrapped_text(ax, 0.06, 0.370, assumptions, width=92, fontsize=9.4, line_height=0.024)
+        wrapped_text(ax, 0.06, 0.408, assumptions, width=86, fontsize=8.7, line_height=0.021)
 
-        ax.add_patch(Rectangle((0.080, 0.095), 0.840, 0.220, transform=ax.transAxes, facecolor=LIGHT, edgecolor="#D1D5DB", linewidth=0.6))
-        add_risk_image(fig, [0.095, 0.110, 0.810, 0.190])
-        ax.text(0.080, 0.073, "Фрагмент обновленного риск-градиента", fontsize=8.2, color=MUTED, va="top")
+        ax.add_patch(Rectangle((0.100, 0.105), 0.800, 0.180, transform=ax.transAxes, facecolor=LIGHT, edgecolor="#D1D5DB", linewidth=0.6))
+        add_risk_image(fig, [0.120, 0.121, 0.760, 0.150])
+        ax.text(0.100, 0.086, "Фрагмент обновленного риск-градиента", fontsize=8.2, color=MUTED, va="top")
 
         ax.text(0.04, 0.045, "Output: attention_monopoly_gradient_step_brief_ru.pdf", fontsize=7.4, color="#6B7280")
         ax.text(0.96, 0.045, "Theclimateguy / AI_economy", fontsize=7.4, color="#6B7280", ha="right")
