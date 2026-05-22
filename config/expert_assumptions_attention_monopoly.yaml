@@ -27,7 +27,7 @@ abm:
 
 risk_weights:
   attention_dependency: 0.30
-  integration_deficit: 0.20
+  integration_capacity: 0.20
   markup_intensity: 0.15
   sme_vulnerability: 0.10
   gatekeeping_exposure: 0.20

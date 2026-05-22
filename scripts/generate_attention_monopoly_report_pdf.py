@@ -221,7 +221,7 @@ def page_model(pdf: PdfPages) -> None:
     ax.text(
         0.060,
         0.360,
-        r"$R_s = 100\left(w_DD_s+w_I(1-I_s)+w_m\frac{m_s}{\max_j m_j}+w_EE_s+w_AA_s(2035)\right)$",
+        r"$R_s = 100\left(w_DD_s+w_II_s+w_m\frac{m_s}{\max_j m_j}+w_EE_s+w_GG_s+w_AA_s(2035)\right)$",
         fontsize=15.0,
         color=INK,
     )

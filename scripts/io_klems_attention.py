@@ -173,7 +173,7 @@ def build_attention_sector_summary(inputs: pd.DataFrame, benchmarks: pd.DataFram
     df["markup_intensity"] = df["platform_markup_mid"] / max_markup
     df["attention_risk_score"] = 100.0 * (
         weights["attention_dependency"] * df["attention_dependency"]
-        + weights["integration_deficit"] * df["integration_deficit"]
+        + weights["integration_capacity"] * df["integration_capacity"]
         + weights["markup_intensity"] * df["markup_intensity"]
         + weights["sme_vulnerability"] * df["vulnerable_sme_share"]
         + weights["gatekeeping_exposure"] * df["gatekeeping_exposure"]
@@ -272,13 +272,12 @@ def plot_risk_gradient(summary: pd.DataFrame, config: dict) -> None:
     x = np.linspace(0.0, 1.0, 150)
     y = np.linspace(0.0, 1.0, 150)
     xx, yy = np.meshgrid(x, y)
-    integration_deficit_grid = 1.0 - xx
     mean_markup = float(summary["platform_markup_mid"].mean() / max_markup)
     mean_sme = float(summary["vulnerable_sme_share"].mean())
     mean_adoption = float(summary["A_2035"].mean())
     zz = 100.0 * (
         weights["attention_dependency"] * yy
-        + weights["integration_deficit"] * integration_deficit_grid
+        + weights["integration_capacity"] * xx
         + weights["markup_intensity"] * mean_markup
         + weights["sme_vulnerability"] * mean_sme
         + weights["gatekeeping_exposure"] * float(summary["gatekeeping_exposure"].mean())
@@ -305,7 +304,6 @@ def plot_risk_gradient(summary: pd.DataFrame, config: dict) -> None:
     ax.set_xlabel("Способность встроиться в AI/platform stack")
     ax.set_ylabel("Зависимость от пользовательского внимания / discovery channel")
     ax.set_xlim(-0.02, 1.02)
-    ax.invert_xaxis()
     ax.set_ylim(-0.02, 1.02)
     ax.grid(color="#E5E7EB", linewidth=0.6)
     cbar = fig.colorbar(contour, ax=ax, pad=0.015)
@@ -390,7 +388,7 @@ $$
 
 $$
 R_s = 100\\left(
-w_D D_s + w_I(1-I_s) + w_m \\frac{{m_s}}{{\\max_j m_j}} + w_E E_s + w_G G_s + w_A A_s(2035)
+w_D D_s + w_I I_s + w_m \\frac{{m_s}}{{\\max_j m_j}} + w_E E_s + w_G G_s + w_A A_s(2035)
 \\right).
 $$
 

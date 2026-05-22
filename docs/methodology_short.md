@@ -120,11 +120,11 @@
 
 - Сценарий монополии внимания описывает ситуацию, где единый AI-ассистент становится основной поверхностью доступа к поиску, покупкам, финансам, сервисам и контенту. В терминах KLEMS это reduced-form слой перераспределения `S` и `K`: часть расходов на маркетинг, медиа и customer access превращается в платформенную ренту и капитальное притяжение AI-экосистем.
 
-- Для каждой отрасли заданы экспертные индексы: `D_s` — зависимость от пользовательского внимания, `I_s` — способность встроиться в AI/platform stack, `m_s` — platform markup, `E_s` — доля уязвимых МСП, `G_s` — gatekeeping exposure. Композитный риск считается как `R_s = 100 * weighted sum(D_s, 1-I_s, m_s, E_s, G_s, A_s(2035))`.
+- Для каждой отрасли заданы экспертные индексы: `D_s` — зависимость от пользовательского внимания, `I_s` — способность встроиться в AI/platform stack, `m_s` — platform markup, `E_s` — доля уязвимых МСП, `G_s` — gatekeeping exposure. Композитный риск считается как `R_s = 100 * weighted sum(D_s, I_s, m_s, E_s, G_s, A_s(2035))`.
 
 - Агрегированная торговля `G` в этом слое разделена только сценарно, без изменения базовой KLEMS/Rosstat сетки: `G_food = Торговля (еда)` получает `30%` ВДС исходного `G`, `G_nonfood = Торговля (не еда)` получает `70%`. Сумма ВДС двух блоков точно равна исходному `G`.
 
-- По последней калибровке `Торговля (не еда)`, `Профессиональные услуги`, `ИТ и связь` и `Финансы` формируют верхний кластер риска. `Строительство` было понижено по attention exposure, а `Добыча`, `Обработка` и `Энергия и ЖКХ` сдвинуты вправо по оси `1-I_s`, потому что они слабее готовы к цифровой интеграции, но не являются главными consumer-attention секторами.
+- По последней калибровке `Торговля (не еда)`, `Профессиональные услуги`, `ИТ и связь` и `Финансы` формируют верхний кластер риска. Ось X теперь показывает `I_s` напрямую: риск выше у отраслей, которым важен поиск/discovery channel и которые легко подключаются к AI/platform stack.
 
 - Артефакты слоя: [`attention_monopoly_sector_summary.csv`](../data/processed/attention_monopoly_sector_summary.csv), [`attention_monopoly_abm_paths.csv`](../data/processed/attention_monopoly_abm_paths.csv), [`attention_monopoly_deadweight_loss.csv`](../data/processed/attention_monopoly_deadweight_loss.csv), графики [`attention_monopoly_risk_gradient.png`](../output/attention_monopoly_risk_gradient.png), [`attention_monopoly_gva_shift.png`](../output/attention_monopoly_gva_shift.png), [`attention_abm_dynamics.png`](../output/attention_abm_dynamics.png), [`attention_deadweight_loss.png`](../output/attention_deadweight_loss.png) и PDF-отчет [`attention_monopoly_scenario_report_ru.pdf`](../output/reports/attention_monopoly_scenario_report_ru.pdf).
 
