@@ -272,12 +272,13 @@ def plot_risk_gradient(summary: pd.DataFrame, config: dict) -> None:
     x = np.linspace(0.0, 1.0, 150)
     y = np.linspace(0.0, 1.0, 150)
     xx, yy = np.meshgrid(x, y)
+    integration_deficit_grid = 1.0 - xx
     mean_markup = float(summary["platform_markup_mid"].mean() / max_markup)
     mean_sme = float(summary["vulnerable_sme_share"].mean())
     mean_adoption = float(summary["A_2035"].mean())
     zz = 100.0 * (
         weights["attention_dependency"] * yy
-        + weights["integration_deficit"] * xx
+        + weights["integration_deficit"] * integration_deficit_grid
         + weights["markup_intensity"] * mean_markup
         + weights["sme_vulnerability"] * mean_sme
         + weights["gatekeeping_exposure"] * float(summary["gatekeeping_exposure"].mean())
@@ -287,7 +288,7 @@ def plot_risk_gradient(summary: pd.DataFrame, config: dict) -> None:
     fig, ax = plt.subplots(figsize=(11, 8))
     contour = ax.contourf(xx, yy, zz, levels=16, cmap="RdYlGn_r", alpha=0.82)
     ax.scatter(
-        summary["integration_deficit"],
+        summary["integration_capacity"],
         summary["attention_dependency"],
         s=120 + 780 * normalize(summary["va_current_bn_rub"]),
         c=summary["attention_risk_score"],
@@ -298,12 +299,13 @@ def plot_risk_gradient(summary: pd.DataFrame, config: dict) -> None:
     )
     for row in summary.itertuples(index=False):
         dx, dy = LABEL_OFFSETS.get(row.sector_id, (0.015, 0.012))
-        ax.text(row.integration_deficit + dx, row.attention_dependency + dy, row.sector_label_ru, fontsize=9)
+        ax.text(row.integration_capacity + dx, row.attention_dependency + dy, row.sector_label_ru, fontsize=9)
 
     ax.set_title("Градиент риска AI-монополии внимания по отраслям")
-    ax.set_xlabel("Дефицит интеграции: 1 - способность встроиться в AI/platform stack")
+    ax.set_xlabel("Способность встроиться в AI/platform stack")
     ax.set_ylabel("Зависимость от пользовательского внимания / discovery channel")
     ax.set_xlim(-0.02, 1.02)
+    ax.invert_xaxis()
     ax.set_ylim(-0.02, 1.02)
     ax.grid(color="#E5E7EB", linewidth=0.6)
     cbar = fig.colorbar(contour, ax=ax, pad=0.015)
