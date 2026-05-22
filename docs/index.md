@@ -36,6 +36,7 @@
 ## 6. Этап 4. Структура экономики
 
 - [Russia Economy Structure Report](russia_economy_structure_report.md)
+- [Attention Monopoly Scenario](attention_monopoly_scenario.md)
 
 ## 7. Воспроизводимость
 

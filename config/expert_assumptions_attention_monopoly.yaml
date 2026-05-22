@@ -1,0 +1,168 @@
+# Scenario: AI assistant monopoly over user attention.
+# Units are shares in [0, 1] unless specified otherwise.
+
+scenario:
+  name: attention_monopoly
+  baseline_year: 2024
+  start_year: 2025
+  end_year: 2035
+  main_scenario: Base
+
+diffusion:
+  # [EXPERT_ASSUMPTION: M] Issue #7, WeChat/Yandex-style ecosystem adoption analogue.
+  p: 0.02
+  q: 0.35
+  initial_share: 0.02
+  saturation_share:
+    low: 0.20
+    base: 0.40
+    high: 0.60
+
+abm:
+  # [EXPERT_ASSUMPTION: M] 12-month retention / cognitive lock-in proxy.
+  cognitive_lock_in: 0.75
+  n_users_index: 100.0
+  n_sme_index: 100.0
+  platform_count: 2
+
+risk_weights:
+  attention_dependency: 0.30
+  integration_deficit: 0.20
+  markup_intensity: 0.15
+  sme_vulnerability: 0.10
+  gatekeeping_exposure: 0.20
+  ai_adoption: 0.05
+
+deadweight_loss:
+  # [EXPERT_ASSUMPTION: L] Reduced-form demand elasticity for intention access.
+  demand_elasticity_abs: 1.20
+  competitive_markup: 0.03
+
+capital_reallocation:
+  # [EXPERT_ASSUMPTION: M] Share of extracted access rent captured by AI-platform sectors.
+  platform_rent_capture_share: 0.65
+  # [EXPERT_ASSUMPTION: M] Share of integrated-sector CAC savings retained as sectoral VA.
+  cac_saving_retention: 0.50
+
+retail_split:
+  # [EXPERT_ASSUMPTION: L] Scenario-layer split of aggregate OKVED G because processed Rosstat/KLEMS data currently publish G as one aggregate.
+  source_sector_id: G
+  components:
+    G_food:
+      sector_name_ru: "Торговля (еда)"
+      va_share_within_source: 0.30
+      notes: "Food/grocery retail proxy inside aggregate G; lower discretionary search, higher repeat purchase and offline share."
+    G_nonfood:
+      sector_name_ru: "Торговля (не еда)"
+      va_share_within_source: 0.70
+      notes: "Non-food retail/e-commerce proxy inside aggregate G; higher recommendation, comparison-shopping and platform gatekeeping exposure."
+
+sector_priors:
+  B:
+    attention_dependency: 0.15
+    integration_capacity: 0.30
+    platform_markup_mid: 0.05
+    cac_saving_mid: 0.05
+    vulnerable_sme_share: 0.20
+    gatekeeping_exposure: 0.25
+    platform_rent_receiver: false
+    notes: "Low direct consumer-attention exposure; strategic B2B sector with weaker digital/interface readiness than consumer sectors."
+  C:
+    attention_dependency: 0.35
+    integration_capacity: 0.30
+    platform_markup_mid: 0.08
+    cac_saving_mid: 0.08
+    vulnerable_sme_share: 0.45
+    gatekeeping_exposure: 0.35
+    platform_rent_receiver: false
+    notes: "Mixed B2B/B2C manufacturing exposure; lower integration capacity reflects uneven digital readiness across manufacturing."
+  C_mach:
+    attention_dependency: 0.25
+    integration_capacity: 0.50
+    platform_markup_mid: 0.06
+    cac_saving_mid: 0.07
+    vulnerable_sme_share: 0.35
+    gatekeeping_exposure: 0.30
+    platform_rent_receiver: false
+    notes: "Machinery: weaker attention channel, stronger API/B2B integration potential."
+  DE:
+    attention_dependency: 0.30
+    integration_capacity: 0.25
+    platform_markup_mid: 0.05
+    cac_saving_mid: 0.05
+    vulnerable_sme_share: 0.30
+    gatekeeping_exposure: 0.45
+    platform_rent_receiver: false
+    notes: "D+E aggregate: energy, gas, steam, water supply, waste and utilities; mostly regulated demand, nonzero household/service interface exposure, and lower digital/interface readiness."
+  F:
+    attention_dependency: 0.35
+    integration_capacity: 0.45
+    platform_markup_mid: 0.08
+    cac_saving_mid: 0.08
+    vulnerable_sme_share: 0.55
+    gatekeeping_exposure: 0.35
+    platform_rent_receiver: false
+    notes: "Construction is partly local-discovery exposed, but core investment/B2B demand is not primarily mediated by a consumer AI assistant."
+  G:
+    attention_dependency: 0.85
+    integration_capacity: 0.70
+    platform_markup_mid: 0.10
+    cac_saving_mid: 0.25
+    vulnerable_sme_share: 0.70
+    gatekeeping_exposure: 0.75
+    platform_rent_receiver: false
+    notes: "Retail/e-commerce: high attention exposure but high integration upside for large players."
+  G_food:
+    attention_dependency: 0.65
+    integration_capacity: 0.75
+    platform_markup_mid: 0.07
+    cac_saving_mid: 0.18
+    vulnerable_sme_share: 0.45
+    gatekeeping_exposure: 0.55
+    platform_rent_receiver: false
+    notes: "Food retail/grocery: lower discretionary discovery and higher repeat/offline demand, but delivery and marketplace ranking remain relevant."
+  G_nonfood:
+    attention_dependency: 0.90
+    integration_capacity: 0.68
+    platform_markup_mid: 0.12
+    cac_saving_mid: 0.28
+    vulnerable_sme_share: 0.80
+    gatekeeping_exposure: 0.85
+    platform_rent_receiver: false
+    notes: "Non-food retail/e-commerce: stronger search, recommendations, comparison and marketplace gatekeeping channel."
+  H:
+    attention_dependency: 0.45
+    integration_capacity: 0.45
+    platform_markup_mid: 0.12
+    cac_saving_mid: 0.10
+    vulnerable_sme_share: 0.55
+    gatekeeping_exposure: 0.55
+    platform_rent_receiver: false
+    notes: "Transport/logistics marketplaces and service discovery channel."
+  J:
+    attention_dependency: 0.90
+    integration_capacity: 0.90
+    platform_markup_mid: 0.18
+    cac_saving_mid: 0.30
+    vulnerable_sme_share: 0.20
+    gatekeeping_exposure: 0.80
+    platform_rent_receiver: true
+    notes: "IT/telecom ecosystems capture platform access rents."
+  K:
+    attention_dependency: 0.85
+    integration_capacity: 0.65
+    platform_markup_mid: 0.06
+    cac_saving_mid: 0.20
+    vulnerable_sme_share: 0.45
+    gatekeeping_exposure: 0.90
+    platform_rent_receiver: false
+    notes: "Finance has lower explicit transaction markup due to regulation, but high gatekeeping risk through ranking, embedded finance, lead allocation and default assistant recommendations."
+  M:
+    attention_dependency: 0.70
+    integration_capacity: 0.55
+    platform_markup_mid: 0.22
+    cac_saving_mid: 0.18
+    vulnerable_sme_share: 0.65
+    gatekeeping_exposure: 0.70
+    platform_rent_receiver: false
+    notes: "Professional services and agencies: high exposure to discovery/intermediation."
