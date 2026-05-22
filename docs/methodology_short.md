@@ -1,12 +1,12 @@
 # Короткая методология проекта
 
-Документ описывает только методологию: какие данные были взяты, как они были преобразованы и какие аналитические артефакты получены. Интерпретации и выводы намеренно не включены.
+Документ описывает методологию и технические результаты преобразований: какие данные были взяты, как они были преобразованы и какие аналитические артефакты получены. Интерпретационные выводы намеренно не включены.
 
 ## 1. Историческая база для проверки переносимых закономерностей
 
-- Данные `EU KLEMS` по национальным счетам, капиталу, доле труда и ICT/non-ICT капиталу были взяты из открытых bulk-файлов EU KLEMS ([National Accounts](https://euklems.eu/bulk/Statistical_National-Accounts.csv), [Capital](https://euklems.eu/bulk/Statistical_Capital.csv), [Labour income shares](https://euklems.eu/bulk/Shares_LabourIncome.csv), [ICT/non-ICT shares](https://euklems.eu/bulk/Shares_ICT-NonICT.csv)) и приведены к восьми проектным секторам `B, C, DE, F, H, J, K, M`; получена историческая sector-country панель с выпуском, добавленной стоимостью, капиталом, долей труда и капиталовооруженностью.
+- Данные `EU KLEMS` по национальным счетам, капиталу, доле труда и ICT/non-ICT капиталу были взяты из открытых bulk-файлов EU KLEMS ([National Accounts](https://euklems.eu/bulk/Statistical_National-Accounts.csv), [Capital](https://euklems.eu/bulk/Statistical_Capital.csv), [Labour income shares](https://euklems.eu/bulk/Shares_LabourIncome.csv), [ICT/non-ICT shares](https://euklems.eu/bulk/Shares_ICT-NonICT.csv)) и приведены к проектным секторам `B, C, C_mach, DE, F, G, H, J, K, M`; получена историческая sector-country панель с выпуском, добавленной стоимостью, капиталом, долей труда и капиталовооруженностью.
 
-- Данные `OECD STAN 2025` были взяты из набора `OECD.STI.PIE/DSD_STAN@DF_STAN_2025` и приведены к тем же восьми секторам; получены дополнительные отраслевые показатели выпуска, добавленной стоимости, компенсации работников, налогов, операционного излишка и запасов капитала.
+- Данные `OECD STAN 2025` были взяты из набора `OECD.STI.PIE/DSD_STAN@DF_STAN_2025` и приведены к тем же проектным секторам; получены дополнительные отраслевые показатели выпуска, добавленной стоимости, компенсации работников, налогов, операционного излишка и запасов капитала.
 
 - Данные `ILOSTAT` по занятости `industry × occupation` ([EMP_TEMP_ECO_OCU_NB_A](https://rplumber.ilo.org/data/indicator/?id=EMP_TEMP_ECO_OCU_NB_A&lang=en&type=code&format=.csv.gz&channel=ilostat)) были объединены с occupation-level RTI из базы Lewandowski ([RTI for 102 countries](https://piotr-lewandowski.pl/wp-content/uploads/2023/08/Country-specific-routine-task-intensity-of-occupations-for-102-countries.zip)); получена матрица отраслевой рутинности `RTI_s` как средневзвешенное значение RTI профессий внутри отрасли.
 
@@ -22,7 +22,9 @@
 
 ## 3. Официальный baseline РФ
 
-- Файлы Росстата по ВДС, занятости и зарплатам были взяты из официальных XLS/XLSX: [ВДС по ОКВЭД2 2011-2025](https://rosstat.gov.ru/storage/mediabank/VDS_god_OKVED2_s_2011-2025.xlsx), [занятость 2017-2024](https://rosstat.gov.ru/storage/mediabank/05-05_2017-2024.xls), [зарплаты 2017-2025](https://rosstat.gov.ru/storage/mediabank/tab3-zpl_2025.xlsx). Строки ОКВЭД2 были явно сопоставлены с секторами `B, C, DE, F, H, J, K, M`; для `DE` отрасли `D` и `E` сначала агрегировались, а затем считались производные показатели.
+- Файлы Росстата по ВДС, занятости и зарплатам были взяты из официальных XLS/XLSX: [ВДС по ОКВЭД2 2011-2025](https://rosstat.gov.ru/storage/mediabank/VDS_god_OKVED2_s_2011-2025.xlsx), [занятость 2017-2024](https://rosstat.gov.ru/storage/mediabank/05-05_2017-2024.xls), [зарплаты 2017-2025](https://rosstat.gov.ru/storage/mediabank/tab3-zpl_2025.xlsx). Строки ОКВЭД2 были явно сопоставлены с секторами `B, C, C_mach, DE, F, G, H, J, K, M`; для `DE` отрасли `D` и `E` сначала агрегировались, а затем считались производные показатели.
+
+- Обрабатывающая промышленность была дополнительно разделена на `C` без машиностроения и `C_mach` через долю ОКВЭД `26-30` в общей ВДС обрабатывающей промышленности; получена таблица [`cmach_share_proxy.csv`](../data/processed/cmach_share_proxy.csv). Для `2024` доля `C_mach` в manufacturing baseline составила `0.210`, после чего shock и accounting layer считались отдельно для `C` и `C_mach`.
 
 - Номинальная ВДС, ВДС в постоянных ценах, занятость и среднемесячная зарплата были преобразованы в панель `sector × year`; получен файл [`russia_sector_panel_official_2011_2025.csv`](../data/processed/russia_sector_panel_official_2011_2025.csv).
 
@@ -46,13 +48,15 @@
 
 - Сценарные параметры были преобразованы в годовые траектории adoption `2025-2035` через Bass-type кривую: внедрение сначала идет медленно, затем ускоряется за счет распространения внутри отрасли, затем приближается к насыщению; получен файл [`ai_diffusion_paths_2025_2035.csv`](../data/processed/ai_diffusion_paths_2025_2035.csv).
 
+- Годовые траектории adoption были дополнительно сжаты в промежуточный snapshot `2030`: для каждого сценария и сектора сохранены `A_2030`, `A_2035`, `delta_sL_2030`, `delta_sL_2035`, labour share и маржа; получен файл [`ai_diffusion_snapshot_2030.csv`](../data/processed/ai_diffusion_snapshot_2030.csv). В `Base` к `2030` получены adoption `0.384` для software-секторов `J/K/M`, `0.106` для hybrid-секторов `C/C_mach/DE/G` и `0.043` для hardware-секторов `B/F/H`.
+
 - Потенциальный shock доли труда был умножен на степень adoption каждого года; получены годовые траектории фактически реализованного labour-share shock и отраслевые summary-таблицы [`ai_diffusion_sector_summary.csv`](../data/processed/ai_diffusion_sector_summary.csv) и [`ai_diffusion_class_summary.csv`](../data/processed/ai_diffusion_class_summary.csv).
 
 - Adoption paths, премия к марже и капитальные барьеры были преобразованы в capital-need и capital-return траектории; маржа без AI-premium использовалась как контрфакт, чтобы отделить эффект внедрения от обычной динамики маржи. Получены [`ai_capital_return_paths_2025_2035.csv`](../data/processed/ai_capital_return_paths_2025_2035.csv), [`ai_capital_return_sector_summary.csv`](../data/processed/ai_capital_return_sector_summary.csv) и [`ai_capital_return_class_summary.csv`](../data/processed/ai_capital_return_class_summary.csv).
 
 ## 6. Managed obsolescence / throttling layer
 
-- Данные `Russia KLEMS` ВШЭ ([страница источника](https://cps.hse.ru/en/data/), [raw workbook](https://www.hse.ru/mirror/pubs/share/322620037)) были приведены из NACE 1.0 к восьми проектным секторам; получена панель [`russia_klems_sector_panel_1995_2016.csv`](../data/processed/russia_klems_sector_panel_1995_2016.csv).
+- Данные `Russia KLEMS` ВШЭ ([страница источника](https://cps.hse.ru/en/data/), [raw workbook](https://www.hse.ru/mirror/pubs/share/322620037)) были приведены из NACE 1.0 к проектным секторам `B, C, C_mach, DE, F, G, H, J, K, M`; получена панель [`russia_klems_sector_panel_1995_2016.csv`](../data/processed/russia_klems_sector_panel_1995_2016.csv).
 
 - Исторические индексы Russia KLEMS были преобразованы в четыре компонента pressure score: разрыв "производительность минус часы", разрыв "капитальные услуги минус трудовые услуги", разрыв "ICT-капитал минус non-ICT капитал" и сокращение занятости. Каждый компонент был взят только в положительной части и нормирован от 0 до 1 по секторам.
 
@@ -72,6 +76,10 @@
 
 - ВДС и производительность труда были преобразованы в занятость делением `VA` на `VA/L`; маржа была умножена на ВДС, получен profit pool; доля труда была умножена на ВДС, получен labour income. Итоговые sector и aggregate таблицы сохранены в [`russia_economy_structure_sector_summary.csv`](../data/processed/russia_economy_structure_sector_summary.csv) и [`russia_economy_structure_aggregate_summary.csv`](../data/processed/russia_economy_structure_aggregate_summary.csv).
 
+- Aggregate summary был дополнительно преобразован в компактную таблицу сценариев с двумя горизонтами `2030` и `2035`; получен файл [`output/scenario_table_2030_2035.csv`](../output/scenario_table_2030_2035.csv). В базовой связке `Base / BaseThrottle` промежуточный горизонт `2030` дал: `VA +1.554%` к контрфакту, profit pool `+4.262%`, labour income `-5.704%`, employment delta `-360.561` тыс. человек, aggregate `VA/L +2.326%`, cumulative net value after capex `8262.949` млрд руб.
+
+- Sector summary был преобразован в операционный ranking `2030` по incremental VA. В `Base / BaseThrottle` первые строки ranking: `K` получил `717.788` млрд руб. incremental VA и `1245.610` млрд руб. incremental profit pool; `M` получил `600.804` и `809.123`; `J` получил `423.930` и `495.899`; `G` получил `197.447` и `237.439`; `C` без машиностроения получил `196.829` и `317.803`.
+
 ## 8. Monte Carlo sensitivity
 
 - Параметры elasticities, throttling strength и Bass diffusion были преобразованы в распределения неопределенности: нормальные распределения с отсечением для эффектов ВДС и производительности, beta-распределение для `rho`, lognormal-множители для `p` и `q`.
@@ -80,11 +88,19 @@
 
 ## 9. Input-output partial closure
 
-- Таблицы Росстата input-output были взяты из официальных файлов: [базовая ТЗВ 2016](https://rosstat.gov.ru/storage/mediabank/baz-tzv-2016(1).xlsx) и [TRI 2019](https://rosstat.gov.ru/storage/mediabank/tri-2019.xlsx). Они были агрегированы к восьми проектным секторам.
+- Таблицы Росстата input-output были взяты из официальных файлов: [базовая ТЗВ 2016](https://rosstat.gov.ru/storage/mediabank/baz-tzv-2016(1).xlsx) и [TRI 2019](https://rosstat.gov.ru/storage/mediabank/tri-2019.xlsx). Они были агрегированы к проектной сетке `B, C, C_mach, DE, F, G, H, J, K, M`, где `C_mach` выделяет машиностроение, а `G` добавляет торговлю как крупный канал спроса и занятости.
 
 - Межотраслевая матрица промежуточного потребления была преобразована в матрицу прямых затрат: каждый столбец intermediate-use был поделен на выпуск соответствующего сектора. Затем была посчитана матрица Леонтьева, которая показывает, сколько совокупного выпуска требуется по цепочкам поставок для единицы финального спроса.
 
 - Direct AI-shock из accounting layer был преобразован в output-equivalent impulse через коэффициент `VA/output`; этот impulse был пропущен через матрицу Леонтьева. Получены прямые и косвенные эффекты по ВДС, занятости и импортной компоненте в [`io_multiplier_sector_summary.csv`](../data/processed/io_multiplier_sector_summary.csv).
+
+- IO-response был дополнительно разложен в матрицу `recipient sector × supplier sector`: для каждого сектора-реципиента показано, какие поставщики получают косвенный выпуск, косвенную ВДС и косвенную занятость; получен файл [`io_indirect_decomposition.csv`](../data/processed/io_indirect_decomposition.csv).
+
+- Для `2019` IO-таблицы в `Base / BaseThrottle` прямой accounting shock `2035` был преобразован в `7570.082` млрд руб. direct VA gain; после Леонтьевского распространения получено еще `5203.245` млрд руб. indirect VA gain, total IO-adjusted VA gain `12773.326` млрд руб. или `7.200%` к контрфактической ВДС. Direct employment delta `-978.392` тыс. был дополнен `+1260.024` тыс. indirect demand-support, что дало net IO employment delta `+281.632` тыс. в fixed-coefficient partial closure.
+
+- Тот же IO-блок посчитал import content: для `2019 Base / BaseThrottle` получено `1663.608` млрд руб. import content до sanction haircut, `1505.751` млрд руб. после `SanctionBase` haircut и `157.857` млрд руб. import-saving proxy. В секторной таблице крупнейшие import-content строки: `C`, `C_mach`, `J`, `M`, `K`.
+
+- Декомпозиция межотраслевых цепочек была преобразована в ranking пар поставщик → реципиент по косвенному эффекту занятости. В верхних строках `2019 Base / BaseThrottle`: `J → J`, `C → C`, `G → C`, `H → C`, `M → M`; это сохранено в [`docs/io_macro_closure.md`](io_macro_closure.md) и [`io_indirect_decomposition.csv`](../data/processed/io_indirect_decomposition.csv).
 
 ## 10. Welfare / distributional proxy
 
@@ -100,7 +116,19 @@
 
 - Все processed-таблицы и графики были собраны в итоговую аналитическую записку [`ai-economy-analytical-note.md`](../ai-economy-analytical-note.md) и PDF-версию [`ai-economy-analytical-note.pdf`](../ai-economy-analytical-note.pdf).
 
-## 12. Воспроизводимый порядок запуска
+## 12. Attention monopoly scenario layer
+
+- Сценарий монополии внимания описывает ситуацию, где единый AI-ассистент становится основной поверхностью доступа к поиску, покупкам, финансам, сервисам и контенту. В терминах KLEMS это reduced-form слой перераспределения `S` и `K`: часть расходов на маркетинг, медиа и customer access превращается в платформенную ренту и капитальное притяжение AI-экосистем.
+
+- Для каждой отрасли заданы экспертные индексы: `D_s` — зависимость от пользовательского внимания, `I_s` — способность встроиться в AI/platform stack, `m_s` — platform markup, `E_s` — доля уязвимых МСП, `G_s` — gatekeeping exposure. Композитный риск считается как `R_s = 100 * weighted sum(D_s, 1-I_s, m_s, E_s, G_s, A_s(2035))`.
+
+- Агрегированная торговля `G` в этом слое разделена только сценарно, без изменения базовой KLEMS/Rosstat сетки: `G_food = Торговля (еда)` получает `30%` ВДС исходного `G`, `G_nonfood = Торговля (не еда)` получает `70%`. Сумма ВДС двух блоков точно равна исходному `G`.
+
+- По последней калибровке `Торговля (не еда)`, `Профессиональные услуги`, `ИТ и связь` и `Финансы` формируют верхний кластер риска. `Строительство` было понижено по attention exposure, а `Добыча`, `Обработка` и `Энергия и ЖКХ` сдвинуты вправо по оси `1-I_s`, потому что они слабее готовы к цифровой интеграции, но не являются главными consumer-attention секторами.
+
+- Артефакты слоя: [`attention_monopoly_sector_summary.csv`](../data/processed/attention_monopoly_sector_summary.csv), [`attention_monopoly_abm_paths.csv`](../data/processed/attention_monopoly_abm_paths.csv), [`attention_monopoly_deadweight_loss.csv`](../data/processed/attention_monopoly_deadweight_loss.csv), графики [`attention_monopoly_risk_gradient.png`](../output/attention_monopoly_risk_gradient.png), [`attention_monopoly_gva_shift.png`](../output/attention_monopoly_gva_shift.png), [`attention_abm_dynamics.png`](../output/attention_abm_dynamics.png), [`attention_deadweight_loss.png`](../output/attention_deadweight_loss.png) и PDF-отчет [`attention_monopoly_scenario_report_ru.pdf`](../output/reports/attention_monopoly_scenario_report_ru.pdf).
+
+## 13. Воспроизводимый порядок запуска
 
 Полный pipeline запускается командой:
 
@@ -116,11 +144,14 @@ python3 scripts/run_pipeline.py --stage all
 4. `calculate_task_content.py`: labour-share panel → historical `ΔTC` benchmarks.
 5. `build_russia_ai_scenarios.py`: `ΔTC` benchmarks + RTI buckets → Russia AI scenario shocks.
 6. `build_russia_sector_panel.py`: Rosstat XLS/XLSX → official Russia sector baseline.
-7. `build_ai_diffusion_model.py`: scenario classes → AI adoption paths.
-8. `build_ai_capital_returns.py`: adoption + margin + capex assumptions → capital-return paths.
-9. `build_managed_obsolescence_layer.py`: Russia KLEMS + recent official block → `MOS_s`.
-10. `import_friction_layer.py`: sector priors + official indicators → import/sanction wedge.
-11. `build_russia_economy_structure.py`: adoption + baseline + MOS → economy-structure paths.
-12. `sensitivity_montecarlo.py`: parameter distributions → uncertainty fan outputs.
-13. `io_leontief_propagation.py`: IO tables + direct shocks → partial IO closure.
-14. `welfare_distributional.py`: occupation matrix + exposure + sector shocks → welfare proxy.
+7. `build_cmach_share_proxy.py`: Rosstat manufacturing rows `26-30` → `C_mach` share proxy.
+8. `build_russia_ai_summary_report.py`: Russia baseline + scenario shocks → sector impact summary.
+9. `build_ai_diffusion_model.py`: scenario classes → AI adoption paths and `2030` snapshot.
+10. `build_ai_capital_returns.py`: adoption + margin + capex assumptions → capital-return paths.
+11. `build_managed_obsolescence_layer.py`: Russia KLEMS + recent official block → `MOS_s`.
+12. `import_friction_layer.py`: sector priors + official indicators → import/sanction wedge.
+13. `build_russia_economy_structure.py`: adoption + baseline + MOS → economy-structure paths and `2030/2035` scenario table.
+14. `sensitivity_montecarlo.py`: parameter distributions → uncertainty fan outputs.
+15. `io_leontief_propagation.py`: IO tables + direct shocks → partial IO closure and supplier-recipient decomposition.
+16. `welfare_distributional.py`: occupation matrix + exposure + sector shocks → welfare proxy.
+17. `scenario_runner.py --scenario attention_monopoly`: expert assumptions + baseline outputs → attention monopoly CSV, PNG and PDF report.

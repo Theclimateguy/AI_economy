@@ -44,6 +44,7 @@ STAGE_MAP["all"] = (
     + STAGE_MAP["stage2"]
     + STAGE_MAP["managed_obsolescence"]
     + STAGE_MAP["structure"]
+    + STAGE_MAP["attention_monopoly"]
 )
 
 

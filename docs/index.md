@@ -36,8 +36,12 @@
 ## 6. Этап 4. Структура экономики
 
 - [Russia Economy Structure Report](russia_economy_structure_report.md)
-- [Attention Monopoly Scenario](attention_monopoly_scenario.md)
 
-## 7. Воспроизводимость
+## 7. Этап 5. AI-монополия внимания
+
+- [Attention Monopoly Scenario](attention_monopoly_scenario.md)
+- [Attention Monopoly PDF](../output/reports/attention_monopoly_scenario_report_ru.pdf)
+
+## 8. Воспроизводимость
 
 - [Reproducibility Guide](reproducibility.md)
