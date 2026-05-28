@@ -1,0 +1,15 @@
+{
+  "scenario": "Base",
+  "throttle_scenario": "BaseThrottle",
+  "climate_scenario": "OrderlyTransition",
+  "risk_gate_threshold": 0.35,
+  "risk_gate_lambda": 3.0,
+  "figures": [
+    "output/figures/okved_resilience/critic_resilience_index_paths_top5_2025_2030.png",
+    "output/figures/okved_resilience/critic_resilience_rank_paths_2025_2030.png",
+    "output/figures/okved_resilience/critic_resilience_rank_shift_2024_2030.png",
+    "output/figures/okved_resilience/critic_resilience_index_2030.png",
+    "output/figures/okved_resilience/critic_resilience_block_heatmap_2030.png",
+    "output/figures/okved_resilience/critic_resilience_block_weights_2030.png"
+  ]
+}

@@ -1,0 +1,28 @@
+level,block,criterion,label,direction,weight
+indicator,adaptive_potential,adaptation_managed,Managed AI adaptation,positive,0.17359496310715616
+indicator,adaptive_potential,diffusion_speed_managed,Managed diffusion speed,positive,0.1857293201577291
+indicator,adaptive_potential,va_ai_growth_yoy_pct,AI-path VA growth,positive,0.4522903313493684
+indicator,adaptive_potential,lp_gain_vs_cf_pct,Labour productivity gain,positive,0.18838538538574642
+indicator,credit_potential,va_share_ai,AI-path VA share,positive,0.46919285200640937
+indicator,credit_potential,delta_k_need_managed_bn_rub,Annual capital need,positive,0.1563578825265865
+indicator,credit_potential,cumulative_delta_k_need_managed_bn_rub,Cumulative capital need,positive,0.14826903311373232
+indicator,credit_potential,capital_need_share_pct,Capital need to VA,positive,0.22618023235327167
+indicator,bank_profitability,margin_ai,AI-path margin proxy,positive,0.3602690379541318
+indicator,bank_profitability,incremental_profit_pool_vs_cf_bn_rub,Annual incremental profit pool,positive,0.18560555632711734
+indicator,bank_profitability,profit_uplift_pct,Profit uplift vs counterfactual,positive,0.23512435754351646
+indicator,bank_profitability,cumulative_net_value_after_capex_bn_rub,Cumulative net value after capex,positive,0.21900104817523447
+indicator,financial_stability,margin_ai,AI-path margin proxy,positive,0.20404651116083403
+indicator,financial_stability,import_dependency_score,Import dependency,negative,0.22027859115211476
+indicator,financial_stability,market_concentration_score,Market concentration risk,negative,0.21066059827593098
+indicator,financial_stability,managed_obsolescence_pressure_score,Managed obsolescence pressure,negative,0.15970864555036574
+indicator,financial_stability,transition_risk_score,Climate-transition risk,negative,0.20530565386075456
+indicator,strategic_convergence,adaptation_managed,Managed AI adaptation,positive,0.1816129780101332
+indicator,strategic_convergence,lp_gain_vs_cf_pct,Labour productivity gain,positive,0.19667970178745264
+indicator,strategic_convergence,strategy_capacity_index,Strategy capacity,positive,0.17424638411088386
+indicator,strategic_convergence,diversification_upside_score,Diversification upside,positive,0.17639906507000608
+indicator,strategic_convergence,net_transformation_score,Net transformation score,positive,0.27106187102152424
+block,adaptive_potential,adaptive_potential,Адаптивность,,0.19873127827107856
+block,credit_potential,credit_potential,Кредитный потенциал,,0.25459085620879557
+block,bank_profitability,bank_profitability,Доходность для банка,,0.14573959542401552
+block,financial_stability,financial_stability,Финансовая устойчивость,,0.18582197755973184
+block,strategic_convergence,strategic_convergence,Стратегическая конвергенция,,0.21511629253637862

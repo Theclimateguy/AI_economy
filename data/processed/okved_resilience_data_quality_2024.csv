@@ -1,0 +1,32 @@
+block,criterion,label,direction,n,n_missing,missing_share,min,median,max
+adaptive_potential,va_real_growth_median_2019_2024_pct,"Median real VA growth, 2019-2024",positive,10,0,0.0,-0.07917878738464171,4.661483927231242,12.445181217659886
+adaptive_potential,va_real_growth_volatility_2019_2024_pct,"Real VA growth volatility, 2019-2024",negative,10,0,0.0,2.5182426203761996,4.808656287360864,11.613091902090101
+adaptive_potential,va_real_cagr_2019_2024_pct,"Real VA CAGR, 2019-2024",positive,10,0,0.0,-0.9584124730837251,3.4927766461608334,12.25234855127555
+adaptive_potential,shock_recovery_2022_2024_pct,"Real VA recovery CAGR, 2022-2024",positive,10,0,0.0,-1.1688150516529827,6.081299158838272,21.63085138844938
+adaptive_potential,labour_productivity_cagr_2019_2024_pct,"Labour productivity CAGR, 2019-2024",positive,10,0,0.0,-2.195977902831092,2.647786526412166,13.945453496276583
+credit_potential,va_share_2024,"Current VA market share, 2024",positive,10,0,0.0,0.039578991529789144,0.07542231922003503,0.18253942405994225
+credit_potential,employment_share_2024,"Employment share, 2024",positive,10,0,0.0,0.026622687422338805,0.05608063066203192,0.2908346852133094
+credit_potential,va_real_growth_pct,"Real VA growth, 2024",positive,10,0,0.0,-0.534839518836236,6.224514684293844,24.305879247242117
+credit_potential,cumulative_capex_2030_bn_rub,AI-related cumulative capex proxy by 2030,positive,10,0,0.0,9.493110327938265,58.254946971956414,232.67096111919727
+credit_potential,fixed_asset_renewal_pct,Fixed asset renewal rate,positive,10,0,0.0,3.9,6.35,13.5
+credit_potential,backward_linkage_multiplier,Input-output backward linkage multiplier,positive,10,0,0.0,1.354994481595814,1.815590982644509,2.5573857470933494
+bank_profitability,net_return_on_new_capital_cf_2035,"Net return on new capital, 2035",positive,10,0,0.0,1.3339484161204025,9.238728742295102,162.5623251233808
+bank_profitability,net_return_cf_2035,"Net capital-flow return, 2035",positive,10,0,0.0,1.0144998085244752,7.02627509939782,66.30320611764297
+bank_profitability,margin_2030,"AI margin proxy, 2030",positive,10,0,0.0,0.2379310185455893,0.5297235753051828,0.8570149876133488
+bank_profitability,profit_margin_proxy_2024,Current profit margin proxy,positive,10,0,0.0,0.25079293921166346,0.5337729952452264,0.8970632447741391
+bank_profitability,cumulative_net_value_after_capex_2030_bn_rub,Net value after capex by 2030,positive,10,0,0.0,5.7624516453228125,441.6205336970287,3100.522453305634
+bank_profitability,incremental_profit_pool_2030_bn_rub,Incremental profit pool by 2030,positive,10,0,0.0,13.509920457348016,169.48384374991474,1245.6100041742377
+financial_stability,profit_margin_proxy_2024,Current profit margin proxy,positive,10,0,0.0,0.25079293921166346,0.5337729952452264,0.8970632447741391
+financial_stability,va_real_growth_median_2019_2024_pct,"Median real VA growth, 2019-2024",positive,10,0,0.0,-0.07917878738464171,4.661483927231242,12.445181217659886
+financial_stability,va_real_growth_volatility_2019_2024_pct,"Real VA growth volatility, 2019-2024",negative,10,0,0.0,2.5182426203761996,4.808656287360864,11.613091902090101
+financial_stability,deflator_volatility_2019_2024_pct,"Deflator volatility, 2019-2024",negative,10,0,0.0,3.2341571497433077,8.9911581441675,28.032688010569974
+financial_stability,min_real_growth_2019_2024_pct,"Worst annual real growth, 2019-2024",positive,10,0,0.0,-12.60781848289396,-2.8954405762515307,2.1936305046741182
+financial_stability,import_dependency_score,Import dependency score,negative,10,0,0.0,0.0737147211322869,0.18835997057174886,0.3323276345291479
+financial_stability,sanction_wedge_base,Base sanction wedge,negative,10,0,0.0,0.0523863776811878,0.0931031431210489,0.1336070647610726
+strategic_convergence,A_2030,"AI diffusion level, 2030",positive,10,0,0.0,0.0428584819509576,0.106415670647682,0.3843066910924466
+strategic_convergence,adaptation_managed_2030,"Managed adaptation, 2030",positive,10,0,0.0,0.0398669573738462,0.09487570337733225,0.3647652795736482
+strategic_convergence,lp_gain_vs_cf_2030_pct,"Productivity gain vs counterfactual, 2030",positive,10,0,0.0,0.3594470835099672,1.337120911862666,8.355614789593746
+strategic_convergence,ict_digital_share_proxy_pct,ICT and digital-use proxy,positive,10,0,0.0,31.45,46.724999999999994,62.67
+strategic_convergence,clean_energy_readiness,Clean-energy readiness,positive,10,0,0.0,0.25,0.35,0.55
+strategic_convergence,ai_service_leverage,AI-service leverage,positive,10,0,0.0,0.25,0.5,0.9
+strategic_convergence,strategy_capacity_index_2030,"Strategy capacity index, 2030",positive,10,0,0.0,32.33436011808719,39.76207909098582,50.315775032325675

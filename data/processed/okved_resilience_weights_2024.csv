@@ -1,0 +1,37 @@
+level,block,criterion,label,weight,direction
+block,adaptive_potential,adaptive_potential,Adaptive potential,0.2038312315458973,
+block,credit_potential,credit_potential,Credit potential,0.16560342772343803,
+block,bank_profitability,bank_profitability,Bank profitability proxy,0.26081382602189807,
+block,financial_stability,financial_stability,Financial stability,0.17297022171336562,
+block,strategic_convergence,strategic_convergence,Strategic convergence,0.19678129299540104,
+indicator,adaptive_potential,va_real_growth_median_2019_2024_pct,"Median real VA growth, 2019-2024",0.13913798228988633,positive
+indicator,adaptive_potential,va_real_growth_volatility_2019_2024_pct,"Real VA growth volatility, 2019-2024",0.4429633623035639,negative
+indicator,adaptive_potential,va_real_cagr_2019_2024_pct,"Real VA CAGR, 2019-2024",0.13754361750586913,positive
+indicator,adaptive_potential,shock_recovery_2022_2024_pct,"Real VA recovery CAGR, 2022-2024",0.1605552416497852,positive
+indicator,adaptive_potential,labour_productivity_cagr_2019_2024_pct,"Labour productivity CAGR, 2019-2024",0.11979979625089532,positive
+indicator,credit_potential,va_share_2024,"Current VA market share, 2024",0.1760481695320566,positive
+indicator,credit_potential,employment_share_2024,"Employment share, 2024",0.15860064109952599,positive
+indicator,credit_potential,va_real_growth_pct,"Real VA growth, 2024",0.17011171282949258,positive
+indicator,credit_potential,cumulative_capex_2030_bn_rub,AI-related cumulative capex proxy by 2030,0.16831512319303657,positive
+indicator,credit_potential,fixed_asset_renewal_pct,Fixed asset renewal rate,0.14353994743953502,positive
+indicator,credit_potential,backward_linkage_multiplier,Input-output backward linkage multiplier,0.1833844059063531,positive
+indicator,bank_profitability,net_return_on_new_capital_cf_2035,"Net return on new capital, 2035",0.1522877954437415,positive
+indicator,bank_profitability,net_return_cf_2035,"Net capital-flow return, 2035",0.15274476762298222,positive
+indicator,bank_profitability,margin_2030,"AI margin proxy, 2030",0.19822974575791333,positive
+indicator,bank_profitability,profit_margin_proxy_2024,Current profit margin proxy,0.22825856490150545,positive
+indicator,bank_profitability,cumulative_net_value_after_capex_2030_bn_rub,Net value after capex by 2030,0.13893937453749136,positive
+indicator,bank_profitability,incremental_profit_pool_2030_bn_rub,Incremental profit pool by 2030,0.12953975173636617,positive
+indicator,financial_stability,profit_margin_proxy_2024,Current profit margin proxy,0.1514709073513217,positive
+indicator,financial_stability,va_real_growth_median_2019_2024_pct,"Median real VA growth, 2019-2024",0.17253327611265776,positive
+indicator,financial_stability,va_real_growth_volatility_2019_2024_pct,"Real VA growth volatility, 2019-2024",0.11607057785802322,negative
+indicator,financial_stability,deflator_volatility_2019_2024_pct,"Deflator volatility, 2019-2024",0.13011728050390953,negative
+indicator,financial_stability,min_real_growth_2019_2024_pct,"Worst annual real growth, 2019-2024",0.13995930384886146,positive
+indicator,financial_stability,import_dependency_score,Import dependency score,0.16252302734218138,negative
+indicator,financial_stability,sanction_wedge_base,Base sanction wedge,0.12732562698304498,negative
+indicator,strategic_convergence,A_2030,"AI diffusion level, 2030",0.11902817284685281,positive
+indicator,strategic_convergence,adaptation_managed_2030,"Managed adaptation, 2030",0.1132292080095928,positive
+indicator,strategic_convergence,lp_gain_vs_cf_2030_pct,"Productivity gain vs counterfactual, 2030",0.11939509072504227,positive
+indicator,strategic_convergence,ict_digital_share_proxy_pct,ICT and digital-use proxy,0.1840997486437053,positive
+indicator,strategic_convergence,clean_energy_readiness,Clean-energy readiness,0.2377674353241561,positive
+indicator,strategic_convergence,ai_service_leverage,AI-service leverage,0.12465489615360299,positive
+indicator,strategic_convergence,strategy_capacity_index_2030,"Strategy capacity index, 2030",0.1018254482970477,positive
